@@ -58,4 +58,58 @@ describe('MemberTable', () => {
 
         expect(membertable).toMatchSnapshot();
     });
+
+    it('should display no results message when hasNoResults is true', () => {
+        const { getByText } = renderWithRedux(
+            <MemberTable
+                domain="domain"
+                collection="role"
+                members={[]}
+                caption="Approved"
+                hasNoResults={true}
+                justificationRequired={false}
+            />
+        );
+
+        expect(getByText('該当するメンバーが見つかりません')).toBeInTheDocument();
+    });
+
+    it('should use totalMembers for length display when provided', () => {
+        const members = [
+            { memberName: 'user1', approved: true },
+            { memberName: 'user2', approved: true },
+        ];
+
+        const { getByText } = renderWithRedux(
+            <MemberTable
+                domain="domain"
+                collection="role"
+                members={members}
+                totalMembers={100}
+                caption="Approved"
+                justificationRequired={false}
+            />
+        );
+
+        expect(getByText('Approved (100)')).toBeInTheDocument();
+    });
+
+    it('should fall back to members length when totalMembers not provided', () => {
+        const members = [
+            { memberName: 'user1', approved: true },
+            { memberName: 'user2', approved: true },
+        ];
+
+        const { getByText } = renderWithRedux(
+            <MemberTable
+                domain="domain"
+                collection="role"
+                members={members}
+                caption="Approved"
+                justificationRequired={false}
+            />
+        );
+
+        expect(getByText('Approved (2)')).toBeInTheDocument();
+    });
 });

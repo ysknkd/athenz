@@ -666,6 +666,152 @@ exports[`MemberPage should render 1`] = `
 }
 
 .emotion-71 {
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  border: 1px solid #e9ecef;
+}
+
+.emotion-73 {
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.emotion-75 {
+  font-weight: 600;
+  color: #495057;
+  white-space: nowrap;
+}
+
+.emotion-77 {
+  box-sizing: border-box;
+  display: inline-flex;
+  -webkit-box-flex-flow: row nowrap;
+  -webkit-flex-flow: row nowrap;
+  -ms-flex-flow: row nowrap;
+  flex-flow: row nowrap;
+  font-family: Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  position: relative;
+  width: 250px;
+}
+
+.emotion-77 input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background: rgba(53,112,244,0.05);
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+  border-right: transparent;
+  border-left: transparent;
+  border-radius: 2px;
+  box-shadow: none;
+  box-sizing: border-box;
+  color: #303030;
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  font: inherit;
+  height: 36px;
+  margin: 0;
+  outline: none;
+  padding: 0 1rem;
+  text-align: left;
+  width: 100%;
+}
+
+.emotion-77.animated input {
+  -webkit-transition: background-color 0.2s ease-in-out,color 0.2s ease-in-out,border 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out,color 0.2s ease-in-out,border 0.2s ease-in-out;
+}
+
+.emotion-77 input::-webkit-input-placeholder {
+  color: rgba(48,48,48,0.6);
+}
+
+.emotion-77 input::-moz-placeholder {
+  color: rgba(48,48,48,0.6);
+}
+
+.emotion-77 input:-ms-input-placeholder {
+  color: rgba(48,48,48,0.6);
+}
+
+.emotion-77 input::placeholder {
+  color: rgba(48,48,48,0.6);
+}
+
+.emotion-77 input.focused,
+.emotion-77 input:active,
+.emotion-77 input:focus {
+  background: rgba(53,112,244,0.05);
+  border-bottom: 2px solid #3570f4;
+  color: #303030;
+}
+
+.emotion-77 input:invalid {
+  background: rgba(53,112,244,0.05);
+  border-bottom: 2px solid #d01111;
+  color: #303030;
+}
+
+.emotion-77 .message {
+  font-size: 12px;
+  left: 0;
+  line-height: 1.8;
+  position: absolute;
+  top: 2.571rem;
+}
+
+.emotion-77.error input,
+.emotion-77.error input.focused,
+.emotion-77.error input:active,
+.emotion-77.error input:focus {
+  border-bottom: 2px solid #d01111;
+}
+
+.emotion-77.error .message {
+  color: #d01111;
+}
+
+.emotion-77 input {
+  padding-right: 36px;
+}
+
+.emotion-77 .input-icon {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: flex;
+  height: 36px;
+  position: absolute;
+  right: 6px;
+}
+
+.emotion-83 {
+  position: relative;
+}
+
+.emotion-83 input {
+  cursor: pointer;
+}
+
+.emotion-87 {
   width: 100%;
   border-spacing: 0;
   display: table;
@@ -680,7 +826,7 @@ exports[`MemberPage should render 1`] = `
   height: 50px;
 }
 
-.emotion-73 {
+.emotion-89 {
   height: 25px;
   margin-left: 10px;
   margin-top: 10px;
@@ -692,18 +838,18 @@ exports[`MemberPage should render 1`] = `
   display: table-cell;
 }
 
-.emotion-75 {
+.emotion-91 {
   margin-right: 10px;
   verticalalign: bottom;
 }
 
-.emotion-77 {
+.emotion-93 {
   fill: #188fff;
   cursor: pointer;
   vertical-align: text-bottom;
 }
 
-.emotion-78 {
+.emotion-94 {
   text-align: center;
   width: 1%;
   border-bottom: 2px solid #d5d5d5;
@@ -716,7 +862,7 @@ exports[`MemberPage should render 1`] = `
   word-break: break-all;
 }
 
-.emotion-80 {
+.emotion-96 {
   text-align: left;
   width: 18.5%;
   border-bottom: 2px solid #d5d5d5;
@@ -729,7 +875,7 @@ exports[`MemberPage should render 1`] = `
   word-break: break-all;
 }
 
-.emotion-82 {
+.emotion-98 {
   text-align: left;
   width: 18.5%;
   border-bottom: 2px solid #d5d5d5;
@@ -742,7 +888,7 @@ exports[`MemberPage should render 1`] = `
   word-break: break-all;
 }
 
-.emotion-86 {
+.emotion-102 {
   text-align: left;
   width: 32.5%;
   border-bottom: 2px solid #d5d5d5;
@@ -755,7 +901,7 @@ exports[`MemberPage should render 1`] = `
   word-break: break-all;
 }
 
-.emotion-88 {
+.emotion-104 {
   text-align: center;
   width: 8%;
   border-bottom: 2px solid #d5d5d5;
@@ -768,7 +914,7 @@ exports[`MemberPage should render 1`] = `
   word-break: break-all;
 }
 
-.emotion-90 {
+.emotion-106 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -791,13 +937,13 @@ exports[`MemberPage should render 1`] = `
   width: 20px;
 }
 
-.emotion-92 {
+.emotion-108 {
   fill: #303030;
   cursor: inherit;
   vertical-align: text-bottom;
 }
 
-.emotion-93 {
+.emotion-109 {
   margin-right: 0;
   border-left: 1px solid #d5d5d5;
   -webkit-flex: 0 0 350px;
@@ -812,7 +958,7 @@ exports[`MemberPage should render 1`] = `
   width: 350px;
 }
 
-.emotion-95 {
+.emotion-111 {
   -webkit-align-items: baseline;
   -webkit-box-align: baseline;
   -ms-flex-align: baseline;
@@ -828,38 +974,38 @@ exports[`MemberPage should render 1`] = `
   padding: 20px 30px 20px 15px;
 }
 
-.emotion-97 {
+.emotion-113 {
   font-size: 16px;
   font-weight: 600;
 }
 
-.emotion-99 {
+.emotion-115 {
   color: #3570f4;
   -webkit-text-decoration: none;
   text-decoration: none;
   cursor: pointer;
 }
 
-.emotion-101 {
+.emotion-117 {
   padding: 0 5px;
   color: #d5d5d5;
 }
 
-.emotion-105 {
+.emotion-121 {
   padding: 0 30px 0 15px;
 }
 
-.emotion-107 {
+.emotion-123 {
   padding: 10px 0;
   display: flex;
 }
 
-.emotion-109 {
+.emotion-125 {
   font-size: 1.25em;
   margin-right: 5px;
 }
 
-.emotion-111 {
+.emotion-127 {
   fill: #303030;
   cursor: inherit;
   vertical-align: baseline;
@@ -905,7 +1051,7 @@ exports[`MemberPage should render 1`] = `
               <div
                 aria-expanded="false"
                 aria-haspopup="listbox"
-                aria-labelledby="downshift-1-label"
+                aria-labelledby="downshift-2-label"
                 class="emotion-13 denali-input-dropdown"
                 data-testid="input-dropdown"
                 role="combobox"
@@ -916,11 +1062,11 @@ exports[`MemberPage should render 1`] = `
                 >
                   <input
                     aria-autocomplete="list"
-                    aria-labelledby="downshift-1-label"
+                    aria-labelledby="downshift-2-label"
                     autocomplete="off"
                     autocorrect="off"
                     data-testid="input-node"
-                    id="downshift-1-input"
+                    id="downshift-2-input"
                     name="search-type"
                     readonly=""
                     spellcheck="false"
@@ -1177,21 +1323,151 @@ exports[`MemberPage should render 1`] = `
                 </button>
               </div>
             </div>
-            <table
+            <div
               class="emotion-71 emotion-72"
+              data-testid="member-filter"
+            >
+              <div
+                class="emotion-73 emotion-74"
+              >
+                <label
+                  class="emotion-75 emotion-76"
+                  for="member-search"
+                >
+                  メンバー検索:
+                </label>
+                <div
+                  class="emotion-77 denali-input animated"
+                  data-testid="input-wrapper"
+                >
+                  <input
+                    autocomplete="off"
+                    data-testid="input-node"
+                    id="member-search"
+                    placeholder="アカウント名で検索"
+                    value=""
+                  />
+                  <div
+                    class="input-icon"
+                  >
+                    <svg
+                      class="emotion-19"
+                      data-testid="icon"
+                      data-wdio=""
+                      height="24px"
+                      id=""
+                      viewBox="0 0 1024 1024"
+                      width="24px"
+                    >
+                      <title>
+                        search
+                      </title>
+                      <path
+                        d="M659.413 599.68c40.125-53.054 64.27-120.136 64.27-192.857 0-177.556-143.937-321.493-321.493-321.493s-321.493 143.937-321.493 321.493c0 177.556 143.937 321.493 321.493 321.493 74.297 0 142.708-25.203 197.149-67.525l-0.726 0.543 267.307 264.96c7.723 7.731 18.396 12.514 30.187 12.514s22.464-4.782 30.186-12.513l0-0c7.795-7.733 12.621-18.45 12.621-30.293s-4.826-22.56-12.618-30.291l-0.003-0.003zM444.8 637.227c-11.829 2.113-25.446 3.322-39.345 3.322-129.603 0-234.667-105.064-234.667-234.667s105.064-234.667 234.667-234.667c129.603 0 234.667 105.064 234.667 234.667 0 13.899-1.208 27.516-3.526 40.752l0.204-1.407c-17.178 98.349-93.651 174.822-190.593 191.796l-1.407 0.204z"
+                      />
+                    </svg>
+                  </div>
+                  <div
+                    class="message"
+                    data-testid="message"
+                  />
+                </div>
+              </div>
+              <div
+                class="emotion-73 emotion-74"
+              >
+                <label
+                  class="emotion-75 emotion-76"
+                  for="items-per-page"
+                >
+                  表示件数:
+                </label>
+                <div
+                  aria-expanded="false"
+                  aria-haspopup="listbox"
+                  aria-labelledby="downshift-3-label"
+                  class="emotion-83 denali-input-dropdown"
+                  data-testid="input-dropdown"
+                  role="combobox"
+                >
+                  <div
+                    class="emotion-77 denali-input animated"
+                    data-testid="input-wrapper"
+                  >
+                    <input
+                      aria-autocomplete="list"
+                      aria-labelledby="downshift-3-label"
+                      autocomplete="off"
+                      autocorrect="off"
+                      data-testid="input-node"
+                      id="downshift-3-input"
+                      name="items-per-page"
+                      readonly=""
+                      spellcheck="false"
+                      value="30"
+                    />
+                    <div
+                      class="input-icon"
+                    >
+                      <svg
+                        class="emotion-15"
+                        data-testid="icon"
+                        data-wdio="clear-input"
+                        height="16px"
+                        id=""
+                        viewBox="0 0 1024 1024"
+                        width="16px"
+                      >
+                        <title>
+                          close-circle
+                        </title>
+                        <path
+                          d="M512 128c212.077 0 384 171.923 384 384s-171.923 384-384 384c-212.077 0-384-171.923-384-384v0c1.203-211.592 172.408-382.797 383.885-383.999l0.115-0.001zM512 42.667c-259.206 0-469.333 210.128-469.333 469.333s210.128 469.333 469.333 469.333c259.206 0 469.333-210.128 469.333-469.333v0c0.003-0.635 0.005-1.387 0.005-2.138 0-258.027-209.173-467.2-467.2-467.2-0.752 0-1.504 0.002-2.255 0.005l0.117-0z"
+                        />
+                        <path
+                          d="M571.733 512l119.467-117.333c7.901-8.071 12.777-19.131 12.777-31.33 0-9.87-3.192-18.994-8.599-26.397l0.088 0.127c-7.382-10.88-19.691-17.934-33.649-17.934-12.060 0-22.89 5.267-30.315 13.626l-0.036 0.042-119.467 119.467-119.467-119.467c-7.461-8.401-18.291-13.668-30.351-13.668-13.957 0-26.267 7.055-33.558 17.793l-0.091 0.142c-5.319 7.276-8.51 16.4-8.51 26.27 0 12.199 4.876 23.259 12.785 31.338l-0.008-0.008 119.467 117.333-119.467 117.333c-7.901 8.071-12.777 19.131-12.777 31.33 0 9.87 3.192 18.994 8.599 26.397l-0.088-0.127c7.382 10.88 19.691 17.934 33.649 17.934 12.060 0 22.89-5.267 30.315-13.626l0.036-0.042 119.467-119.467 119.467 119.467c7.461 8.401 18.291 13.668 30.351 13.668 13.957 0 26.267-7.055 33.558-17.793l0.091-0.142c5.319-7.276 8.51-16.4 8.51-26.27 0-12.199-4.876-23.259-12.785-31.338l0.008 0.008z"
+                        />
+                      </svg>
+                      <svg
+                        class="emotion-15"
+                        data-testid="icon"
+                        data-wdio=""
+                        height="24px"
+                        id=""
+                        viewBox="0 0 1024 1024"
+                        width="24px"
+                      >
+                        <title>
+                          arrowhead-down
+                        </title>
+                        <path
+                          d="M512 580.267l-226.133-226.133c-7.461-8.401-18.291-13.668-30.351-13.668-13.957 0-26.267 7.055-33.558 17.793l-0.091 0.142c-5.319 7.276-8.51 16.4-8.51 26.27 0 12.199 4.876 23.259 12.785 31.338l-0.008-0.008 256 253.867c7.434 8.083 18.061 13.13 29.867 13.13s22.432-5.047 29.84-13.101l0.026-0.029 256-253.867c7.901-8.071 12.777-19.131 12.777-31.33 0-9.87-3.192-18.994-8.599-26.397l0.088 0.127c-7.382-10.88-19.691-17.934-33.649-17.934-12.060 0-22.89 5.267-30.315 13.626l-0.036 0.042z"
+                        />
+                      </svg>
+                    </div>
+                    <div
+                      class="message"
+                      data-testid="message"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <table
+              class="emotion-87 emotion-88"
               data-testid="member-table"
             >
               <thead>
                 <tr>
                   <th
-                    class="emotion-73 emotion-74"
+                    class="emotion-89 emotion-90"
                     colspan="3"
                   >
                     <span
-                      class="emotion-75 emotion-76"
+                      class="emotion-91 emotion-92"
                     >
                       <svg
-                        class="emotion-77"
+                        class="emotion-93"
                         data-testid="icon"
                         data-wdio=""
                         height="1.25em"
@@ -1212,35 +1488,35 @@ exports[`MemberPage should render 1`] = `
                 </tr>
                 <tr>
                   <th
-                    class="emotion-78 emotion-79"
+                    class="emotion-94 emotion-95"
                     width="1"
                   />
                   <th
-                    class="emotion-80 emotion-81"
+                    class="emotion-96 emotion-97"
                     width="18.5"
                   >
                     User Name
                   </th>
                   <th
-                    class="emotion-82 emotion-79"
+                    class="emotion-98 emotion-95"
                     width="18.5"
                   >
                     Name of User
                   </th>
                   <th
-                    class="emotion-82 emotion-79"
+                    class="emotion-98 emotion-95"
                     width="18.5"
                   >
                     Expiration Date
                   </th>
                   <th
-                    class="emotion-86 emotion-79"
+                    class="emotion-102 emotion-95"
                     width="32.5"
                   >
                     Review Reminder Date
                   </th>
                   <th
-                    class="emotion-88 emotion-79"
+                    class="emotion-104 emotion-95"
                     width="8"
                   >
                     Delete
@@ -1257,11 +1533,11 @@ exports[`MemberPage should render 1`] = `
         data-testid="user-domains"
       >
         <div
-          class="emotion-90 emotion-91"
+          class="emotion-106 emotion-107"
           data-testid="toggle-domain"
         >
           <svg
-            class="emotion-92"
+            class="emotion-108"
             data-testid="icon"
             data-wdio=""
             height="1em"
@@ -1278,30 +1554,30 @@ exports[`MemberPage should render 1`] = `
           </svg>
         </div>
         <div
-          class="emotion-93 emotion-94"
+          class="emotion-109 emotion-110"
         >
           <div
-            class="emotion-95 emotion-96"
+            class="emotion-111 emotion-112"
           >
             <div
-              class="emotion-97 emotion-98"
+              class="emotion-113 emotion-114"
             >
               My Domains
             </div>
             <div>
               <a
-                class="emotion-99 emotion-100"
+                class="emotion-115 emotion-116"
                 href="/domain/create"
               >
                 Create
               </a>
               <span
-                class="emotion-101 emotion-102"
+                class="emotion-117 emotion-118"
               >
                  | 
               </span>
               <a
-                class="emotion-99 emotion-100"
+                class="emotion-115 emotion-116"
                 href="/domain/manage"
               >
                 Manage
@@ -1309,16 +1585,16 @@ exports[`MemberPage should render 1`] = `
             </div>
           </div>
           <div
-            class="emotion-105 emotion-106"
+            class="emotion-121 emotion-122"
           >
             <div
-              class="emotion-107 emotion-108"
+              class="emotion-123 emotion-124"
             >
               <div
-                class="emotion-109 emotion-110"
+                class="emotion-125 emotion-126"
               >
                 <svg
-                  class="emotion-111"
+                  class="emotion-127"
                   data-testid="icon"
                   data-wdio=""
                   height="1em"
@@ -1341,20 +1617,20 @@ exports[`MemberPage should render 1`] = `
                 </svg>
               </div>
               <a
-                class="emotion-99 emotion-100"
+                class="emotion-115 emotion-116"
                 href="/domain/athens/role"
               >
                 athens
               </a>
             </div>
             <div
-              class="emotion-107 emotion-108"
+              class="emotion-123 emotion-124"
             >
               <div
-                class="emotion-109 emotion-110"
+                class="emotion-125 emotion-126"
               >
                 <svg
-                  class="emotion-111"
+                  class="emotion-127"
                   data-testid="icon"
                   data-wdio=""
                   height="1em"
@@ -1377,7 +1653,7 @@ exports[`MemberPage should render 1`] = `
                 </svg>
               </div>
               <a
-                class="emotion-99 emotion-100"
+                class="emotion-115 emotion-116"
                 href="/domain/athens.ci/role"
               >
                 athens.ci

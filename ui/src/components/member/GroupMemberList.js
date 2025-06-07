@@ -18,6 +18,10 @@ import styled from '@emotion/styled';
 import Button from '../denali/Button';
 import DateUtils from '../utils/DateUtils';
 import { withRouter } from 'next/router';
+import MemberFilter from './MemberFilter';
+import Pagination from './Pagination';
+import { useMemberFilter } from '../../hooks/useMemberFilter';
+import { usePagination } from '../../hooks/usePagination';
 
 const StyleTable = styled.table`
     width: 100%;
@@ -59,76 +63,142 @@ const StyledTd = styled.td`
     padding: 5px;
 `;
 
-class GroupMemberList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.viewGroup = this.viewGroup.bind(this);
-        this.localDate = new DateUtils();
-    }
+const GroupMemberListComponent = (props) => {
+    const localDate = new DateUtils();
+    const groupMembers = props.member.groupMembers || [];
 
-    viewGroup(e) {
+    const {
+        searchTerm,
+        setSearchTerm,
+        filteredMembers,
+        hasNoResults,
+    } = useMemberFilter(groupMembers);
+
+    const {
+        currentPage,
+        itemsPerPage,
+        totalItems,
+        totalPages,
+        paginatedData,
+        pageNumbers,
+        canGoNext,
+        canGoPrevious,
+        goToPage,
+        goToFirstPage,
+        goToLastPage,
+        goToNextPage,
+        goToPreviousPage,
+        setItemsPerPage,
+        resetPagination,
+    } = usePagination(filteredMembers, 30);
+
+    React.useEffect(() => {
+        resetPagination();
+    }, [searchTerm, resetPagination]);
+
+    const viewGroup = (e) => {
         e.stopPropagation();
-        let dom = this.props.groupName.split(':group.')[0];
-        let grp = this.props.groupName.split(':group.')[1];
-        this.props.router.push(
+        let dom = props.groupName.split(':group.')[0];
+        let grp = props.groupName.split(':group.')[1];
+        props.router.push(
             `/domain/${dom}/group/${grp}/members`,
             `/domain/${dom}/group/${grp}/members`
         );
-    }
+    };
 
-    render() {
-        const { member } = this.props;
-        let rows;
-        if (member.groupMembers) {
-            rows = member.groupMembers.map((item, i) => {
-                return (
-                    <StyledTr>
-                        <StyledTd>{item.memberName}</StyledTd>
-                        <StyledTd>
-                            {item.expiration
-                                ? this.localDate.getLocalDate(
-                                      item.expiration,
-                                      this.props.timeZone,
-                                      this.props.timeZone
-                                  )
-                                : 'N/A'}
-                        </StyledTd>
-                    </StyledTr>
-                );
-            });
-        } else {
-            rows = (
-                <StyledTr>
-                    <StyledTd colSpan={2}>{'No members in group.'}</StyledTd>
+    const handleItemsPerPageChange = (newItemsPerPage) => {
+        setItemsPerPage(newItemsPerPage);
+        resetPagination();
+    };
+
+    let rows;
+    if (hasNoResults) {
+        rows = (
+            <StyledTr>
+                <StyledTd colSpan={2} style={{ color: '#6c757d' }}>
+                    該当するメンバーが見つかりません
+                </StyledTd>
+            </StyledTr>
+        );
+    } else if (paginatedData && paginatedData.length > 0) {
+        rows = paginatedData.map((item, i) => {
+            return (
+                <StyledTr key={item.memberName || i}>
+                    <StyledTd>{item.memberName}</StyledTd>
+                    <StyledTd>
+                        {item.expiration
+                            ? localDate.getLocalDate(
+                                  item.expiration,
+                                  props.timeZone,
+                                  props.timeZone
+                              )
+                            : 'N/A'}
+                    </StyledTd>
                 </StyledTr>
             );
-        }
-
-        return (
-            <StyledDiv>
-                <StyleTable>
-                    {member.groupMembers ? (
-                        <StyledTr>
-                            <StyledTh> Member </StyledTh>
-                            <StyledTh> Expiry </StyledTh>
-                        </StyledTr>
-                    ) : (
-                        ''
-                    )}
-
-                    {rows}
-                    <tfoot colspan={'0'}>
-                        <tr>
-                            <StyledTd colSpan={2}>
-                                <Button secondary onClick={this.viewGroup}>
-                                    View Members
-                                </Button>
-                            </StyledTd>
-                        </tr>
-                    </tfoot>
-                </StyleTable>
-            </StyledDiv>
+        });
+    } else {
+        rows = (
+            <StyledTr>
+                <StyledTd colSpan={2}>{'No members in group.'}</StyledTd>
+            </StyledTr>
         );
+    }
+
+    return (
+        <StyledDiv>
+            {groupMembers.length > 0 && (
+                <MemberFilter
+                    searchTerm={searchTerm}
+                    onSearchChange={setSearchTerm}
+                    itemsPerPage={itemsPerPage}
+                    onItemsPerPageChange={handleItemsPerPageChange}
+                />
+            )}
+            <StyleTable>
+                {groupMembers.length > 0 ? (
+                    <StyledTr>
+                        <StyledTh> Member </StyledTh>
+                        <StyledTh> Expiry </StyledTh>
+                    </StyledTr>
+                ) : (
+                    ''
+                )}
+
+                {rows}
+                <tfoot colspan={'0'}>
+                    <tr>
+                        <StyledTd colSpan={2}>
+                            <Button secondary onClick={viewGroup}>
+                                View Members
+                            </Button>
+                        </StyledTd>
+                    </tr>
+                </tfoot>
+            </StyleTable>
+            {groupMembers.length > 0 && (
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    totalItems={totalItems}
+                    itemsPerPage={itemsPerPage}
+                    pageNumbers={pageNumbers}
+                    canGoNext={canGoNext}
+                    canGoPrevious={canGoPrevious}
+                    onPageChange={goToPage}
+                    onNext={goToNextPage}
+                    onPrevious={goToPreviousPage}
+                    onFirst={goToFirstPage}
+                    onLast={goToLastPage}
+                />
+            )}
+        </StyledDiv>
+    );
+};
+
+class GroupMemberList extends React.Component {
+    render() {
+        return <GroupMemberListComponent {...this.props} />;
     }
 }
 export default withRouter(GroupMemberList);

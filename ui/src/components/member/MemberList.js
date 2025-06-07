@@ -20,11 +20,15 @@ import Alert from '../denali/Alert';
 import { MODAL_TIME_OUT } from '../constants/constants';
 import AddMember from './AddMember';
 import MemberTable from './MemberTable';
+import MemberFilter from './MemberFilter';
+import Pagination from './Pagination';
 import { selectIsLoading } from '../../redux/selectors/loading';
 import { selectTimeZone } from '../../redux/selectors/domains';
 import { connect } from 'react-redux';
 import { ReduxPageLoader } from '../denali/ReduxPageLoader';
 import { arrayEquals } from '../utils/ArrayUtils';
+import { useMemberFilter } from '../../hooks/useMemberFilter';
+import { usePagination } from '../../hooks/usePagination';
 
 const MembersSectionDiv = styled.div`
     margin: 20px;
@@ -39,59 +43,118 @@ const AddContainerDiv = styled.div`
     float: right;
 `;
 
-class MemberList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            showuser: false,
-            showAddMember: false,
-            members: props.members || [],
-            errorMessage: null,
-        };
-        this.toggleAddMember = this.toggleAddMember.bind(this);
-        this.closeModal = this.closeModal.bind(this);
-        this.reloadMembers = this.reloadMembers.bind(this);
-    }
+const MemberListComponent = (props) => {
+    const [showAddMember, setShowAddMember] = React.useState(false);
+    const [showSuccess, setShowSuccess] = React.useState(false);
+    const [successMessage, setSuccessMessage] = React.useState('');
+    const [members, setMembers] = React.useState(props.members || []);
 
-    toggleAddMember() {
-        this.setState({
-            showAddMember: !this.state.showAddMember,
-        });
-    }
+    const {
+        searchTerm,
+        setSearchTerm,
+        filteredMembers,
+        hasNoResults,
+    } = useMemberFilter(members);
 
-    componentDidUpdate = (prevProps) => {
+    const {
+        currentPage,
+        itemsPerPage,
+        totalItems,
+        totalPages,
+        paginatedData,
+        pageNumbers,
+        canGoNext,
+        canGoPrevious,
+        goToPage,
+        goToFirstPage,
+        goToLastPage,
+        goToNextPage,
+        goToPreviousPage,
+        setItemsPerPage,
+        resetPagination,
+    } = usePagination(filteredMembers, 30);
+
+    const approvedPaginatedData = React.useMemo(() => {
+        return paginatedData.filter((item) => item.approved);
+    }, [paginatedData]);
+
+    const pendingPaginatedData = React.useMemo(() => {
+        return paginatedData.filter((item) => !item.approved);
+    }, [paginatedData]);
+
+    React.useEffect(() => {
         if (
-            prevProps.collection !== this.props.collection ||
-            prevProps.domain !== this.props.domain ||
-            !arrayEquals(prevProps.members, this.props.members)
+            props.collection !== props.collection ||
+            props.domain !== props.domain ||
+            !arrayEquals(props.members, members)
         ) {
-            this.setState({
-                members: this.props.members,
-                showuser: false,
-            });
+            setMembers(props.members || []);
         }
+    }, [props.collection, props.domain, props.members, members]);
+
+    React.useEffect(() => {
+        resetPagination();
+    }, [searchTerm, resetPagination]);
+
+    const toggleAddMember = () => {
+        setShowAddMember(!showAddMember);
     };
 
-    reloadMembers(successMessage, showSuccess = true) {
-        this.setState({
-            showAddMember: false,
-            showSuccess,
-            successMessage: successMessage,
-            errorMessage: null,
-        });
-        setTimeout(
-            () =>
-                this.setState({
-                    showSuccess: false,
-                    successMessage: '',
-                }),
-            MODAL_TIME_OUT
-        );
+    const closeModal = () => {
+        setShowSuccess(false);
+    };
+
+    const reloadMembers = (successMsg, showSuccessFlag = true) => {
+        setShowAddMember(false);
+        setShowSuccess(showSuccessFlag);
+        setSuccessMessage(successMsg);
+        setTimeout(() => {
+            setShowSuccess(false);
+            setSuccessMessage('');
+        }, MODAL_TIME_OUT);
+    };
+
+    const handleItemsPerPageChange = (newItemsPerPage) => {
+        setItemsPerPage(newItemsPerPage);
+        resetPagination();
+    };
+
+    return <MemberListRender 
+        {...props}
+        showAddMember={showAddMember}
+        showSuccess={showSuccess}
+        successMessage={successMessage}
+        members={members}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        filteredMembers={filteredMembers}
+        hasNoResults={hasNoResults}
+        currentPage={currentPage}
+        itemsPerPage={itemsPerPage}
+        totalItems={totalItems}
+        totalPages={totalPages}
+        approvedPaginatedData={approvedPaginatedData}
+        pendingPaginatedData={pendingPaginatedData}
+        pageNumbers={pageNumbers}
+        canGoNext={canGoNext}
+        canGoPrevious={canGoPrevious}
+        goToPage={goToPage}
+        goToFirstPage={goToFirstPage}
+        goToLastPage={goToLastPage}
+        goToNextPage={goToNextPage}
+        goToPreviousPage={goToPreviousPage}
+        handleItemsPerPageChange={handleItemsPerPageChange}
+        toggleAddMember={toggleAddMember}
+        closeModal={closeModal}
+        reloadMembers={reloadMembers}
+    />;
+};
+
+class MemberListRender extends React.Component {
+    constructor(props) {
+        super(props);
     }
 
-    closeModal() {
-        this.setState({ showSuccess: null });
-    }
 
     render() {
         const { domain, collection, collectionDetails } = this.props;
@@ -102,34 +165,31 @@ class MemberList extends React.Component {
             this.props.isDomainAuditEnabled ||
             collectionDetails.reviewEnabled ||
             collectionDetails.selfServe;
-        let addMember = this.state.showAddMember ? (
+        let addMember = this.props.showAddMember ? (
             <AddMember
                 category={this.props.category}
                 domainName={this.props.domain}
                 collection={this.props.collection}
-                onSubmit={this.reloadMembers}
-                onCancel={this.toggleAddMember}
+                onSubmit={this.props.reloadMembers}
+                onCancel={this.props.toggleAddMember}
                 _csrf={this.props._csrf}
-                showAddMember={this.state.showAddMember}
+                showAddMember={this.props.showAddMember}
                 justificationRequired={justificationReq}
             />
         ) : (
             ''
         );
         if (collectionDetails.trust) {
-            approvedMembers = this.props.members;
+            approvedMembers = this.props.approvedPaginatedData;
+            pendingMembers = [];
         } else {
-            approvedMembers = this.props.members
-                ? this.props.members.filter((item) => item.approved)
-                : [];
-            pendingMembers = this.props.members
-                ? this.props.members.filter((item) => !item.approved)
-                : [];
+            approvedMembers = this.props.approvedPaginatedData;
+            pendingMembers = this.props.pendingPaginatedData;
         }
         addMemberButton = (
             <AddContainerDiv>
                 <div>
-                    <Button secondary onClick={this.toggleAddMember}>
+                    <Button secondary onClick={this.props.toggleAddMember}>
                         Add Member
                     </Button>
                     {addMember}
@@ -138,21 +198,29 @@ class MemberList extends React.Component {
         );
 
         let showPending = pendingMembers.length > 0;
-        let newMember = this.state.successMessage;
+        let newMember = this.props.successMessage;
         return this.props.isLoading.length !== 0 ? (
             <ReduxPageLoader message={'Loading members'} />
         ) : (
             <MembersSectionDiv data-testid='member-list'>
                 {addMemberButton}
+                <MemberFilter
+                    searchTerm={this.props.searchTerm}
+                    onSearchChange={this.props.setSearchTerm}
+                    itemsPerPage={this.props.itemsPerPage}
+                    onItemsPerPageChange={this.props.handleItemsPerPageChange}
+                />
                 <MemberTable
                     category={this.props.category}
                     domain={domain}
                     collection={collection}
                     members={approvedMembers}
+                    totalMembers={this.props.totalItems}
+                    hasNoResults={this.props.hasNoResults && !showPending}
                     caption='Approved'
                     timeZone={this.props.timeZone}
                     _csrf={this.props._csrf}
-                    onSubmit={this.reloadMembers}
+                    onSubmit={this.props.reloadMembers}
                     justificationRequired={justificationReq}
                     newMember={newMember}
                 />
@@ -163,20 +231,36 @@ class MemberList extends React.Component {
                         domain={domain}
                         collection={collection}
                         members={pendingMembers}
+                        totalMembers={this.props.totalItems}
+                        hasNoResults={false}
                         pending={true}
                         caption='Pending'
                         timeZone={this.props.timeZone}
                         _csrf={this.props._csrf}
-                        onSubmit={this.reloadMembers}
+                        onSubmit={this.props.reloadMembers}
                         justificationRequired={justificationReq}
                         newMember={newMember}
                     />
                 ) : null}
-                {this.state.showSuccess ? (
+                <Pagination
+                    currentPage={this.props.currentPage}
+                    totalPages={this.props.totalPages}
+                    totalItems={this.props.totalItems}
+                    itemsPerPage={this.props.itemsPerPage}
+                    pageNumbers={this.props.pageNumbers}
+                    canGoNext={this.props.canGoNext}
+                    canGoPrevious={this.props.canGoPrevious}
+                    onPageChange={this.props.goToPage}
+                    onNext={this.props.goToNextPage}
+                    onPrevious={this.props.goToPreviousPage}
+                    onFirst={this.props.goToFirstPage}
+                    onLast={this.props.goToLastPage}
+                />
+                {this.props.showSuccess ? (
                     <Alert
-                        isOpen={this.state.showSuccess}
-                        title={this.state.successMessage}
-                        onClose={this.closeModal}
+                        isOpen={this.props.showSuccess}
+                        title={this.props.successMessage}
+                        onClose={this.props.closeModal}
                         type='success'
                     />
                 ) : null}
@@ -193,4 +277,6 @@ const mapStateToProps = (state, props) => {
     };
 };
 
-export default connect(mapStateToProps)(MemberList);
+const MemberList = connect(mapStateToProps)(MemberListComponent);
+
+export default MemberList;

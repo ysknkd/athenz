@@ -131,12 +131,21 @@ export default class MemberTable extends React.Component {
         const arrowdown = 'arrowhead-down-circle';
         let expandMembers = this.expandMembers.bind(this);
         let rows = [];
-        let length = this.props.members ? this.props.members.length : 0;
+        let length = this.props.totalMembers || (this.props.members ? this.props.members.length : 0);
         let columnWidthPercentages = this.props.category === 'role' ? 18.5 : 25;
         let pendingStateColumnWidthPercentages = 14;
         let deleteColumnWidthPercentages = 8;
         let warningColumnWidthPercentages = 1;
-        if (this.props.members && this.props.members.length > 0) {
+        
+        if (this.props.hasNoResults) {
+            rows = (
+                <tr>
+                    <td colSpan="6" style={{ textAlign: 'center', padding: '20px', color: '#6c757d' }}>
+                        該当するメンバーが見つかりません
+                    </td>
+                </tr>
+            );
+        } else if (this.props.members && this.props.members.length > 0) {
             rows = this.props.members
                 .sort((a, b) => {
                     return a.memberName.localeCompare(b.memberName);
