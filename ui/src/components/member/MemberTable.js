@@ -18,6 +18,9 @@ import styled from '@emotion/styled';
 import { colors } from '../denali/styles';
 import MemberRow from './MemberRow';
 import Icon from '../denali/icons/Icon';
+import Pagination from './Pagination';
+import PageSizeSelector from './PageSizeSelector';
+import { PAGINATION_SHOW_THRESHOLD } from '../constants/constants';
 
 const StyleTable = styled.table`
     width: 100%;
@@ -108,6 +111,50 @@ const LeftMarginSpan = styled.span`
     verticalalign: bottom;
 `;
 
+const PaginationFooter = styled.tfoot`
+    border-top: none;
+`;
+
+const PaginationCell = styled.td`
+    padding: 8px 15px 12px 15px;
+    text-align: center;
+    background-color: #ffffff;
+    border: none;
+    border-top: 2px solid #d5d5d5;
+    color: #9a9a9a;
+    font-weight: 500;
+    vertical-align: middle;
+`;
+
+const HeaderTitleContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+`;
+
+const HeaderLeftContent = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
+const HeaderRightContent = styled.div`
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+    
+    @media (max-width: 768px) {
+        align-self: flex-end;
+        margin-right: 8px;
+    }
+`;
+
 export default class MemberTable extends React.Component {
     constructor(props) {
         super(props);
@@ -115,6 +162,14 @@ export default class MemberTable extends React.Component {
         this.state = {
             expanded: true,
         };
+    }
+
+    getColumnCount() {
+        let count = 4; // Basic columns: warning, user name, name, expiration date
+        if (this.props.category !== 'group') count++; // Review reminder date (role only)
+        if (this.props.pending) count++; // Pending state (pending only)
+        count++; // Delete column
+        return count;
     }
 
     expandMembers() {
@@ -131,16 +186,13 @@ export default class MemberTable extends React.Component {
         const arrowdown = 'arrowhead-down-circle';
         let expandMembers = this.expandMembers.bind(this);
         let rows = [];
-        let length = this.props.members ? this.props.members.length : 0;
+        let length = this.props.totalMembers || (this.props.members ? this.props.members.length : 0);
         let columnWidthPercentages = this.props.category === 'role' ? 18.5 : 25;
         let pendingStateColumnWidthPercentages = 14;
         let deleteColumnWidthPercentages = 8;
         let warningColumnWidthPercentages = 1;
         if (this.props.members && this.props.members.length > 0) {
             rows = this.props.members
-                .sort((a, b) => {
-                    return a.memberName.localeCompare(b.memberName);
-                })
                 .map((item, i) => {
                     let color = '';
                     if (i % 2 === 0) {
@@ -170,6 +222,7 @@ export default class MemberTable extends React.Component {
 
         if (!this.state.expanded) {
             return (
+                <div>
                 <StyleTable data-testid='member-table'>
                     <tbody>
                         <tr>
@@ -193,29 +246,47 @@ export default class MemberTable extends React.Component {
                         </tr>
                     </tbody>
                 </StyleTable>
+                </div>
             );
         }
 
         return (
+            <div>
             <StyleTable data-testid='member-table'>
                 <thead>
                     <tr>
-                        <TableThStyledExpand colSpan='3'>
-                            <LeftMarginSpan>
-                                <Icon
-                                    icon={
-                                        this.state.expanded
-                                            ? arrowup
-                                            : arrowdown
-                                    }
-                                    onClick={expandMembers}
-                                    color={colors.icons}
-                                    isLink
-                                    size={'1.25em'}
-                                    verticalAlign={'text-bottom'}
-                                />
-                            </LeftMarginSpan>
-                            {`${caption} (${length})`}
+                        <TableThStyledExpand colSpan={this.getColumnCount()}>
+                            <HeaderTitleContainer>
+                                <HeaderLeftContent>
+                                    <LeftMarginSpan>
+                                        <Icon
+                                            icon={
+                                                this.state.expanded
+                                                    ? arrowup
+                                                    : arrowdown
+                                            }
+                                            onClick={expandMembers}
+                                            color={colors.icons}
+                                            isLink
+                                            size={'1.25em'}
+                                            verticalAlign={'text-bottom'}
+                                        />
+                                    </LeftMarginSpan>
+                                    {`${caption} (${length})`}
+                                </HeaderLeftContent>
+                                <HeaderRightContent>
+                                    {this.props.showPageSizeSelector && (
+                                        <PageSizeSelector
+                                            value={this.props.pageSizeValue}
+                                            options={this.props.pageSizeOptions}
+                                            onChange={this.props.onPageSizeChange}
+                                            label="Show"
+                                            compact={true}
+                                            testId={this.props.pageSizeSelectorTestId}
+                                        />
+                                    )}
+                                </HeaderRightContent>
+                            </HeaderTitleContainer>
                         </TableThStyledExpand>
                     </tr>
                     <tr>
@@ -277,7 +348,27 @@ export default class MemberTable extends React.Component {
                     </tr>
                 </thead>
                 <tbody>{rows}</tbody>
+                {this.props.showPagination && (
+                    <PaginationFooter>
+                        <tr>
+                            <PaginationCell colSpan={this.getColumnCount()}>
+                                <Pagination
+                                    currentPage={this.props.currentPage}
+                                    totalPages={this.props.totalPages}
+                                    totalItems={this.props.totalMembers || 0}
+                                    onPageChange={this.props.onPageChange}
+                                    onNextPage={this.props.onNextPage}
+                                    onPreviousPage={this.props.onPreviousPage}
+                                    itemsPerPage={this.props.itemsPerPage}
+                                    memberType="members"
+                                    inTable={true}
+                                />
+                            </PaginationCell>
+                        </tr>
+                    </PaginationFooter>
+                )}
             </StyleTable>
+        </div>
         );
     }
 }

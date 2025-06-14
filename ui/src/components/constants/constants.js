@@ -15,6 +15,20 @@
  */
 
 export const MODAL_TIME_OUT = 2000;
+
+// Pagination Constants
+export const PAGINATION_DEFAULT_ITEMS_PER_PAGE = 30;
+export const PAGINATION_ITEMS_PER_PAGE_OPTIONS = [30, 50, 100];
+export const PAGINATION_SHOW_THRESHOLD = 30;
+export const PAGINATION_MAX_VISIBLE_PAGES = 5;
+
+// Pagination Labels
+export const PAGINATION_ITEMS_PER_PAGE_LABEL = 'Show';
+export const PAGINATION_SHOWING_TEXT = 'Showing';
+export const PAGINATION_OF_TEXT = 'of';
+export const PAGINATION_MEMBERS_TEXT = 'members';
+export const PAGINATION_PREVIOUS_TEXT = 'Previous';
+export const PAGINATION_NEXT_TEXT = 'Next';
 export const GROUP_NAME_REGEX =
     '([a-zA-Z0-9_][a-zA-Z0-9_-]*\\.)*[a-zA-Z0-9_][a-zA-Z0-9_-]*';
 export const GROUP_MEMBER_NAME_REGEX =
