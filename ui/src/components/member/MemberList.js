@@ -17,7 +17,11 @@ import React, { useState, useEffect, useMemo } from 'react';
 import styled from '@emotion/styled';
 import Button from '../denali/Button';
 import Alert from '../denali/Alert';
-import { MODAL_TIME_OUT, PAGINATION_DEFAULT_ITEMS_PER_PAGE, PAGINATION_ITEMS_PER_PAGE_OPTIONS } from '../constants/constants';
+import {
+    MODAL_TIME_OUT,
+    PAGINATION_DEFAULT_ITEMS_PER_PAGE,
+    PAGINATION_ITEMS_PER_PAGE_OPTIONS,
+} from '../constants/constants';
 import AddMember from './AddMember';
 import MemberTable from './MemberTable';
 import PageSizeSelector from './PageSizeSelector';
@@ -27,6 +31,7 @@ import { connect } from 'react-redux';
 import { ReduxPageLoader } from '../denali/ReduxPageLoader';
 import { arrayEquals } from '../utils/ArrayUtils';
 import { usePagination } from '../../hooks/usePagination';
+import API from '../../api';
 
 const MembersSectionDiv = styled.div`
     margin: 20px;
@@ -64,6 +69,9 @@ const MemberList = (props) => {
     const [showSuccess, setShowSuccess] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState(null);
+    const [paginationEnabled, setPaginationEnabled] = useState(true);
+
+    const api = API();
 
     const toggleAddMember = () => {
         setShowAddMember(!showAddMember);
@@ -84,12 +92,38 @@ const MemberList = (props) => {
         setShowSuccess(false);
     };
 
+    // Fetch page feature flag for pagination
+    useEffect(() => {
+        let isMounted = true;
+        
+        api.getPageFeatureFlag('memberList')
+            .then((data) => {
+                if (isMounted && data && typeof data.pagination === 'boolean') {
+                    setPaginationEnabled(data.pagination);
+                }
+            })
+            .catch((err) => {
+                // On error, default to enabled (fail safe)
+                console.warn(
+                    'Failed to fetch memberList page feature flag:',
+                    err
+                );
+                if (isMounted) {
+                    setPaginationEnabled(true);
+                }
+            });
+            
+        return () => {
+            isMounted = false;
+        };
+    }, []);
+
     // Prepare members data
     const { domain, collection, collectionDetails, members = [] } = props;
-    
+
     let approvedMembers = [];
     let pendingMembers = [];
-    
+
     if (collectionDetails.trust) {
         approvedMembers = members;
     } else {
@@ -98,20 +132,33 @@ const MemberList = (props) => {
     }
 
     // Sort members with memoization to prevent unnecessary re-sorts
-    const sortedApprovedMembers = useMemo(() => 
-        [...approvedMembers].sort((a, b) => a.memberName.localeCompare(b.memberName)),
+    const sortedApprovedMembers = useMemo(
+        () =>
+            [...approvedMembers].sort((a, b) =>
+                a.memberName.localeCompare(b.memberName)
+            ),
         [approvedMembers]
     );
-    
-    const sortedPendingMembers = useMemo(() => 
-        [...pendingMembers].sort((a, b) => a.memberName.localeCompare(b.memberName)),
+
+    const sortedPendingMembers = useMemo(
+        () =>
+            [...pendingMembers].sort((a, b) =>
+                a.memberName.localeCompare(b.memberName)
+            ),
         [pendingMembers]
     );
 
     // Setup pagination for approved and pending members
-    const approvedPagination = usePagination(sortedApprovedMembers, PAGINATION_DEFAULT_ITEMS_PER_PAGE);
-    const pendingPagination = usePagination(sortedPendingMembers, PAGINATION_DEFAULT_ITEMS_PER_PAGE);
-
+    const approvedPagination = usePagination(
+        sortedApprovedMembers,
+        PAGINATION_DEFAULT_ITEMS_PER_PAGE,
+        paginationEnabled
+    );
+    const pendingPagination = usePagination(
+        sortedPendingMembers,
+        PAGINATION_DEFAULT_ITEMS_PER_PAGE,
+        paginationEnabled
+    );
 
     const justificationReq =
         props.isDomainAuditEnabled ||
@@ -142,8 +189,10 @@ const MemberList = (props) => {
         </AddContainerDiv>
     );
 
-    const showApprovedPagination = approvedMembers.length > 0;
-    const showPendingPagination = pendingMembers.length > 0;
+    const showApprovedPagination =
+        paginationEnabled && approvedMembers.length > 0;
+    const showPendingPagination =
+        paginationEnabled && pendingMembers.length > 0;
 
     if (props.isLoading.length !== 0) {
         return <ReduxPageLoader message={'Loading members'} />;
@@ -152,8 +201,7 @@ const MemberList = (props) => {
     return (
         <MembersSectionDiv data-testid='member-list'>
             {addMemberButton}
-            
-            
+
             <MemberTable
                 category={props.category}
                 domain={domain}
@@ -166,7 +214,9 @@ const MemberList = (props) => {
                 onSubmit={reloadMembers}
                 justificationRequired={justificationReq}
                 newMember={successMessage}
-                showPagination={showApprovedPagination && approvedPagination.totalPages > 1}
+                showPagination={
+                    showApprovedPagination && approvedPagination.totalPages > 1
+                }
                 currentPage={approvedPagination.currentPage}
                 totalPages={approvedPagination.totalPages}
                 onPageChange={approvedPagination.goToPage}
@@ -179,42 +229,50 @@ const MemberList = (props) => {
                 onPageSizeChange={(newSize) => {
                     approvedPagination.setItemsPerPage(newSize);
                 }}
-                pageSizeSelectorTestId={process.env.NODE_ENV === 'test' ? 'approved-page-size-selector-test' : undefined}
+                pageSizeSelectorTestId={
+                    process.env.NODE_ENV === 'test'
+                        ? 'approved-page-size-selector-test'
+                        : undefined
+                }
             />
-            
+
             <br />
-            
+
             {showPendingPagination && (
                 <MemberTable
-                        category={props.category}
-                        domain={domain}
-                        collection={collection}
-                        members={pendingPagination.paginatedData}
-                        totalMembers={pendingPagination.totalItems}
-                        pending={true}
-                        caption='Pending'
-                        timeZone={props.timeZone}
-                        _csrf={props._csrf}
-                        onSubmit={reloadMembers}
-                        justificationRequired={justificationReq}
-                        newMember={successMessage}
-                        showPagination={pendingPagination.totalPages > 1}
-                        currentPage={pendingPagination.currentPage}
-                        totalPages={pendingPagination.totalPages}
-                        onPageChange={pendingPagination.goToPage}
-                        onNextPage={pendingPagination.goToNextPage}
-                        onPreviousPage={pendingPagination.goToPreviousPage}
-                        itemsPerPage={pendingPagination.itemsPerPage}
-                        showPageSizeSelector={showPendingPagination}
-                        pageSizeValue={pendingPagination.itemsPerPage}
-                        pageSizeOptions={PAGINATION_ITEMS_PER_PAGE_OPTIONS}
-                        onPageSizeChange={(newSize) => {
-                            pendingPagination.setItemsPerPage(newSize);
-                        }}
-                        pageSizeSelectorTestId={process.env.NODE_ENV === 'test' ? 'pending-page-size-selector-test' : undefined}
-                    />
+                    category={props.category}
+                    domain={domain}
+                    collection={collection}
+                    members={pendingPagination.paginatedData}
+                    totalMembers={pendingPagination.totalItems}
+                    pending={true}
+                    caption='Pending'
+                    timeZone={props.timeZone}
+                    _csrf={props._csrf}
+                    onSubmit={reloadMembers}
+                    justificationRequired={justificationReq}
+                    newMember={successMessage}
+                    showPagination={pendingPagination.totalPages > 1}
+                    currentPage={pendingPagination.currentPage}
+                    totalPages={pendingPagination.totalPages}
+                    onPageChange={pendingPagination.goToPage}
+                    onNextPage={pendingPagination.goToNextPage}
+                    onPreviousPage={pendingPagination.goToPreviousPage}
+                    itemsPerPage={pendingPagination.itemsPerPage}
+                    showPageSizeSelector={showPendingPagination}
+                    pageSizeValue={pendingPagination.itemsPerPage}
+                    pageSizeOptions={PAGINATION_ITEMS_PER_PAGE_OPTIONS}
+                    onPageSizeChange={(newSize) => {
+                        pendingPagination.setItemsPerPage(newSize);
+                    }}
+                    pageSizeSelectorTestId={
+                        process.env.NODE_ENV === 'test'
+                            ? 'pending-page-size-selector-test'
+                            : undefined
+                    }
+                />
             )}
-            
+
             {showSuccess && (
                 <Alert
                     isOpen={showSuccess}

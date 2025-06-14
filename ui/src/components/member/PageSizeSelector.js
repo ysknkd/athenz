@@ -22,42 +22,42 @@ const SelectorContainer = styled.div`
     align-items: center;
     gap: 8px;
     font-size: 14px;
-    color: ${(props) => props.compact ? colors.grey600 : colors.grey800};
+    color: ${(props) => (props.compact ? colors.grey600 : colors.grey800)};
 `;
 
 const Label = styled.span`
-    color: ${(props) => props.compact ? colors.grey600 : colors.grey600};
+    color: ${(props) => (props.compact ? colors.grey600 : colors.grey600)};
     font-weight: 500;
     font-size: 14px;
 `;
 
 const Select = styled.select`
-    background: ${(props) => props.compact ? colors.grey100 : colors.grey100};
-    border: 1px solid ${(props) => props.compact ? colors.grey500 : colors.grey400};
+    background: ${(props) => (props.compact ? colors.grey100 : colors.grey100)};
+    border: 1px solid
+        ${(props) => (props.compact ? colors.grey500 : colors.grey400)};
     border-radius: 3px;
-    padding: ${(props) => props.compact ? '4px 8px' : '6px 8px'};
+    padding: ${(props) => (props.compact ? '4px 8px' : '6px 8px')};
     font-size: 14px;
-    color: ${(props) => props.compact ? colors.grey800 : colors.grey800};
-    cursor: ${(props) => props.disabled ? 'not-allowed' : 'pointer'};
-    opacity: ${(props) => props.disabled ? 0.5 : 1};
-    min-width: ${(props) => props.compact ? '50px' : '60px'};
-    
+    color: ${(props) => (props.compact ? colors.grey800 : colors.grey800)};
+    cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
+    opacity: ${(props) => (props.disabled ? 0.5 : 1)};
+    min-width: ${(props) => (props.compact ? '50px' : '60px')};
+
     &:hover:not(:disabled) {
         border-color: ${colors.grey500};
     }
-    
+
     &:focus {
         outline: 2px solid ${colors.brand600};
         outline-offset: 2px;
         border-color: ${colors.brand600};
     }
-    
+
     option {
         background: ${colors.grey100};
         color: ${colors.grey800};
     }
 `;
-
 
 const PageSizeSelector = ({
     value,
@@ -69,7 +69,9 @@ const PageSizeSelector = ({
     className,
     testId,
 }) => {
-    const selectId = testId || `page-size-selector-${Math.random().toString(36).substr(2, 9)}`;
+    const selectId =
+        testId ||
+        `page-size-selector-${Math.random().toString(36).substr(2, 9)}`;
 
     const handleChange = (event) => {
         const newValue = parseInt(event.target.value, 10);
@@ -87,7 +89,7 @@ const PageSizeSelector = ({
                 onChange={handleChange}
                 disabled={disabled}
                 compact={compact}
-                aria-label="Select page size"
+                aria-label='Select page size'
             >
                 {options.map((option) => (
                     <option key={option} value={option}>

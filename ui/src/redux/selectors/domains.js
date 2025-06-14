@@ -89,3 +89,7 @@ export const selectUserLink = (state) => {
         ? state.domains.headerDetails.userData.userLink
         : {};
 };
+
+export const selectConfig = (state) => {
+    return state.domains.headerDetails ? state.domains.headerDetails : {};
+};

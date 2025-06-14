@@ -25,6 +25,7 @@ import {
     selectHeaderDetails,
     selectProductMasterLink,
     selectPendingMembersList,
+    selectConfig,
 } from '../../../redux/selectors/domains';
 import {
     configDom,
@@ -262,6 +263,16 @@ describe('test domains selectors', () => {
             expect(
                 selectPendingMembersList(stateWithoutDomainsData, domainName)
             ).toEqual({});
+        });
+    });
+    describe('test selectConfig selector', () => {
+        it('should return config from header details', () => {
+            expect(selectConfig(stateWithDomainsData)).toEqual(
+                configHeaderDetails
+            );
+        });
+        it('should return empty object', () => {
+            expect(selectConfig(stateWithoutDomainsData)).toEqual({});
         });
     });
 });

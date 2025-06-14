@@ -297,6 +297,89 @@ describe('usePagination', () => {
         });
     });
 
+    describe('pagination enabled/disabled', () => {
+        it('should enable pagination by default', () => {
+            const { result } = renderHook(() => usePagination(sampleData, 10));
+
+            expect(result.current.enabled).toBe(true);
+            expect(result.current.totalPages).toBe(10);
+            expect(result.current.paginatedData).toHaveLength(10);
+        });
+
+        it('should explicitly enable pagination when enabled=true', () => {
+            const { result } = renderHook(() =>
+                usePagination(sampleData, 10, true)
+            );
+
+            expect(result.current.enabled).toBe(true);
+            expect(result.current.totalPages).toBe(10);
+            expect(result.current.paginatedData).toHaveLength(10);
+        });
+
+        it('should disable pagination when enabled=false', () => {
+            const { result } = renderHook(() =>
+                usePagination(sampleData, 10, false)
+            );
+
+            expect(result.current.enabled).toBe(false);
+            expect(result.current.currentPage).toBe(1);
+            expect(result.current.totalPages).toBe(1);
+            expect(result.current.totalItems).toBe(100);
+            expect(result.current.itemsPerPage).toBe(100);
+            expect(result.current.paginatedData).toHaveLength(100);
+            expect(result.current.hasNextPage).toBe(false);
+            expect(result.current.hasPreviousPage).toBe(false);
+        });
+
+        it('should return all data when pagination is disabled', () => {
+            const { result } = renderHook(() =>
+                usePagination(sampleData, 10, false)
+            );
+
+            expect(result.current.paginatedData).toEqual(sampleData);
+            expect(result.current.paginatedData).toHaveLength(
+                sampleData.length
+            );
+        });
+
+        it('should make navigation functions no-ops when disabled', () => {
+            const { result } = renderHook(() =>
+                usePagination(sampleData, 10, false)
+            );
+
+            expect(result.current.currentPage).toBe(1);
+
+            act(() => {
+                result.current.goToPage(5);
+            });
+            expect(result.current.currentPage).toBe(1);
+
+            act(() => {
+                result.current.goToNextPage();
+            });
+            expect(result.current.currentPage).toBe(1);
+
+            act(() => {
+                result.current.goToPreviousPage();
+            });
+            expect(result.current.currentPage).toBe(1);
+
+            act(() => {
+                result.current.setItemsPerPage(50);
+            });
+            expect(result.current.itemsPerPage).toBe(100);
+        });
+
+        it('should handle empty data when pagination is disabled', () => {
+            const { result } = renderHook(() => usePagination([], 10, false));
+
+            expect(result.current.enabled).toBe(false);
+            expect(result.current.totalItems).toBe(0);
+            expect(result.current.paginatedData).toHaveLength(0);
+            expect(result.current.itemsPerPage).toBe(0);
+        });
+    });
+
     describe('edge cases', () => {
         it('should handle zero items per page gracefully', () => {
             const { result } = renderHook(() => usePagination(sampleData, 0));
@@ -313,7 +396,9 @@ describe('usePagination', () => {
         });
 
         it('should handle very large items per page', () => {
-            const { result } = renderHook(() => usePagination(sampleData, 1000));
+            const { result } = renderHook(() =>
+                usePagination(sampleData, 1000)
+            );
 
             expect(result.current.totalPages).toBe(1);
             expect(result.current.paginatedData).toHaveLength(100);

@@ -131,7 +131,7 @@ const HeaderTitleContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    
+
     @media (max-width: 768px) {
         flex-direction: column;
         align-items: flex-start;
@@ -148,7 +148,7 @@ const HeaderRightContent = styled.div`
     display: flex;
     align-items: center;
     margin-right: 15px;
-    
+
     @media (max-width: 768px) {
         align-self: flex-end;
         margin-right: 8px;
@@ -186,78 +186,46 @@ export default class MemberTable extends React.Component {
         const arrowdown = 'arrowhead-down-circle';
         let expandMembers = this.expandMembers.bind(this);
         let rows = [];
-        let length = this.props.totalMembers || (this.props.members ? this.props.members.length : 0);
+        let length =
+            this.props.totalMembers ||
+            (this.props.members ? this.props.members.length : 0);
         let columnWidthPercentages = this.props.category === 'role' ? 18.5 : 25;
         let pendingStateColumnWidthPercentages = 14;
         let deleteColumnWidthPercentages = 8;
         let warningColumnWidthPercentages = 1;
         if (this.props.members && this.props.members.length > 0) {
-            rows = this.props.members
-                .map((item, i) => {
-                    let color = '';
-                    if (i % 2 === 0) {
-                        color = colors.row;
-                    }
-                    return (
-                        <MemberRow
-                            category={this.props.category}
-                            domain={domain}
-                            collection={collection}
-                            pending={this.props.pending}
-                            details={item}
-                            idx={i}
-                            color={color}
-                            key={item.memberName}
-                            onUpdateSuccess={this.props.onSubmit}
-                            timeZone={this.props.timeZone}
-                            _csrf={this.props._csrf}
-                            justificationRequired={
-                                this.props.justificationRequired
-                            }
-                            newMember={this.props.newMember}
-                        />
-                    );
-                });
+            rows = this.props.members.map((item, i) => {
+                let color = '';
+                if (i % 2 === 0) {
+                    color = colors.row;
+                }
+                return (
+                    <MemberRow
+                        category={this.props.category}
+                        domain={domain}
+                        collection={collection}
+                        pending={this.props.pending}
+                        details={item}
+                        idx={i}
+                        color={color}
+                        key={item.memberName}
+                        onUpdateSuccess={this.props.onSubmit}
+                        timeZone={this.props.timeZone}
+                        _csrf={this.props._csrf}
+                        justificationRequired={this.props.justificationRequired}
+                        newMember={this.props.newMember}
+                    />
+                );
+            });
         }
 
         if (!this.state.expanded) {
             return (
                 <div>
-                <StyleTable data-testid='member-table'>
-                    <tbody>
-                        <tr>
-                            <TableThStyled>
-                                <LeftMarginSpan>
-                                    <Icon
-                                        icon={
-                                            this.state.expanded
-                                                ? arrowup
-                                                : arrowdown
-                                        }
-                                        onClick={expandMembers}
-                                        color={colors.icons}
-                                        isLink
-                                        size={'1.25em'}
-                                        verticalAlign={'text-bottom'}
-                                    />
-                                </LeftMarginSpan>
-                                {`${caption} (${length})`}
-                            </TableThStyled>
-                        </tr>
-                    </tbody>
-                </StyleTable>
-                </div>
-            );
-        }
-
-        return (
-            <div>
-            <StyleTable data-testid='member-table'>
-                <thead>
-                    <tr>
-                        <TableThStyledExpand colSpan={this.getColumnCount()}>
-                            <HeaderTitleContainer>
-                                <HeaderLeftContent>
+                    <StyleTable data-testid='member-table'>
+                        <tbody>
+                            <tr>
+                                <TableThStyled>
                                     <LeftMarginSpan>
                                         <Icon
                                             icon={
@@ -273,102 +241,151 @@ export default class MemberTable extends React.Component {
                                         />
                                     </LeftMarginSpan>
                                     {`${caption} (${length})`}
-                                </HeaderLeftContent>
-                                <HeaderRightContent>
-                                    {this.props.showPageSizeSelector && (
-                                        <PageSizeSelector
-                                            value={this.props.pageSizeValue}
-                                            options={this.props.pageSizeOptions}
-                                            onChange={this.props.onPageSizeChange}
-                                            label="Show"
-                                            compact={true}
-                                            testId={this.props.pageSizeSelectorTestId}
-                                        />
-                                    )}
-                                </HeaderRightContent>
-                            </HeaderTitleContainer>
-                        </TableThStyledExpand>
-                    </tr>
-                    <tr>
-                        <TableHeadStyled
-                            width={warningColumnWidthPercentages}
-                            align={center}
-                        ></TableHeadStyled>
-                        <TableHeadStyledRoleName
-                            width={columnWidthPercentages}
-                            align={left}
-                        >
-                            User Name
-                        </TableHeadStyledRoleName>
-                        <TableHeadStyled
-                            width={columnWidthPercentages}
-                            align={left}
-                        >
-                            Name of User
-                        </TableHeadStyled>
-                        <TableHeadStyled
-                            width={
-                                this.props.category === 'group' &&
-                                !this.props.pending
-                                    ? columnWidthPercentages +
-                                      pendingStateColumnWidthPercentages
-                                    : columnWidthPercentages
-                            }
-                            align={left}
-                        >
-                            Expiration Date
-                        </TableHeadStyled>
-                        {this.props.category !== 'group' && (
+                                </TableThStyled>
+                            </tr>
+                        </tbody>
+                    </StyleTable>
+                </div>
+            );
+        }
+
+        return (
+            <div>
+                <StyleTable data-testid='member-table'>
+                    <thead>
+                        <tr>
+                            <TableThStyledExpand
+                                colSpan={this.getColumnCount()}
+                            >
+                                <HeaderTitleContainer>
+                                    <HeaderLeftContent>
+                                        <LeftMarginSpan>
+                                            <Icon
+                                                icon={
+                                                    this.state.expanded
+                                                        ? arrowup
+                                                        : arrowdown
+                                                }
+                                                onClick={expandMembers}
+                                                color={colors.icons}
+                                                isLink
+                                                size={'1.25em'}
+                                                verticalAlign={'text-bottom'}
+                                            />
+                                        </LeftMarginSpan>
+                                        {`${caption} (${length})`}
+                                    </HeaderLeftContent>
+                                    <HeaderRightContent>
+                                        {this.props.showPageSizeSelector &&
+                                            this.props.showPagination && (
+                                                <PageSizeSelector
+                                                    value={
+                                                        this.props.pageSizeValue
+                                                    }
+                                                    options={
+                                                        this.props
+                                                            .pageSizeOptions
+                                                    }
+                                                    onChange={
+                                                        this.props
+                                                            .onPageSizeChange
+                                                    }
+                                                    label='Show'
+                                                    compact={true}
+                                                    testId={
+                                                        this.props
+                                                            .pageSizeSelectorTestId
+                                                    }
+                                                />
+                                            )}
+                                    </HeaderRightContent>
+                                </HeaderTitleContainer>
+                            </TableThStyledExpand>
+                        </tr>
+                        <tr>
+                            <TableHeadStyled
+                                width={warningColumnWidthPercentages}
+                                align={center}
+                            ></TableHeadStyled>
+                            <TableHeadStyledRoleName
+                                width={columnWidthPercentages}
+                                align={left}
+                            >
+                                User Name
+                            </TableHeadStyledRoleName>
+                            <TableHeadStyled
+                                width={columnWidthPercentages}
+                                align={left}
+                            >
+                                Name of User
+                            </TableHeadStyled>
                             <TableHeadStyled
                                 width={
-                                    this.props.pending
-                                        ? columnWidthPercentages
-                                        : columnWidthPercentages +
+                                    this.props.category === 'group' &&
+                                    !this.props.pending
+                                        ? columnWidthPercentages +
                                           pendingStateColumnWidthPercentages
+                                        : columnWidthPercentages
                                 }
                                 align={left}
                             >
-                                Review Reminder Date
+                                Expiration Date
                             </TableHeadStyled>
-                        )}
-                        {this.props.pending && (
+                            {this.props.category !== 'group' && (
+                                <TableHeadStyled
+                                    width={
+                                        this.props.pending
+                                            ? columnWidthPercentages
+                                            : columnWidthPercentages +
+                                              pendingStateColumnWidthPercentages
+                                    }
+                                    align={left}
+                                >
+                                    Review Reminder Date
+                                </TableHeadStyled>
+                            )}
+                            {this.props.pending && (
+                                <TableHeadStyled
+                                    width={pendingStateColumnWidthPercentages}
+                                    align={left}
+                                >
+                                    Pending State
+                                </TableHeadStyled>
+                            )}
                             <TableHeadStyled
-                                width={pendingStateColumnWidthPercentages}
-                                align={left}
+                                width={deleteColumnWidthPercentages}
+                                align={center}
                             >
-                                Pending State
+                                Delete
                             </TableHeadStyled>
-                        )}
-                        <TableHeadStyled
-                            width={deleteColumnWidthPercentages}
-                            align={center}
-                        >
-                            Delete
-                        </TableHeadStyled>
-                    </tr>
-                </thead>
-                <tbody>{rows}</tbody>
-                {this.props.showPagination && (
-                    <PaginationFooter>
-                        <tr>
-                            <PaginationCell colSpan={this.getColumnCount()}>
-                                <Pagination
-                                    currentPage={this.props.currentPage}
-                                    totalPages={this.props.totalPages}
-                                    totalItems={this.props.totalMembers || 0}
-                                    onPageChange={this.props.onPageChange}
-                                    onNextPage={this.props.onNextPage}
-                                    onPreviousPage={this.props.onPreviousPage}
-                                    itemsPerPage={this.props.itemsPerPage}
-                                    memberType="members"
-                                    inTable={true}
-                                />
-                            </PaginationCell>
                         </tr>
-                    </PaginationFooter>
-                )}
-            </StyleTable>
-        </div>
+                    </thead>
+                    <tbody>{rows}</tbody>
+                    {this.props.showPagination && (
+                        <PaginationFooter>
+                            <tr>
+                                <PaginationCell colSpan={this.getColumnCount()}>
+                                    <Pagination
+                                        currentPage={this.props.currentPage}
+                                        totalPages={this.props.totalPages}
+                                        totalItems={
+                                            this.props.totalMembers || 0
+                                        }
+                                        onPageChange={this.props.onPageChange}
+                                        onNextPage={this.props.onNextPage}
+                                        onPreviousPage={
+                                            this.props.onPreviousPage
+                                        }
+                                        itemsPerPage={this.props.itemsPerPage}
+                                        memberType='members'
+                                        inTable={true}
+                                    />
+                                </PaginationCell>
+                            </tr>
+                        </PaginationFooter>
+                    )}
+                </StyleTable>
+            </div>
         );
     }
 }

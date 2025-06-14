@@ -23,7 +23,7 @@ const PaginationContainer = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 8px;
-    margin: ${(props) => props.inTable ? '0' : '20px 0'};
+    margin: ${(props) => (props.inTable ? '0' : '20px 0')};
     color: inherit;
 `;
 
@@ -56,12 +56,12 @@ const PaginationButton = styled.button`
     height: auto;
     font-size: 14px;
     font-weight: normal;
-    cursor: ${(props) => props.disabled ? 'not-allowed' : 'pointer'};
-    opacity: ${(props) => props.disabled ? 0.5 : 1};
+    cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
+    opacity: ${(props) => (props.disabled ? 0.5 : 1)};
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
     &:hover:not(:disabled) {
         background: ${(props) => {
             if (props.$isActive) return colors.brand700;
@@ -73,12 +73,12 @@ const PaginationButton = styled.button`
             return colors.brand600;
         }};
     }
-    
+
     &:focus {
         outline: 2px solid ${colors.brand600};
         outline-offset: 2px;
     }
-    
+
     &:disabled {
         background: transparent;
         border-color: ${colors.grey400};
@@ -113,9 +113,10 @@ const Pagination = ({
     className,
     inTable = false,
 }) => {
-    const startItem = totalItems === 0 ? 0 : (currentPage - 1) * itemsPerPage + 1;
+    const startItem =
+        totalItems === 0 ? 0 : (currentPage - 1) * itemsPerPage + 1;
     const endItem = Math.min(currentPage * itemsPerPage, totalItems);
-    
+
     const hasPrevious = currentPage > 1;
     const hasNext = currentPage < totalPages;
 
@@ -150,15 +151,33 @@ const Pagination = ({
         }
 
         const pages = [];
-        
+
         if (currentPage <= 4) {
             pages.push(1, 2, 3, 4, 5, '...', totalPages);
         } else if (currentPage >= totalPages - 3) {
-            pages.push(1, '...', totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
+            pages.push(
+                1,
+                '...',
+                totalPages - 4,
+                totalPages - 3,
+                totalPages - 2,
+                totalPages - 1,
+                totalPages
+            );
         } else {
-            pages.push(1, '...', currentPage - 2, currentPage - 1, currentPage, currentPage + 1, currentPage + 2, '...', totalPages);
+            pages.push(
+                1,
+                '...',
+                currentPage - 2,
+                currentPage - 1,
+                currentPage,
+                currentPage + 1,
+                currentPage + 2,
+                '...',
+                totalPages
+            );
         }
-        
+
         return pages;
     };
 
@@ -171,44 +190,51 @@ const Pagination = ({
                     Showing {startItem}-{endItem} of {totalItems} {memberType}
                 </InfoText>
             )}
-            
+
             <PaginationControls>
                 <NavigationButton
                     disabled={!hasPrevious}
                     onClick={handlePreviousClick}
                     onKeyDown={(e) => handleKeyDown(e, handlePreviousClick)}
-                    aria-label="Go to previous page"
+                    aria-label='Go to previous page'
                 >
-                    <Icon icon="arrow-left" size="1em" color="currentColor" />
+                    <Icon icon='arrow-left' size='1em' color='currentColor' />
                     Previous
                 </NavigationButton>
 
-                {!compact && visiblePages.map((page, index) => (
-                    page === '...' ? (
-                        <Ellipsis key={`ellipsis-${index}`}>...</Ellipsis>
-                    ) : (
-                        <PaginationButton
-                            key={page}
-                            $isActive={page === currentPage}
-                            inTable={inTable}
-                            onClick={() => handlePageClick(page)}
-                            onKeyDown={(e) => handleKeyDown(e, () => handlePageClick(page))}
-                            aria-label={`Page ${page}`}
-                            aria-current={page === currentPage ? 'page' : undefined}
-                        >
-                            {page}
-                        </PaginationButton>
-                    )
-                ))}
+                {!compact &&
+                    visiblePages.map((page, index) =>
+                        page === '...' ? (
+                            <Ellipsis key={`ellipsis-${index}`}>...</Ellipsis>
+                        ) : (
+                            <PaginationButton
+                                key={page}
+                                $isActive={page === currentPage}
+                                inTable={inTable}
+                                onClick={() => handlePageClick(page)}
+                                onKeyDown={(e) =>
+                                    handleKeyDown(e, () =>
+                                        handlePageClick(page)
+                                    )
+                                }
+                                aria-label={`Page ${page}`}
+                                aria-current={
+                                    page === currentPage ? 'page' : undefined
+                                }
+                            >
+                                {page}
+                            </PaginationButton>
+                        )
+                    )}
 
                 <NavigationButton
                     disabled={!hasNext}
                     onClick={handleNextClick}
                     onKeyDown={(e) => handleKeyDown(e, handleNextClick)}
-                    aria-label="Go to next page"
+                    aria-label='Go to next page'
                 >
                     Next
-                    <Icon icon="arrow-right" size="1em" color="currentColor" />
+                    <Icon icon='arrow-right' size='1em' color='currentColor' />
                 </NavigationButton>
             </PaginationControls>
         </PaginationContainer>
