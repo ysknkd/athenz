@@ -214,9 +214,7 @@ const MemberList = (props) => {
                 onSubmit={reloadMembers}
                 justificationRequired={justificationReq}
                 newMember={successMessage}
-                showPagination={
-                    showApprovedPagination && approvedPagination.totalPages > 1
-                }
+                showPagination={showApprovedPagination}
                 currentPage={approvedPagination.currentPage}
                 totalPages={approvedPagination.totalPages}
                 onPageChange={approvedPagination.goToPage}
@@ -252,7 +250,7 @@ const MemberList = (props) => {
                     onSubmit={reloadMembers}
                     justificationRequired={justificationReq}
                     newMember={successMessage}
-                    showPagination={pendingPagination.totalPages > 1}
+                    showPagination={showPendingPagination}
                     currentPage={pendingPagination.currentPage}
                     totalPages={pendingPagination.totalPages}
                     onPageChange={pendingPagination.goToPage}

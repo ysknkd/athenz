@@ -155,6 +155,50 @@ exports[`MemberList should render 1`] = `
 }
 
 .emotion-18 {
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #9a9a9a;
+}
+
+.emotion-20 {
+  color: #9a9a9a;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.emotion-22 {
+  background: #fff;
+  border: 1px solid #d5d5d5;
+  border-radius: 3px;
+  padding: 4px 8px;
+  font-size: 14px;
+  color: #303030;
+  cursor: pointer;
+  opacity: 1;
+  min-width: 50px;
+}
+
+.emotion-22:hover:not(:disabled) {
+  border-color: #d5d5d5;
+}
+
+.emotion-22:focus {
+  outline: 2px solid #3697f2;
+  outline-offset: 2px;
+  border-color: #3697f2;
+}
+
+.emotion-22 option {
+  background: #fff;
+  color: #303030;
+}
+
+.emotion-24 {
   text-align: center;
   width: 1%;
   border-bottom: 2px solid #d5d5d5;
@@ -167,7 +211,7 @@ exports[`MemberList should render 1`] = `
   word-break: break-all;
 }
 
-.emotion-20 {
+.emotion-26 {
   text-align: left;
   width: 25%;
   border-bottom: 2px solid #d5d5d5;
@@ -180,7 +224,7 @@ exports[`MemberList should render 1`] = `
   word-break: break-all;
 }
 
-.emotion-22 {
+.emotion-28 {
   text-align: left;
   width: 25%;
   border-bottom: 2px solid #d5d5d5;
@@ -193,7 +237,7 @@ exports[`MemberList should render 1`] = `
   word-break: break-all;
 }
 
-.emotion-26 {
+.emotion-32 {
   text-align: left;
   width: 39%;
   border-bottom: 2px solid #d5d5d5;
@@ -206,7 +250,7 @@ exports[`MemberList should render 1`] = `
   word-break: break-all;
 }
 
-.emotion-28 {
+.emotion-34 {
   text-align: center;
   width: 8%;
   border-bottom: 2px solid #d5d5d5;
@@ -219,7 +263,7 @@ exports[`MemberList should render 1`] = `
   word-break: break-all;
 }
 
-.emotion-32 {
+.emotion-38 {
   background-color: #3570f40D;
   text-align: left;
   padding: 5px 0 5px 15px;
@@ -227,13 +271,13 @@ exports[`MemberList should render 1`] = `
   word-break: break-all;
 }
 
-.emotion-40 {
+.emotion-46 {
   display: flex;
   -webkit-column-gap: 10px;
   column-gap: 10px;
 }
 
-.emotion-48 {
+.emotion-54 {
   background-color: #3570f40D;
   text-align: center;
   padding: 5px 0 5px 15px;
@@ -241,21 +285,157 @@ exports[`MemberList should render 1`] = `
   word-break: break-all;
 }
 
-.emotion-53 {
+.emotion-59 {
   text-align: left;
   padding: 5px 0 5px 15px;
   vertical-align: middle;
   word-break: break-all;
 }
 
-.emotion-69 {
+.emotion-75 {
   text-align: center;
   padding: 5px 0 5px 15px;
   vertical-align: middle;
   word-break: break-all;
 }
 
-.emotion-95 {
+.emotion-78 {
+  border-top: none;
+}
+
+.emotion-80 {
+  padding: 8px 15px 12px 15px;
+  text-align: center;
+  background-color: #ffffff;
+  border: none;
+  border-top: 2px solid #d5d5d5;
+  color: #9a9a9a;
+  font-weight: 500;
+  vertical-align: middle;
+}
+
+.emotion-82 {
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: inherit;
+}
+
+.emotion-84 {
+  color: #9a9a9a;
+  font-size: 14px;
+  font-weight: normal;
+  text-align: center;
+}
+
+.emotion-86 {
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.emotion-88 {
+  background: transparent;
+  color: #3697f2;
+  border: 1px solid #3697f2;
+  border-radius: 4px;
+  padding: 8px 12px;
+  min-width: 80px;
+  height: auto;
+  font-size: 14px;
+  font-weight: normal;
+  cursor: not-allowed;
+  opacity: 0.5;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.emotion-88:hover:not(:disabled) {
+  background: #d7e2fd;
+  border-color: #3697f2;
+  color: #3697f2;
+}
+
+.emotion-88:focus {
+  outline: 2px solid #3697f2;
+  outline-offset: 2px;
+}
+
+.emotion-88:disabled {
+  background: transparent;
+  border-color: #e8e8e8;
+  color: #e8e8e8;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.emotion-90 {
+  fill: currentColor;
+  cursor: inherit;
+  vertical-align: text-bottom;
+}
+
+.emotion-91 {
+  background: #3697f2;
+  color: #fff;
+  border: 1px solid #3697f2;
+  border-radius: 4px;
+  padding: 8px 12px;
+  min-width: 32px;
+  height: auto;
+  font-size: 14px;
+  font-weight: normal;
+  cursor: pointer;
+  opacity: 1;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.emotion-91:hover:not(:disabled) {
+  background: #3570f4;
+  border-color: #3697f2;
+  color: #fff;
+}
+
+.emotion-91:focus {
+  outline: 2px solid #3697f2;
+  outline-offset: 2px;
+}
+
+.emotion-91:disabled {
+  background: transparent;
+  border-color: #e8e8e8;
+  color: #e8e8e8;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.emotion-125 {
   text-align: left;
   width: 14%;
   border-bottom: 2px solid #d5d5d5;
@@ -324,41 +504,72 @@ exports[`MemberList should render 1`] = `
               </div>
               <div
                 class="emotion-16 emotion-17"
-              />
+              >
+                <div
+                  class="emotion-18 emotion-19"
+                >
+                  <span
+                    class="emotion-20 emotion-21"
+                  >
+                    Show
+                  </span>
+                  <select
+                    aria-label="Select page size"
+                    class="emotion-22 emotion-23"
+                    id="approved-page-size-selector-test"
+                  >
+                    <option
+                      value="30"
+                    >
+                      30
+                    </option>
+                    <option
+                      value="50"
+                    >
+                      50
+                    </option>
+                    <option
+                      value="100"
+                    >
+                      100
+                    </option>
+                  </select>
+                </div>
+              </div>
             </div>
           </th>
         </tr>
         <tr>
           <th
-            class="emotion-18 emotion-19"
+            class="emotion-24 emotion-25"
             width="1"
           />
           <th
-            class="emotion-20 emotion-21"
+            class="emotion-26 emotion-27"
             width="25"
           >
             User Name
           </th>
           <th
-            class="emotion-22 emotion-19"
+            class="emotion-28 emotion-25"
             width="25"
           >
             Name of User
           </th>
           <th
-            class="emotion-22 emotion-19"
+            class="emotion-28 emotion-25"
             width="25"
           >
             Expiration Date
           </th>
           <th
-            class="emotion-26 emotion-19"
+            class="emotion-32 emotion-25"
             width="39"
           >
             Review Reminder Date
           </th>
           <th
-            class="emotion-28 emotion-19"
+            class="emotion-34 emotion-25"
             width="8"
           >
             Delete
@@ -367,30 +578,30 @@ exports[`MemberList should render 1`] = `
       </thead>
       <tbody>
         <tr
-          class="emotion-30 emotion-31"
+          class="emotion-36 emotion-37"
           data-testid="member-row"
           data-wdio="user1-member-row"
         >
           <td
-            class="emotion-32 emotion-33"
+            class="emotion-38 emotion-39"
             color="#3570f40D"
           />
           <td
-            class="emotion-32 emotion-33"
+            class="emotion-38 emotion-39"
             color="#3570f40D"
           >
             user1
           </td>
           <td
-            class="emotion-32 emotion-33"
+            class="emotion-38 emotion-39"
             color="#3570f40D"
           />
           <td
-            class="emotion-32 emotion-33"
+            class="emotion-38 emotion-39"
             color="#3570f40D"
           >
             <div
-              class="emotion-40 emotion-41"
+              class="emotion-46 emotion-47"
             >
               N/A
               <span>
@@ -414,11 +625,11 @@ exports[`MemberList should render 1`] = `
             </div>
           </td>
           <td
-            class="emotion-32 emotion-33"
+            class="emotion-38 emotion-39"
             color="#3570f40D"
           >
             <div
-              class="emotion-40 emotion-41"
+              class="emotion-46 emotion-47"
             >
               N/A
               <span>
@@ -442,7 +653,7 @@ exports[`MemberList should render 1`] = `
             </div>
           </td>
           <td
-            class="emotion-48 emotion-33"
+            class="emotion-54 emotion-39"
             color="#3570f40D"
           >
             <span>
@@ -469,30 +680,30 @@ exports[`MemberList should render 1`] = `
           </td>
         </tr>
         <tr
-          class="emotion-30 emotion-31"
+          class="emotion-36 emotion-37"
           data-testid="member-row"
           data-wdio="user4-member-row"
         >
           <td
-            class="emotion-53 emotion-33"
+            class="emotion-59 emotion-39"
             color=""
           />
           <td
-            class="emotion-53 emotion-33"
+            class="emotion-59 emotion-39"
             color=""
           >
             user4
           </td>
           <td
-            class="emotion-53 emotion-33"
+            class="emotion-59 emotion-39"
             color=""
           />
           <td
-            class="emotion-53 emotion-33"
+            class="emotion-59 emotion-39"
             color=""
           >
             <div
-              class="emotion-40 emotion-41"
+              class="emotion-46 emotion-47"
             >
               N/A
               <span>
@@ -516,11 +727,11 @@ exports[`MemberList should render 1`] = `
             </div>
           </td>
           <td
-            class="emotion-53 emotion-33"
+            class="emotion-59 emotion-39"
             color=""
           >
             <div
-              class="emotion-40 emotion-41"
+              class="emotion-46 emotion-47"
             >
               N/A
               <span>
@@ -544,7 +755,7 @@ exports[`MemberList should render 1`] = `
             </div>
           </td>
           <td
-            class="emotion-69 emotion-33"
+            class="emotion-75 emotion-39"
             color=""
           >
             <span>
@@ -571,6 +782,90 @@ exports[`MemberList should render 1`] = `
           </td>
         </tr>
       </tbody>
+      <tfoot
+        class="emotion-78 emotion-79"
+      >
+        <tr>
+          <td
+            class="emotion-80 emotion-81"
+            colspan="6"
+          >
+            <div
+              class="emotion-82 emotion-83"
+            >
+              <div
+                class="emotion-84 emotion-85"
+              >
+                Showing 
+                1
+                -
+                2
+                 of 
+                2
+                 
+                members
+              </div>
+              <div
+                class="emotion-86 emotion-87"
+              >
+                <button
+                  aria-label="Go to previous page"
+                  class="emotion-88 emotion-89"
+                  disabled=""
+                >
+                  <svg
+                    class="emotion-90"
+                    data-testid="icon"
+                    data-wdio=""
+                    height="1em"
+                    id=""
+                    viewBox="0 0 1024 1024"
+                    width="1em"
+                  >
+                    <title>
+                      arrow-left
+                    </title>
+                    <path
+                      d="M444.373 512l225.707-226.133c7.792-7.733 12.616-18.447 12.616-30.289 0-14.295-7.030-26.948-17.822-34.691l-0.128-0.087c-6.877-4.635-15.35-7.398-24.467-7.398-12.618 0-24 5.292-32.048 13.778l-0.019 0.020-254.293 254.72c-7.731 7.723-12.514 18.396-12.514 30.187s4.782 22.464 12.513 30.186l0 0 254.293 254.507c8.066 8.506 19.448 13.798 32.066 13.798 9.118 0 17.59-2.763 24.625-7.498l-0.158 0.1c10.565-7.858 17.335-20.305 17.335-34.333 0-11.534-4.577-21.999-12.013-29.678l0.011 0.011z"
+                    />
+                  </svg>
+                  Previous
+                </button>
+                <button
+                  aria-current="page"
+                  aria-label="Page 1"
+                  class="emotion-91 emotion-92"
+                >
+                  1
+                </button>
+                <button
+                  aria-label="Go to next page"
+                  class="emotion-88 emotion-89"
+                  disabled=""
+                >
+                  Next
+                  <svg
+                    class="emotion-90"
+                    data-testid="icon"
+                    data-wdio=""
+                    height="1em"
+                    id=""
+                    viewBox="0 0 1024 1024"
+                    width="1em"
+                  >
+                    <title>
+                      arrow-right
+                    </title>
+                    <path
+                      d="M579.627 512l-225.707 226.133c-7.425 7.668-12.002 18.133-12.002 29.667 0 14.028 6.77 26.476 17.222 34.252l0.114 0.081c6.877 4.635 15.35 7.398 24.467 7.398 12.618 0 24-5.292 32.048-13.778l0.019-0.020 254.293-253.653c7.731-7.723 12.514-18.396 12.514-30.187s-4.782-22.464-12.513-30.186l-0-0-254.293-254.507c-8.066-8.506-19.448-13.798-32.066-13.798-9.118 0-17.59 2.763-24.625 7.498l0.158-0.1c-10.919 7.83-17.949 20.483-17.949 34.778 0 11.841 4.824 22.556 12.613 30.286l0.003 0.003z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tfoot>
     </table>
   </div>
   <br />
@@ -615,47 +910,78 @@ exports[`MemberList should render 1`] = `
               </div>
               <div
                 class="emotion-16 emotion-17"
-              />
+              >
+                <div
+                  class="emotion-18 emotion-19"
+                >
+                  <span
+                    class="emotion-20 emotion-21"
+                  >
+                    Show
+                  </span>
+                  <select
+                    aria-label="Select page size"
+                    class="emotion-22 emotion-23"
+                    id="pending-page-size-selector-test"
+                  >
+                    <option
+                      value="30"
+                    >
+                      30
+                    </option>
+                    <option
+                      value="50"
+                    >
+                      50
+                    </option>
+                    <option
+                      value="100"
+                    >
+                      100
+                    </option>
+                  </select>
+                </div>
+              </div>
             </div>
           </th>
         </tr>
         <tr>
           <th
-            class="emotion-18 emotion-19"
+            class="emotion-24 emotion-25"
             width="1"
           />
           <th
-            class="emotion-20 emotion-21"
+            class="emotion-26 emotion-27"
             width="25"
           >
             User Name
           </th>
           <th
-            class="emotion-22 emotion-19"
+            class="emotion-28 emotion-25"
             width="25"
           >
             Name of User
           </th>
           <th
-            class="emotion-22 emotion-19"
+            class="emotion-28 emotion-25"
             width="25"
           >
             Expiration Date
           </th>
           <th
-            class="emotion-22 emotion-19"
+            class="emotion-28 emotion-25"
             width="25"
           >
             Review Reminder Date
           </th>
           <th
-            class="emotion-95 emotion-19"
+            class="emotion-125 emotion-25"
             width="14"
           >
             Pending State
           </th>
           <th
-            class="emotion-28 emotion-19"
+            class="emotion-34 emotion-25"
             width="8"
           >
             Delete
@@ -664,30 +990,30 @@ exports[`MemberList should render 1`] = `
       </thead>
       <tbody>
         <tr
-          class="emotion-30 emotion-31"
+          class="emotion-36 emotion-37"
           data-testid="member-row"
           data-wdio="user2-member-row"
         >
           <td
-            class="emotion-32 emotion-33"
+            class="emotion-38 emotion-39"
             color="#3570f40D"
           />
           <td
-            class="emotion-32 emotion-33"
+            class="emotion-38 emotion-39"
             color="#3570f40D"
           >
             user2
           </td>
           <td
-            class="emotion-32 emotion-33"
+            class="emotion-38 emotion-39"
             color="#3570f40D"
           />
           <td
-            class="emotion-32 emotion-33"
+            class="emotion-38 emotion-39"
             color="#3570f40D"
           >
             <div
-              class="emotion-40 emotion-41"
+              class="emotion-46 emotion-47"
             >
               N/A
               <span>
@@ -711,11 +1037,11 @@ exports[`MemberList should render 1`] = `
             </div>
           </td>
           <td
-            class="emotion-32 emotion-33"
+            class="emotion-38 emotion-39"
             color="#3570f40D"
           >
             <div
-              class="emotion-40 emotion-41"
+              class="emotion-46 emotion-47"
             >
               N/A
               <span>
@@ -739,11 +1065,11 @@ exports[`MemberList should render 1`] = `
             </div>
           </td>
           <td
-            class="emotion-32 emotion-33"
+            class="emotion-38 emotion-39"
             color="#3570f40D"
           />
           <td
-            class="emotion-48 emotion-33"
+            class="emotion-54 emotion-39"
             color="#3570f40D"
           >
             <span>
@@ -770,30 +1096,30 @@ exports[`MemberList should render 1`] = `
           </td>
         </tr>
         <tr
-          class="emotion-30 emotion-31"
+          class="emotion-36 emotion-37"
           data-testid="member-row"
           data-wdio="user3-member-row"
         >
           <td
-            class="emotion-53 emotion-33"
+            class="emotion-59 emotion-39"
             color=""
           />
           <td
-            class="emotion-53 emotion-33"
+            class="emotion-59 emotion-39"
             color=""
           >
             user3
           </td>
           <td
-            class="emotion-53 emotion-33"
+            class="emotion-59 emotion-39"
             color=""
           />
           <td
-            class="emotion-53 emotion-33"
+            class="emotion-59 emotion-39"
             color=""
           >
             <div
-              class="emotion-40 emotion-41"
+              class="emotion-46 emotion-47"
             >
               N/A
               <span>
@@ -817,11 +1143,11 @@ exports[`MemberList should render 1`] = `
             </div>
           </td>
           <td
-            class="emotion-53 emotion-33"
+            class="emotion-59 emotion-39"
             color=""
           >
             <div
-              class="emotion-40 emotion-41"
+              class="emotion-46 emotion-47"
             >
               N/A
               <span>
@@ -845,11 +1171,11 @@ exports[`MemberList should render 1`] = `
             </div>
           </td>
           <td
-            class="emotion-53 emotion-33"
+            class="emotion-59 emotion-39"
             color=""
           />
           <td
-            class="emotion-69 emotion-33"
+            class="emotion-75 emotion-39"
             color=""
           >
             <span>
@@ -876,6 +1202,90 @@ exports[`MemberList should render 1`] = `
           </td>
         </tr>
       </tbody>
+      <tfoot
+        class="emotion-78 emotion-79"
+      >
+        <tr>
+          <td
+            class="emotion-80 emotion-81"
+            colspan="7"
+          >
+            <div
+              class="emotion-82 emotion-83"
+            >
+              <div
+                class="emotion-84 emotion-85"
+              >
+                Showing 
+                1
+                -
+                2
+                 of 
+                2
+                 
+                members
+              </div>
+              <div
+                class="emotion-86 emotion-87"
+              >
+                <button
+                  aria-label="Go to previous page"
+                  class="emotion-88 emotion-89"
+                  disabled=""
+                >
+                  <svg
+                    class="emotion-90"
+                    data-testid="icon"
+                    data-wdio=""
+                    height="1em"
+                    id=""
+                    viewBox="0 0 1024 1024"
+                    width="1em"
+                  >
+                    <title>
+                      arrow-left
+                    </title>
+                    <path
+                      d="M444.373 512l225.707-226.133c7.792-7.733 12.616-18.447 12.616-30.289 0-14.295-7.030-26.948-17.822-34.691l-0.128-0.087c-6.877-4.635-15.35-7.398-24.467-7.398-12.618 0-24 5.292-32.048 13.778l-0.019 0.020-254.293 254.72c-7.731 7.723-12.514 18.396-12.514 30.187s4.782 22.464 12.513 30.186l0 0 254.293 254.507c8.066 8.506 19.448 13.798 32.066 13.798 9.118 0 17.59-2.763 24.625-7.498l-0.158 0.1c10.565-7.858 17.335-20.305 17.335-34.333 0-11.534-4.577-21.999-12.013-29.678l0.011 0.011z"
+                    />
+                  </svg>
+                  Previous
+                </button>
+                <button
+                  aria-current="page"
+                  aria-label="Page 1"
+                  class="emotion-91 emotion-92"
+                >
+                  1
+                </button>
+                <button
+                  aria-label="Go to next page"
+                  class="emotion-88 emotion-89"
+                  disabled=""
+                >
+                  Next
+                  <svg
+                    class="emotion-90"
+                    data-testid="icon"
+                    data-wdio=""
+                    height="1em"
+                    id=""
+                    viewBox="0 0 1024 1024"
+                    width="1em"
+                  >
+                    <title>
+                      arrow-right
+                    </title>
+                    <path
+                      d="M579.627 512l-225.707 226.133c-7.425 7.668-12.002 18.133-12.002 29.667 0 14.028 6.77 26.476 17.222 34.252l0.114 0.081c6.877 4.635 15.35 7.398 24.467 7.398 12.618 0 24-5.292 32.048-13.778l0.019-0.020 254.293-253.653c7.731-7.723 12.514-18.396 12.514-30.187s-4.782-22.464-12.513-30.186l-0-0-254.293-254.507c-8.066-8.506-19.448-13.798-32.066-13.798-9.118 0-17.59 2.763-24.625 7.498l0.158-0.1c-10.919 7.83-17.949 20.483-17.949 34.778 0 11.841 4.824 22.556 12.613 30.286l0.003 0.003z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tfoot>
     </table>
   </div>
 </div>
@@ -1036,6 +1446,50 @@ exports[`MemberList should render delegated role 1`] = `
 }
 
 .emotion-18 {
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #9a9a9a;
+}
+
+.emotion-20 {
+  color: #9a9a9a;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.emotion-22 {
+  background: #fff;
+  border: 1px solid #d5d5d5;
+  border-radius: 3px;
+  padding: 4px 8px;
+  font-size: 14px;
+  color: #303030;
+  cursor: pointer;
+  opacity: 1;
+  min-width: 50px;
+}
+
+.emotion-22:hover:not(:disabled) {
+  border-color: #d5d5d5;
+}
+
+.emotion-22:focus {
+  outline: 2px solid #3697f2;
+  outline-offset: 2px;
+  border-color: #3697f2;
+}
+
+.emotion-22 option {
+  background: #fff;
+  color: #303030;
+}
+
+.emotion-24 {
   text-align: center;
   width: 1%;
   border-bottom: 2px solid #d5d5d5;
@@ -1048,7 +1502,7 @@ exports[`MemberList should render delegated role 1`] = `
   word-break: break-all;
 }
 
-.emotion-20 {
+.emotion-26 {
   text-align: left;
   width: 25%;
   border-bottom: 2px solid #d5d5d5;
@@ -1061,7 +1515,7 @@ exports[`MemberList should render delegated role 1`] = `
   word-break: break-all;
 }
 
-.emotion-22 {
+.emotion-28 {
   text-align: left;
   width: 25%;
   border-bottom: 2px solid #d5d5d5;
@@ -1074,7 +1528,7 @@ exports[`MemberList should render delegated role 1`] = `
   word-break: break-all;
 }
 
-.emotion-26 {
+.emotion-32 {
   text-align: left;
   width: 39%;
   border-bottom: 2px solid #d5d5d5;
@@ -1087,7 +1541,7 @@ exports[`MemberList should render delegated role 1`] = `
   word-break: break-all;
 }
 
-.emotion-28 {
+.emotion-34 {
   text-align: center;
   width: 8%;
   border-bottom: 2px solid #d5d5d5;
@@ -1100,7 +1554,7 @@ exports[`MemberList should render delegated role 1`] = `
   word-break: break-all;
 }
 
-.emotion-32 {
+.emotion-38 {
   background-color: #3570f40D;
   text-align: left;
   padding: 5px 0 5px 15px;
@@ -1108,13 +1562,13 @@ exports[`MemberList should render delegated role 1`] = `
   word-break: break-all;
 }
 
-.emotion-40 {
+.emotion-46 {
   display: flex;
   -webkit-column-gap: 10px;
   column-gap: 10px;
 }
 
-.emotion-48 {
+.emotion-54 {
   background-color: #3570f40D;
   text-align: center;
   padding: 5px 0 5px 15px;
@@ -1122,18 +1576,154 @@ exports[`MemberList should render delegated role 1`] = `
   word-break: break-all;
 }
 
-.emotion-53 {
+.emotion-59 {
   text-align: left;
   padding: 5px 0 5px 15px;
   vertical-align: middle;
   word-break: break-all;
 }
 
-.emotion-69 {
+.emotion-75 {
   text-align: center;
   padding: 5px 0 5px 15px;
   vertical-align: middle;
   word-break: break-all;
+}
+
+.emotion-120 {
+  border-top: none;
+}
+
+.emotion-122 {
+  padding: 8px 15px 12px 15px;
+  text-align: center;
+  background-color: #ffffff;
+  border: none;
+  border-top: 2px solid #d5d5d5;
+  color: #9a9a9a;
+  font-weight: 500;
+  vertical-align: middle;
+}
+
+.emotion-124 {
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: inherit;
+}
+
+.emotion-126 {
+  color: #9a9a9a;
+  font-size: 14px;
+  font-weight: normal;
+  text-align: center;
+}
+
+.emotion-128 {
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.emotion-130 {
+  background: transparent;
+  color: #3697f2;
+  border: 1px solid #3697f2;
+  border-radius: 4px;
+  padding: 8px 12px;
+  min-width: 80px;
+  height: auto;
+  font-size: 14px;
+  font-weight: normal;
+  cursor: not-allowed;
+  opacity: 0.5;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.emotion-130:hover:not(:disabled) {
+  background: #d7e2fd;
+  border-color: #3697f2;
+  color: #3697f2;
+}
+
+.emotion-130:focus {
+  outline: 2px solid #3697f2;
+  outline-offset: 2px;
+}
+
+.emotion-130:disabled {
+  background: transparent;
+  border-color: #e8e8e8;
+  color: #e8e8e8;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.emotion-132 {
+  fill: currentColor;
+  cursor: inherit;
+  vertical-align: text-bottom;
+}
+
+.emotion-133 {
+  background: #3697f2;
+  color: #fff;
+  border: 1px solid #3697f2;
+  border-radius: 4px;
+  padding: 8px 12px;
+  min-width: 32px;
+  height: auto;
+  font-size: 14px;
+  font-weight: normal;
+  cursor: pointer;
+  opacity: 1;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.emotion-133:hover:not(:disabled) {
+  background: #3570f4;
+  border-color: #3697f2;
+  color: #fff;
+}
+
+.emotion-133:focus {
+  outline: 2px solid #3697f2;
+  outline-offset: 2px;
+}
+
+.emotion-133:disabled {
+  background: transparent;
+  border-color: #e8e8e8;
+  color: #e8e8e8;
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 <div
@@ -1192,41 +1782,72 @@ exports[`MemberList should render delegated role 1`] = `
               </div>
               <div
                 class="emotion-16 emotion-17"
-              />
+              >
+                <div
+                  class="emotion-18 emotion-19"
+                >
+                  <span
+                    class="emotion-20 emotion-21"
+                  >
+                    Show
+                  </span>
+                  <select
+                    aria-label="Select page size"
+                    class="emotion-22 emotion-23"
+                    id="approved-page-size-selector-test"
+                  >
+                    <option
+                      value="30"
+                    >
+                      30
+                    </option>
+                    <option
+                      value="50"
+                    >
+                      50
+                    </option>
+                    <option
+                      value="100"
+                    >
+                      100
+                    </option>
+                  </select>
+                </div>
+              </div>
             </div>
           </th>
         </tr>
         <tr>
           <th
-            class="emotion-18 emotion-19"
+            class="emotion-24 emotion-25"
             width="1"
           />
           <th
-            class="emotion-20 emotion-21"
+            class="emotion-26 emotion-27"
             width="25"
           >
             User Name
           </th>
           <th
-            class="emotion-22 emotion-19"
+            class="emotion-28 emotion-25"
             width="25"
           >
             Name of User
           </th>
           <th
-            class="emotion-22 emotion-19"
+            class="emotion-28 emotion-25"
             width="25"
           >
             Expiration Date
           </th>
           <th
-            class="emotion-26 emotion-19"
+            class="emotion-32 emotion-25"
             width="39"
           >
             Review Reminder Date
           </th>
           <th
-            class="emotion-28 emotion-19"
+            class="emotion-34 emotion-25"
             width="8"
           >
             Delete
@@ -1235,30 +1856,30 @@ exports[`MemberList should render delegated role 1`] = `
       </thead>
       <tbody>
         <tr
-          class="emotion-30 emotion-31"
+          class="emotion-36 emotion-37"
           data-testid="member-row"
           data-wdio="user1-member-row"
         >
           <td
-            class="emotion-32 emotion-33"
+            class="emotion-38 emotion-39"
             color="#3570f40D"
           />
           <td
-            class="emotion-32 emotion-33"
+            class="emotion-38 emotion-39"
             color="#3570f40D"
           >
             user1
           </td>
           <td
-            class="emotion-32 emotion-33"
+            class="emotion-38 emotion-39"
             color="#3570f40D"
           />
           <td
-            class="emotion-32 emotion-33"
+            class="emotion-38 emotion-39"
             color="#3570f40D"
           >
             <div
-              class="emotion-40 emotion-41"
+              class="emotion-46 emotion-47"
             >
               N/A
               <span>
@@ -1282,11 +1903,11 @@ exports[`MemberList should render delegated role 1`] = `
             </div>
           </td>
           <td
-            class="emotion-32 emotion-33"
+            class="emotion-38 emotion-39"
             color="#3570f40D"
           >
             <div
-              class="emotion-40 emotion-41"
+              class="emotion-46 emotion-47"
             >
               N/A
               <span>
@@ -1310,7 +1931,7 @@ exports[`MemberList should render delegated role 1`] = `
             </div>
           </td>
           <td
-            class="emotion-48 emotion-33"
+            class="emotion-54 emotion-39"
             color="#3570f40D"
           >
             <span>
@@ -1337,30 +1958,30 @@ exports[`MemberList should render delegated role 1`] = `
           </td>
         </tr>
         <tr
-          class="emotion-30 emotion-31"
+          class="emotion-36 emotion-37"
           data-testid="member-row"
           data-wdio="user2-member-row"
         >
           <td
-            class="emotion-53 emotion-33"
+            class="emotion-59 emotion-39"
             color=""
           />
           <td
-            class="emotion-53 emotion-33"
+            class="emotion-59 emotion-39"
             color=""
           >
             user2
           </td>
           <td
-            class="emotion-53 emotion-33"
+            class="emotion-59 emotion-39"
             color=""
           />
           <td
-            class="emotion-53 emotion-33"
+            class="emotion-59 emotion-39"
             color=""
           >
             <div
-              class="emotion-40 emotion-41"
+              class="emotion-46 emotion-47"
             >
               N/A
               <span>
@@ -1384,11 +2005,11 @@ exports[`MemberList should render delegated role 1`] = `
             </div>
           </td>
           <td
-            class="emotion-53 emotion-33"
+            class="emotion-59 emotion-39"
             color=""
           >
             <div
-              class="emotion-40 emotion-41"
+              class="emotion-46 emotion-47"
             >
               N/A
               <span>
@@ -1412,7 +2033,7 @@ exports[`MemberList should render delegated role 1`] = `
             </div>
           </td>
           <td
-            class="emotion-69 emotion-33"
+            class="emotion-75 emotion-39"
             color=""
           >
             <span>
@@ -1439,30 +2060,30 @@ exports[`MemberList should render delegated role 1`] = `
           </td>
         </tr>
         <tr
-          class="emotion-30 emotion-31"
+          class="emotion-36 emotion-37"
           data-testid="member-row"
           data-wdio="user3-member-row"
         >
           <td
-            class="emotion-32 emotion-33"
+            class="emotion-38 emotion-39"
             color="#3570f40D"
           />
           <td
-            class="emotion-32 emotion-33"
+            class="emotion-38 emotion-39"
             color="#3570f40D"
           >
             user3
           </td>
           <td
-            class="emotion-32 emotion-33"
+            class="emotion-38 emotion-39"
             color="#3570f40D"
           />
           <td
-            class="emotion-32 emotion-33"
+            class="emotion-38 emotion-39"
             color="#3570f40D"
           >
             <div
-              class="emotion-40 emotion-41"
+              class="emotion-46 emotion-47"
             >
               N/A
               <span>
@@ -1486,11 +2107,11 @@ exports[`MemberList should render delegated role 1`] = `
             </div>
           </td>
           <td
-            class="emotion-32 emotion-33"
+            class="emotion-38 emotion-39"
             color="#3570f40D"
           >
             <div
-              class="emotion-40 emotion-41"
+              class="emotion-46 emotion-47"
             >
               N/A
               <span>
@@ -1514,7 +2135,7 @@ exports[`MemberList should render delegated role 1`] = `
             </div>
           </td>
           <td
-            class="emotion-48 emotion-33"
+            class="emotion-54 emotion-39"
             color="#3570f40D"
           >
             <span>
@@ -1541,30 +2162,30 @@ exports[`MemberList should render delegated role 1`] = `
           </td>
         </tr>
         <tr
-          class="emotion-30 emotion-31"
+          class="emotion-36 emotion-37"
           data-testid="member-row"
           data-wdio="user4-member-row"
         >
           <td
-            class="emotion-53 emotion-33"
+            class="emotion-59 emotion-39"
             color=""
           />
           <td
-            class="emotion-53 emotion-33"
+            class="emotion-59 emotion-39"
             color=""
           >
             user4
           </td>
           <td
-            class="emotion-53 emotion-33"
+            class="emotion-59 emotion-39"
             color=""
           />
           <td
-            class="emotion-53 emotion-33"
+            class="emotion-59 emotion-39"
             color=""
           >
             <div
-              class="emotion-40 emotion-41"
+              class="emotion-46 emotion-47"
             >
               N/A
               <span>
@@ -1588,11 +2209,11 @@ exports[`MemberList should render delegated role 1`] = `
             </div>
           </td>
           <td
-            class="emotion-53 emotion-33"
+            class="emotion-59 emotion-39"
             color=""
           >
             <div
-              class="emotion-40 emotion-41"
+              class="emotion-46 emotion-47"
             >
               N/A
               <span>
@@ -1616,7 +2237,7 @@ exports[`MemberList should render delegated role 1`] = `
             </div>
           </td>
           <td
-            class="emotion-69 emotion-33"
+            class="emotion-75 emotion-39"
             color=""
           >
             <span>
@@ -1643,6 +2264,90 @@ exports[`MemberList should render delegated role 1`] = `
           </td>
         </tr>
       </tbody>
+      <tfoot
+        class="emotion-120 emotion-121"
+      >
+        <tr>
+          <td
+            class="emotion-122 emotion-123"
+            colspan="6"
+          >
+            <div
+              class="emotion-124 emotion-125"
+            >
+              <div
+                class="emotion-126 emotion-127"
+              >
+                Showing 
+                1
+                -
+                4
+                 of 
+                4
+                 
+                members
+              </div>
+              <div
+                class="emotion-128 emotion-129"
+              >
+                <button
+                  aria-label="Go to previous page"
+                  class="emotion-130 emotion-131"
+                  disabled=""
+                >
+                  <svg
+                    class="emotion-132"
+                    data-testid="icon"
+                    data-wdio=""
+                    height="1em"
+                    id=""
+                    viewBox="0 0 1024 1024"
+                    width="1em"
+                  >
+                    <title>
+                      arrow-left
+                    </title>
+                    <path
+                      d="M444.373 512l225.707-226.133c7.792-7.733 12.616-18.447 12.616-30.289 0-14.295-7.030-26.948-17.822-34.691l-0.128-0.087c-6.877-4.635-15.35-7.398-24.467-7.398-12.618 0-24 5.292-32.048 13.778l-0.019 0.020-254.293 254.72c-7.731 7.723-12.514 18.396-12.514 30.187s4.782 22.464 12.513 30.186l0 0 254.293 254.507c8.066 8.506 19.448 13.798 32.066 13.798 9.118 0 17.59-2.763 24.625-7.498l-0.158 0.1c10.565-7.858 17.335-20.305 17.335-34.333 0-11.534-4.577-21.999-12.013-29.678l0.011 0.011z"
+                    />
+                  </svg>
+                  Previous
+                </button>
+                <button
+                  aria-current="page"
+                  aria-label="Page 1"
+                  class="emotion-133 emotion-134"
+                >
+                  1
+                </button>
+                <button
+                  aria-label="Go to next page"
+                  class="emotion-130 emotion-131"
+                  disabled=""
+                >
+                  Next
+                  <svg
+                    class="emotion-132"
+                    data-testid="icon"
+                    data-wdio=""
+                    height="1em"
+                    id=""
+                    viewBox="0 0 1024 1024"
+                    width="1em"
+                  >
+                    <title>
+                      arrow-right
+                    </title>
+                    <path
+                      d="M579.627 512l-225.707 226.133c-7.425 7.668-12.002 18.133-12.002 29.667 0 14.028 6.77 26.476 17.222 34.252l0.114 0.081c6.877 4.635 15.35 7.398 24.467 7.398 12.618 0 24-5.292 32.048-13.778l0.019-0.020 254.293-253.653c7.731-7.723 12.514-18.396 12.514-30.187s-4.782-22.464-12.513-30.186l-0-0-254.293-254.507c-8.066-8.506-19.448-13.798-32.066-13.798-9.118 0-17.59 2.763-24.625 7.498l0.158-0.1c-10.919 7.83-17.949 20.483-17.949 34.778 0 11.841 4.824 22.556 12.613 30.286l0.003 0.003z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tfoot>
     </table>
   </div>
   <br />
