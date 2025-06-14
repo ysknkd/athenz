@@ -29,6 +29,9 @@ export const PAGINATION_OF_TEXT = 'of';
 export const PAGINATION_MEMBERS_TEXT = 'members';
 export const PAGINATION_PREVIOUS_TEXT = 'Previous';
 export const PAGINATION_NEXT_TEXT = 'Next';
+
+// Member filtering constants
+export const MEMBER_FILTER_PLACEHOLDER = 'Filter members by name';
 export const GROUP_NAME_REGEX =
     '([a-zA-Z0-9_][a-zA-Z0-9_-]*\\.)*[a-zA-Z0-9_][a-zA-Z0-9_-]*';
 export const GROUP_MEMBER_NAME_REGEX =

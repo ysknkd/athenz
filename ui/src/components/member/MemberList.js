@@ -25,12 +25,14 @@ import {
 import AddMember from './AddMember';
 import MemberTable from './MemberTable';
 import PageSizeSelector from './PageSizeSelector';
+import MemberFilter from './MemberFilter';
 import { selectIsLoading } from '../../redux/selectors/loading';
 import { selectTimeZone } from '../../redux/selectors/domains';
 import { connect } from 'react-redux';
 import { ReduxPageLoader } from '../denali/ReduxPageLoader';
 import { arrayEquals } from '../utils/ArrayUtils';
 import { usePagination } from '../../hooks/usePagination';
+import { useMemberFilter } from '../../hooks/useMemberFilter';
 import API from '../../api';
 
 const MembersSectionDiv = styled.div`
@@ -121,14 +123,17 @@ const MemberList = (props) => {
     // Prepare members data
     const { domain, collection, collectionDetails, members = [] } = props;
 
+    // Apply filtering to all members first
+    const memberFilter = useMemberFilter(members, '');
+
     let approvedMembers = [];
     let pendingMembers = [];
 
     if (collectionDetails.trust) {
-        approvedMembers = members;
+        approvedMembers = memberFilter.filteredMembers;
     } else {
-        approvedMembers = members.filter((item) => item.approved);
-        pendingMembers = members.filter((item) => !item.approved);
+        approvedMembers = memberFilter.filteredMembers.filter((item) => item.approved);
+        pendingMembers = memberFilter.filteredMembers.filter((item) => !item.approved);
     }
 
     // Sort members with memoization to prevent unnecessary re-sorts
@@ -201,6 +206,15 @@ const MemberList = (props) => {
     return (
         <MembersSectionDiv data-testid='member-list'>
             {addMemberButton}
+
+            {/* Member Filter */}
+            {paginationEnabled && members.length > 0 && (
+                <MemberFilter
+                    value={memberFilter.filterText}
+                    onChange={memberFilter.setFilterText}
+                    testId="member-filter"
+                />
+            )}
 
             <MemberTable
                 category={props.category}
