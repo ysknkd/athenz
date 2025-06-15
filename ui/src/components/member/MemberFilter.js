@@ -17,23 +17,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import SearchInput from '../denali/SearchInput';
-import {
-    MEMBER_FILTER_PLACEHOLDER,
-} from '../constants/constants';
+import { MEMBER_FILTER_PLACEHOLDER } from '../constants/constants';
 
 const FilterContainer = styled.div`
     margin-bottom: 16px;
     max-width: 400px;
 `;
 
-
-
-const MemberFilter = ({
-    value,
-    onChange,
-    testId,
-    disabled,
-}) => {
+const MemberFilter = ({ value, onChange, testId, disabled }) => {
     const handleInputChange = (event) => {
         if (onChange) {
             onChange(event.target.value);
@@ -47,7 +38,6 @@ const MemberFilter = ({
         }
     };
 
-
     return (
         <FilterContainer data-testid={testId}>
             <SearchInput
@@ -55,7 +45,9 @@ const MemberFilter = ({
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
                 placeholder={MEMBER_FILTER_PLACEHOLDER}
-                aria-label={`Filter members by name${value ? ' (filtered)' : ''}`}
+                aria-label={`Filter members by name${
+                    value ? ' (filtered)' : ''
+                }`}
                 data-testid={testId ? `${testId}-input` : undefined}
                 disabled={disabled}
                 fluid

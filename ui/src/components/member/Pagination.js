@@ -164,7 +164,7 @@ const Pagination = ({
 
             <PaginationControls>
                 <NavigationButtonStyle
-                    className="button is-outline is-small"
+                    className='button is-outline is-small'
                     disabled={!hasPrevious}
                     onClick={handlePreviousClick}
                     onKeyDown={(e) => handleKeyDown(e, handlePreviousClick)}
@@ -175,16 +175,24 @@ const Pagination = ({
                 </NavigationButtonStyle>
 
                 {!compact && visiblePages.length > 0 && (
-                    <div className="toggle is-small">
+                    <div className='toggle is-small'>
                         <ul>
                             {visiblePages.map((page, index) =>
                                 page === '...' ? (
-                                    <Ellipsis key={`ellipsis-${index}`}>...</Ellipsis>
+                                    <Ellipsis key={`ellipsis-${index}`}>
+                                        ...
+                                    </Ellipsis>
                                 ) : (
                                     <li
                                         key={page}
-                                        className={page === currentPage ? 'is-active' : ''}
-                                        onClick={(event) => handlePageClick(page, event)}
+                                        className={
+                                            page === currentPage
+                                                ? 'is-active'
+                                                : ''
+                                        }
+                                        onClick={(event) =>
+                                            handlePageClick(page, event)
+                                        }
                                         onKeyDown={(e) =>
                                             handleKeyDown(e, () =>
                                                 handlePageClick(page, e)
@@ -192,9 +200,11 @@ const Pagination = ({
                                         }
                                         aria-label={`Page ${page}`}
                                         aria-current={
-                                            page === currentPage ? 'page' : undefined
+                                            page === currentPage
+                                                ? 'page'
+                                                : undefined
                                         }
-                                        role="button"
+                                        role='button'
                                         tabIndex={0}
                                     >
                                         <a>{page}</a>
@@ -206,7 +216,7 @@ const Pagination = ({
                 )}
 
                 <NavigationButtonStyle
-                    className="button is-outline is-small"
+                    className='button is-outline is-small'
                     disabled={!hasNext}
                     onClick={handleNextClick}
                     onKeyDown={(e) => handleKeyDown(e, handleNextClick)}

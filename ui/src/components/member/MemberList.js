@@ -13,26 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import Button from '../denali/Button';
 import Alert from '../denali/Alert';
-import {
-    MODAL_TIME_OUT,
-    PAGINATION_DEFAULT_ITEMS_PER_PAGE,
-    PAGINATION_ITEMS_PER_PAGE_OPTIONS,
-} from '../constants/constants';
+import { MODAL_TIME_OUT } from '../constants/constants';
 import AddMember from './AddMember';
-import MemberTable from './MemberTable';
-import PageSizeSelector from './PageSizeSelector';
+import PaginatedMemberTable from './PaginatedMemberTable';
 import MemberFilter from './MemberFilter';
 import { selectIsLoading } from '../../redux/selectors/loading';
 import { selectTimeZone } from '../../redux/selectors/domains';
 import { connect } from 'react-redux';
 import { ReduxPageLoader } from '../denali/ReduxPageLoader';
-import { arrayEquals } from '../utils/ArrayUtils';
-import { usePagination } from '../../hooks/usePagination';
-import { useMemberFilter } from '../../hooks/useMemberFilter';
+import { useMemberPagination } from '../../hooks/useMemberPagination';
 import API from '../../api';
 
 const MembersSectionDiv = styled.div`
@@ -46,24 +39,6 @@ const AddContainerDiv = styled.div`
     align-items: center;
     flex-flow: row nowrap;
     float: right;
-`;
-
-const PaginationControlsDiv = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-`;
-
-const LeftControlsDiv = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 10px;
-`;
-
-const RightControlsDiv = styled.div`
-    display: flex;
-    align-items: center;
 `;
 
 const MemberList = (props) => {
@@ -94,10 +69,13 @@ const MemberList = (props) => {
         setShowSuccess(false);
     };
 
-    // Fetch page feature flag for pagination
+    // Prepare members data
+    const { domain, collection, collectionDetails, members = [] } = props;
+
+    // Fetch page feature flag for pagination with caching
     useEffect(() => {
         let isMounted = true;
-        
+
         api.getPageFeatureFlag('memberList')
             .then((data) => {
                 if (isMounted && data && typeof data.pagination === 'boolean') {
@@ -114,55 +92,18 @@ const MemberList = (props) => {
                     setPaginationEnabled(true);
                 }
             });
-            
+
         return () => {
             isMounted = false;
         };
-    }, []);
+    }, []); // Empty dependency array for proper caching
 
-    // Prepare members data
-    const { domain, collection, collectionDetails, members = [] } = props;
-
-    // Apply filtering to all members first
-    const memberFilter = useMemberFilter(members, '');
-
-    let approvedMembers = [];
-    let pendingMembers = [];
-
-    if (collectionDetails.trust) {
-        approvedMembers = memberFilter.filteredMembers;
-    } else {
-        approvedMembers = memberFilter.filteredMembers.filter((item) => item.approved);
-        pendingMembers = memberFilter.filteredMembers.filter((item) => !item.approved);
-    }
-
-    // Sort members with memoization to prevent unnecessary re-sorts
-    const sortedApprovedMembers = useMemo(
-        () =>
-            [...approvedMembers].sort((a, b) =>
-                a.memberName.localeCompare(b.memberName)
-            ),
-        [approvedMembers]
-    );
-
-    const sortedPendingMembers = useMemo(
-        () =>
-            [...pendingMembers].sort((a, b) =>
-                a.memberName.localeCompare(b.memberName)
-            ),
-        [pendingMembers]
-    );
-
-    // Setup pagination for approved and pending members
-    const approvedPagination = usePagination(
-        sortedApprovedMembers,
-        PAGINATION_DEFAULT_ITEMS_PER_PAGE,
-        paginationEnabled
-    );
-    const pendingPagination = usePagination(
-        sortedPendingMembers,
-        PAGINATION_DEFAULT_ITEMS_PER_PAGE,
-        paginationEnabled
+    // Unified pagination hook that handles filtering, sorting, and pagination
+    const memberPagination = useMemberPagination(
+        members,
+        collectionDetails,
+        paginationEnabled,
+        '' // initial filter
     );
 
     const justificationReq =
@@ -194,10 +135,22 @@ const MemberList = (props) => {
         </AddContainerDiv>
     );
 
-    const showApprovedPagination =
-        paginationEnabled && approvedMembers.length > 0;
-    const showPendingPagination =
-        paginationEnabled && pendingMembers.length > 0;
+    // Configuration objects for cleaner prop passing
+    const sharedTableConfig = {
+        category: props.category,
+        domain,
+        collection,
+        timeZone: props.timeZone,
+        _csrf: props._csrf,
+        onSubmit: reloadMembers,
+        justificationRequired: justificationReq,
+        newMember: successMessage,
+    };
+
+    const paginationConfig = {
+        pageSizeOptions: memberPagination.pageSizeOptions,
+        onPageSizeChange: memberPagination.onPageSizeChange,
+    };
 
     if (props.isLoading.length !== 0) {
         return <ReduxPageLoader message={'Loading members'} />;
@@ -210,78 +163,36 @@ const MemberList = (props) => {
             {/* Member Filter */}
             {paginationEnabled && members.length > 0 && (
                 <MemberFilter
-                    value={memberFilter.filterText}
-                    onChange={memberFilter.setFilterText}
-                    testId="member-filter"
+                    value={memberPagination.filterText}
+                    onChange={memberPagination.setFilterText}
+                    testId='member-filter'
                 />
             )}
 
-            <MemberTable
-                category={props.category}
-                domain={domain}
-                collection={collection}
-                members={approvedPagination.paginatedData}
-                totalMembers={approvedPagination.totalItems}
-                caption='Approved'
-                timeZone={props.timeZone}
-                _csrf={props._csrf}
-                onSubmit={reloadMembers}
-                justificationRequired={justificationReq}
-                newMember={successMessage}
-                showPagination={showApprovedPagination}
-                currentPage={approvedPagination.currentPage}
-                totalPages={approvedPagination.totalPages}
-                onPageChange={approvedPagination.goToPage}
-                onNextPage={approvedPagination.goToNextPage}
-                onPreviousPage={approvedPagination.goToPreviousPage}
-                itemsPerPage={approvedPagination.itemsPerPage}
-                showPageSizeSelector={showApprovedPagination}
-                pageSizeValue={approvedPagination.itemsPerPage}
-                pageSizeOptions={PAGINATION_ITEMS_PER_PAGE_OPTIONS}
-                onPageSizeChange={(newSize) => {
-                    approvedPagination.setItemsPerPage(newSize);
+            {/* Approved Members Table */}
+            <PaginatedMemberTable
+                memberData={memberPagination.approvedMembers}
+                paginationConfig={paginationConfig}
+                tableConfig={{
+                    ...sharedTableConfig,
+                    caption: 'Approved',
                 }}
-                pageSizeSelectorTestId={
-                    process.env.NODE_ENV === 'test'
-                        ? 'approved-page-size-selector-test'
-                        : undefined
-                }
+                testIdPrefix='approved'
             />
 
             <br />
 
-            {showPendingPagination && (
-                <MemberTable
-                    category={props.category}
-                    domain={domain}
-                    collection={collection}
-                    members={pendingPagination.paginatedData}
-                    totalMembers={pendingPagination.totalItems}
-                    pending={true}
-                    caption='Pending'
-                    timeZone={props.timeZone}
-                    _csrf={props._csrf}
-                    onSubmit={reloadMembers}
-                    justificationRequired={justificationReq}
-                    newMember={successMessage}
-                    showPagination={showPendingPagination}
-                    currentPage={pendingPagination.currentPage}
-                    totalPages={pendingPagination.totalPages}
-                    onPageChange={pendingPagination.goToPage}
-                    onNextPage={pendingPagination.goToNextPage}
-                    onPreviousPage={pendingPagination.goToPreviousPage}
-                    itemsPerPage={pendingPagination.itemsPerPage}
-                    showPageSizeSelector={showPendingPagination}
-                    pageSizeValue={pendingPagination.itemsPerPage}
-                    pageSizeOptions={PAGINATION_ITEMS_PER_PAGE_OPTIONS}
-                    onPageSizeChange={(newSize) => {
-                        pendingPagination.setItemsPerPage(newSize);
+            {/* Pending Members Table - only show if there are pending members */}
+            {memberPagination.pendingMembers.totalItems > 0 && (
+                <PaginatedMemberTable
+                    memberData={memberPagination.pendingMembers}
+                    paginationConfig={paginationConfig}
+                    tableConfig={{
+                        ...sharedTableConfig,
+                        pending: true,
+                        caption: 'Pending',
                     }}
-                    pageSizeSelectorTestId={
-                        process.env.NODE_ENV === 'test'
-                            ? 'pending-page-size-selector-test'
-                            : undefined
-                    }
+                    testIdPrefix='pending'
                 />
             )}
 

@@ -19,7 +19,6 @@ export const MODAL_TIME_OUT = 2000;
 // Pagination Constants
 export const PAGINATION_DEFAULT_ITEMS_PER_PAGE = 30;
 export const PAGINATION_ITEMS_PER_PAGE_OPTIONS = [30, 50, 100];
-export const PAGINATION_SHOW_THRESHOLD = 30;
 export const PAGINATION_MAX_VISIBLE_PAGES = 5;
 
 // Pagination Labels

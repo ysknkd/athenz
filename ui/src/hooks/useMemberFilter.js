@@ -31,18 +31,20 @@ export const useMemberFilter = (members, initialFilter = '') => {
         }
 
         const lowerCaseFilter = filterText.toLowerCase();
-        
-        return members.filter(member => {
+
+        return members.filter((member) => {
             // Filter by member name (primary field)
             if (member.memberName?.toLowerCase().includes(lowerCaseFilter)) {
                 return true;
             }
-            
+
             // Filter by member full name (if available)
-            if (member.memberFullName?.toLowerCase().includes(lowerCaseFilter)) {
+            if (
+                member.memberFullName?.toLowerCase().includes(lowerCaseFilter)
+            ) {
                 return true;
             }
-            
+
             return false;
         });
     }, [members, filterText]);

@@ -104,7 +104,9 @@ describe('MemberList Integration with Filtering', () => {
                 expect(screen.getByTestId('member-filter')).toBeInTheDocument();
             });
 
-            expect(screen.getByPlaceholderText('Filter members by name')).toBeInTheDocument();
+            expect(
+                screen.getByPlaceholderText('Filter members by name')
+            ).toBeInTheDocument();
         });
 
         it('should filter both approved and pending members', async () => {
@@ -115,7 +117,9 @@ describe('MemberList Integration with Filtering', () => {
             });
 
             // Filter by 'user'
-            const filterInput = screen.getByPlaceholderText('Filter members by name');
+            const filterInput = screen.getByPlaceholderText(
+                'Filter members by name'
+            );
             fireEvent.change(filterInput, { target: { value: 'user' } });
 
             await waitFor(() => {
@@ -132,7 +136,9 @@ describe('MemberList Integration with Filtering', () => {
             });
 
             // Filter by full name
-            const filterInput = screen.getByPlaceholderText('Filter members by name');
+            const filterInput = screen.getByPlaceholderText(
+                'Filter members by name'
+            );
             fireEvent.change(filterInput, { target: { value: 'Johnson' } });
 
             await waitFor(() => {
@@ -149,7 +155,9 @@ describe('MemberList Integration with Filtering', () => {
             });
 
             // Filter with no matches
-            const filterInput = screen.getByPlaceholderText('Filter members by name');
+            const filterInput = screen.getByPlaceholderText(
+                'Filter members by name'
+            );
             fireEvent.change(filterInput, { target: { value: 'nomatch' } });
 
             await waitFor(() => {
@@ -157,7 +165,6 @@ describe('MemberList Integration with Filtering', () => {
                 expect(filterInput.value).toBe('nomatch');
             });
         });
-
 
         it('should clear filter with Escape key', async () => {
             renderWithStore();
@@ -167,7 +174,9 @@ describe('MemberList Integration with Filtering', () => {
             });
 
             // Apply filter
-            const filterInput = screen.getByPlaceholderText('Filter members by name');
+            const filterInput = screen.getByPlaceholderText(
+                'Filter members by name'
+            );
             fireEvent.change(filterInput, { target: { value: 'user' } });
 
             await waitFor(() => {
@@ -199,7 +208,9 @@ describe('MemberList Integration with Filtering', () => {
             });
 
             // Apply filter that reduces results
-            const filterInput = screen.getByPlaceholderText('Filter members by name');
+            const filterInput = screen.getByPlaceholderText(
+                'Filter members by name'
+            );
             fireEvent.change(filterInput, { target: { value: 'member0' } });
 
             await waitFor(() => {
@@ -216,7 +227,9 @@ describe('MemberList Integration with Filtering', () => {
             });
 
             // Apply filter
-            const filterInput = screen.getByPlaceholderText('Filter members by name');
+            const filterInput = screen.getByPlaceholderText(
+                'Filter members by name'
+            );
             fireEvent.change(filterInput, { target: { value: 'member1' } });
 
             await waitFor(() => {
@@ -245,7 +258,9 @@ describe('MemberList Integration with Filtering', () => {
             });
 
             // Filter should work the same way
-            const filterInput = screen.getByPlaceholderText('Filter members by name');
+            const filterInput = screen.getByPlaceholderText(
+                'Filter members by name'
+            );
             fireEvent.change(filterInput, { target: { value: 'user' } });
 
             await waitFor(() => {
@@ -260,23 +275,31 @@ describe('MemberList Integration with Filtering', () => {
 
             await waitFor(() => {
                 // Filter should not be shown when no members
-                expect(screen.queryByTestId('member-filter')).not.toBeInTheDocument();
+                expect(
+                    screen.queryByTestId('member-filter')
+                ).not.toBeInTheDocument();
             });
         });
 
         it('should not show filter when pagination is disabled', async () => {
-            mockApi.getPageFeatureFlag.mockResolvedValueOnce({ pagination: false });
+            mockApi.getPageFeatureFlag.mockResolvedValueOnce({
+                pagination: false,
+            });
 
             renderWithStore();
 
             await waitFor(() => {
                 // Filter should not be shown when pagination is disabled
-                expect(screen.queryByTestId('member-filter')).not.toBeInTheDocument();
+                expect(
+                    screen.queryByTestId('member-filter')
+                ).not.toBeInTheDocument();
             });
         });
 
         it('should handle API error gracefully', async () => {
-            mockApi.getPageFeatureFlag.mockRejectedValueOnce(new Error('API Error'));
+            mockApi.getPageFeatureFlag.mockRejectedValueOnce(
+                new Error('API Error')
+            );
 
             renderWithStore();
 

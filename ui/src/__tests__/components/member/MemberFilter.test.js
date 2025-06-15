@@ -34,20 +34,20 @@ describe('MemberFilter', () => {
 
             const input = screen.getByPlaceholderText('Filter members by name');
             expect(input).toBeInTheDocument();
-            expect(input).toHaveAttribute('aria-label', 'Filter members by name');
+            expect(input).toHaveAttribute(
+                'aria-label',
+                'Filter members by name'
+            );
         });
 
-
         it('should update aria-label when filter is active', () => {
-            render(
-                <MemberFilter
-                    {...defaultProps}
-                    value="test"
-                />
-            );
+            render(<MemberFilter {...defaultProps} value='test' />);
 
             const input = screen.getByPlaceholderText('Filter members by name');
-            expect(input).toHaveAttribute('aria-label', 'Filter members by name (filtered)');
+            expect(input).toHaveAttribute(
+                'aria-label',
+                'Filter members by name (filtered)'
+            );
         });
     });
 
@@ -61,14 +61,8 @@ describe('MemberFilter', () => {
             expect(defaultProps.onChange).toHaveBeenCalledWith('test');
         });
 
-
         it('should clear filter when Escape key is pressed with filter', () => {
-            render(
-                <MemberFilter
-                    {...defaultProps}
-                    value="test"
-                />
-            );
+            render(<MemberFilter {...defaultProps} value='test' />);
 
             const input = screen.getByPlaceholderText('Filter members by name');
             fireEvent.keyDown(input, { key: 'Escape' });
@@ -102,28 +96,30 @@ describe('MemberFilter', () => {
             render(<MemberFilter {...defaultProps} />);
 
             const input = screen.getByPlaceholderText('Filter members by name');
-            expect(input).toHaveAttribute('aria-label', 'Filter members by name');
+            expect(input).toHaveAttribute(
+                'aria-label',
+                'Filter members by name'
+            );
         });
-
 
         it('should update aria-label based on filter state', () => {
             const { rerender } = render(<MemberFilter {...defaultProps} />);
 
             let input = screen.getByPlaceholderText('Filter members by name');
-            expect(input).toHaveAttribute('aria-label', 'Filter members by name');
-
-            rerender(
-                <MemberFilter
-                    {...defaultProps}
-                    value="test"
-                />
+            expect(input).toHaveAttribute(
+                'aria-label',
+                'Filter members by name'
             );
 
+            rerender(<MemberFilter {...defaultProps} value='test' />);
+
             input = screen.getByPlaceholderText('Filter members by name');
-            expect(input).toHaveAttribute('aria-label', 'Filter members by name (filtered)');
+            expect(input).toHaveAttribute(
+                'aria-label',
+                'Filter members by name (filtered)'
+            );
         });
     });
-
 
     describe('disabled state', () => {
         it('should disable input when disabled prop is true', () => {
@@ -132,7 +128,6 @@ describe('MemberFilter', () => {
             const input = screen.getByPlaceholderText('Filter members by name');
             expect(input).toBeDisabled();
         });
-
     });
 
     describe('edge cases', () => {
@@ -145,8 +140,6 @@ describe('MemberFilter', () => {
                 fireEvent.change(input, { target: { value: 'test' } });
             }).not.toThrow();
         });
-
-
 
         it('should render without testId', () => {
             const { testId, ...propsWithoutTestId } = defaultProps;
@@ -162,10 +155,9 @@ describe('MemberFilter', () => {
             render(<MemberFilter {...defaultProps} />);
 
             expect(screen.getByTestId('member-filter')).toBeInTheDocument();
-            
+
             // SearchInput uses its own internal testIds
             expect(screen.getByTestId('input-node')).toBeInTheDocument();
         });
-
     });
 });

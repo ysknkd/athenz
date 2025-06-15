@@ -55,7 +55,11 @@ const PageSizeSelector = ({
     return (
         <SelectorContainer className={className} compact={compact}>
             {label && <Label>{label}</Label>}
-            <div className={`input has-arrow w-auto ${compact ? 'is-small' : ''}`}>
+            <div
+                className={`input has-arrow w-auto ${
+                    compact ? 'is-small' : ''
+                }`}
+            >
                 <select
                     id={selectId}
                     value={value}

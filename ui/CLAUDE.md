@@ -115,10 +115,9 @@ export const DELETE_AUDIT_REFERENCE = 'deleted using Athenz UI';
 
 #### Pagination Constants
 ```javascript
-export const PAGINATION_DEFAULT_ITEMS_PER_PAGE = 30;
-export const PAGINATION_ITEMS_PER_PAGE_OPTIONS = [30, 50, 100];
-export const PAGINATION_SHOW_THRESHOLD = 30;
-export const PAGINATION_MAX_VISIBLE_PAGES = 5;
+export const PAGINATION_DEFAULT_ITEMS_PER_PAGE = 10;
+export const PAGINATION_ITEMS_PER_PAGE_OPTIONS = [10, 25, 30, 50, 100];
+export const PAGINATION_MAX_VISIBLE_PAGES = 7;
 
 // Pagination UI Labels
 export const PAGINATION_ITEMS_PER_PAGE_LABEL = 'Show';
@@ -440,6 +439,8 @@ const sortedData = useMemo(() =>
 - Duplicate state management between components
 - Using entire arrays as dependencies when only length matters
 - Missing return values from custom hooks
+- Creating redundant Redux selectors that duplicate existing functionality
+- Over-engineering hooks with complex enabled/disabled logic when simple implementations work better
 
 #### Performance Optimization
 
@@ -477,9 +478,11 @@ useEffect(() => {
 #### Pagination Implementation
 
 **Key Components**:
-- `usePagination` hook in `/src/hooks/usePagination.js`
-- `Pagination` component in `/src/components/member/Pagination.js`
-- `PageSizeSelector` component
+- `usePagination` hook in `/src/hooks/usePagination.js` - General pagination logic
+- `useMemberPagination` hook in `/src/hooks/useMemberPagination.js` - Unified member filtering, sorting, and pagination
+- `Pagination` component in `/src/components/member/Pagination.js` - Denali-compliant pagination UI
+- `PageSizeSelector` component in `/src/components/member/PageSizeSelector.js` - Page size controls
+- `PaginatedMemberTable` component in `/src/components/member/PaginatedMemberTable.js` - Wrapper for member tables with pagination
 
 **Denali Design System Implementation**:
 ```javascript
@@ -526,20 +529,37 @@ useEffect(() => {
 </div>
 ```
 
-**Critical Requirements**:
+**Critical Architecture Requirements**:
 ```javascript
-// Use data.length, not data, to prevent page resets
+// For simple pagination: use usePagination hook
+const pagination = usePagination(data, initialItemsPerPage);
+
+// For member lists: use unified useMemberPagination hook
+const memberPagination = useMemberPagination(
+    members, 
+    collectionDetails, 
+    paginationEnabled, 
+    initialFilter
+);
+
+// Essential patterns for performance:
+// 1. Use data.length, not data, to prevent page resets
 useEffect(() => {
     setCurrentPage(1);
 }, [data.length]);
 
-// Memoize sort operations
+// 2. Always memoize sort operations
 const sortedData = useMemo(() => 
     [...data].sort((a, b) => a.memberName.localeCompare(b.memberName)),
     [data]
 );
 
-const pagination = usePagination(sortedData, PAGINATION_DEFAULT_ITEMS_PER_PAGE);
+// 3. Use PaginatedMemberTable wrapper for simplified props
+<PaginatedMemberTable
+    memberData={memberPagination.approvedMembers}
+    paginationConfig={{ showPagination: true }}
+    tableConfig={{ tableId: 'approved-members', renderMember }}
+/>
 ```
 
 **Denali Component Patterns**:
@@ -563,5 +583,65 @@ const pagination = usePagination(sortedData, PAGINATION_DEFAULT_ITEMS_PER_PAGE);
 - Follow ESLint rules and Prettier formatting
 - Use meaningful variable and function names
 - Write self-documenting code
+
+## Key Architectural Patterns
+
+### Pagination System Architecture
+
+The Athenz UI implements a two-tier pagination system optimized for different use cases:
+
+#### 1. General Purpose: `usePagination` Hook
+- **Purpose**: Simple pagination for any data array
+- **Features**: Basic pagination navigation, page size control, data slicing
+- **Use Case**: Generic lists, search results, simple tables
+- **Location**: `/src/hooks/usePagination.js`
+
+#### 2. Member-Specific: `useMemberPagination` Hook  
+- **Purpose**: Unified filtering, sorting, and pagination for member lists
+- **Features**: Text filtering, member sorting, separate approved/pending pagination, trust collection handling
+- **Use Case**: Member management components (MemberList, role members, group members)
+- **Location**: `/src/hooks/useMemberPagination.js`
+
+#### 3. UI Component: `PaginatedMemberTable` Wrapper
+- **Purpose**: Simplifies prop passing and encapsulates pagination concerns
+- **Features**: Unified interface for member tables with pagination
+- **Benefits**: Reduces component complexity, standardizes member table patterns
+- **Location**: `/src/components/member/PaginatedMemberTable.js`
+
+### Refactoring Principles Applied
+
+Based on the recent pagination refactoring, these principles guide code improvement:
+
+#### 1. Unified Logic Extraction
+- Extract common patterns into shared hooks
+- Eliminate duplicate state management between components
+- Create single sources of truth for complex operations
+
+#### 2. Wrapper Components for Simplification
+- Use wrapper components to simplify prop interfaces
+- Encapsulate complex logic within specialized components
+- Reduce cognitive load on parent components
+
+#### 3. Performance-First Memoization
+- Always memoize expensive operations (sorting, filtering)
+- Use specific dependencies (`data.length` vs `data`)
+- Implement stable references for array operations
+
+#### 4. Hook Simplification
+- Remove over-engineering and unnecessary complexity
+- Focus hooks on specific, well-defined responsibilities
+- Eliminate redundant enabled/disabled logic patterns
+
+### Redux Best Practices
+
+#### Selector Management
+- Avoid creating redundant selectors that duplicate existing functionality
+- Use descriptive names that clearly indicate purpose
+- Remove unused selectors during refactoring
+
+#### State Architecture
+- Keep Redux for global application state
+- Use local component state for UI-specific concerns
+- Implement proper cleanup to prevent memory leaks
 
 This guide provides the essential information needed to understand and develop the Athenz UI codebase effectively.

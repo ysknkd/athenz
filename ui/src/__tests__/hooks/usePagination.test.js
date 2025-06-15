@@ -199,7 +199,7 @@ describe('usePagination', () => {
             expect(result.current.hasPreviousPage).toBe(false);
         });
 
-        it('should reset to first page', () => {
+        it('should navigate to page 1 using goToPage', () => {
             const { result } = renderHook(() => usePagination(sampleData));
 
             act(() => {
@@ -208,7 +208,7 @@ describe('usePagination', () => {
             expect(result.current.currentPage).toBe(5);
 
             act(() => {
-                result.current.resetPage();
+                result.current.goToPage(1);
             });
             expect(result.current.currentPage).toBe(1);
         });
@@ -230,7 +230,7 @@ describe('usePagination', () => {
             expect(result.current.totalItems).toBe(100);
         });
 
-        it('should reset to first page when data changes', () => {
+        it('should reset to first page when data length changes', () => {
             const { result, rerender } = renderHook(
                 ({ data }) => usePagination(data),
                 { initialProps: { data: sampleData } }
@@ -241,12 +241,35 @@ describe('usePagination', () => {
             });
             expect(result.current.currentPage).toBe(5);
 
+            // Change data length from 100 to 20
             rerender({ data: sampleData.slice(0, 20) });
 
             expect(result.current.currentPage).toBe(1);
         });
 
-        it('should adjust current page if it exceeds new total pages', () => {
+        it('should maintain current page when data content changes but length stays same', () => {
+            const { result, rerender } = renderHook(
+                ({ data }) => usePagination(data),
+                { initialProps: { data: sampleData } }
+            );
+
+            act(() => {
+                result.current.goToPage(2);
+            });
+            expect(result.current.currentPage).toBe(2);
+
+            // Change data content but keep same length (100 items)
+            const newSameData = Array.from({ length: 100 }, (_, i) => ({
+                id: i + 1000,
+                name: `New Item ${i + 1000}`,
+            }));
+            rerender({ data: newSameData });
+
+            // Should maintain current page since length didn't change
+            expect(result.current.currentPage).toBe(2);
+        });
+
+        it('should reset to first page when data length changes (regardless of new total pages)', () => {
             const { result, rerender } = renderHook(
                 ({ data }) => usePagination(data),
                 { initialProps: { data: sampleData } }
@@ -259,7 +282,7 @@ describe('usePagination', () => {
 
             rerender({ data: sampleData.slice(0, 25) });
 
-            expect(result.current.currentPage).toBe(1);
+            expect(result.current.currentPage).toBe(1); // Always resets to page 1
             expect(result.current.totalPages).toBe(3);
         });
     });
@@ -271,7 +294,7 @@ describe('usePagination', () => {
             expect(result.current.totalPages).toBe(10);
 
             act(() => {
-                result.current.setItemsPerPage(25);
+                result.current.setPageSize(25);
             });
 
             expect(result.current.totalPages).toBe(4);
@@ -279,119 +302,36 @@ describe('usePagination', () => {
             expect(result.current.itemsPerPage).toBe(25);
         });
 
-        it('should preserve current position when items per page changes', () => {
+        it('should reset to first page when items per page changes', () => {
             const { result } = renderHook(() => usePagination(sampleData, 10));
 
             act(() => {
                 result.current.goToPage(3);
             });
-
-            const firstItemBeforeChange = result.current.paginatedData[0];
+            expect(result.current.currentPage).toBe(3);
 
             act(() => {
-                result.current.setItemsPerPage(20);
+                result.current.setPageSize(20);
             });
 
-            expect(result.current.currentPage).toBe(1);
+            expect(result.current.currentPage).toBe(1); // Always resets to page 1
             expect(result.current.totalPages).toBe(5);
         });
     });
 
-    describe('pagination enabled/disabled', () => {
-        it('should enable pagination by default', () => {
-            const { result } = renderHook(() => usePagination(sampleData, 10));
-
-            expect(result.current.enabled).toBe(true);
-            expect(result.current.totalPages).toBe(10);
-            expect(result.current.paginatedData).toHaveLength(10);
-        });
-
-        it('should explicitly enable pagination when enabled=true', () => {
-            const { result } = renderHook(() =>
-                usePagination(sampleData, 10, true)
-            );
-
-            expect(result.current.enabled).toBe(true);
-            expect(result.current.totalPages).toBe(10);
-            expect(result.current.paginatedData).toHaveLength(10);
-        });
-
-        it('should disable pagination when enabled=false', () => {
-            const { result } = renderHook(() =>
-                usePagination(sampleData, 10, false)
-            );
-
-            expect(result.current.enabled).toBe(false);
-            expect(result.current.currentPage).toBe(1);
-            expect(result.current.totalPages).toBe(1);
-            expect(result.current.totalItems).toBe(100);
-            expect(result.current.itemsPerPage).toBe(100);
-            expect(result.current.paginatedData).toHaveLength(100);
-            expect(result.current.hasNextPage).toBe(false);
-            expect(result.current.hasPreviousPage).toBe(false);
-        });
-
-        it('should return all data when pagination is disabled', () => {
-            const { result } = renderHook(() =>
-                usePagination(sampleData, 10, false)
-            );
-
-            expect(result.current.paginatedData).toEqual(sampleData);
-            expect(result.current.paginatedData).toHaveLength(
-                sampleData.length
-            );
-        });
-
-        it('should make navigation functions no-ops when disabled', () => {
-            const { result } = renderHook(() =>
-                usePagination(sampleData, 10, false)
-            );
-
-            expect(result.current.currentPage).toBe(1);
-
-            act(() => {
-                result.current.goToPage(5);
-            });
-            expect(result.current.currentPage).toBe(1);
-
-            act(() => {
-                result.current.goToNextPage();
-            });
-            expect(result.current.currentPage).toBe(1);
-
-            act(() => {
-                result.current.goToPreviousPage();
-            });
-            expect(result.current.currentPage).toBe(1);
-
-            act(() => {
-                result.current.setItemsPerPage(50);
-            });
-            expect(result.current.itemsPerPage).toBe(100);
-        });
-
-        it('should handle empty data when pagination is disabled', () => {
-            const { result } = renderHook(() => usePagination([], 10, false));
-
-            expect(result.current.enabled).toBe(false);
-            expect(result.current.totalItems).toBe(0);
-            expect(result.current.paginatedData).toHaveLength(0);
-            expect(result.current.itemsPerPage).toBe(0);
-        });
-    });
 
     describe('edge cases', () => {
         it('should handle zero items per page gracefully', () => {
             const { result } = renderHook(() => usePagination(sampleData, 0));
 
-            expect(result.current.totalPages).toBe(0);
+            expect(result.current.totalPages).toBe(1); // fallback to 1 when itemsPerPage <= 0
             expect(result.current.paginatedData).toHaveLength(0);
         });
 
         it('should handle negative items per page gracefully', () => {
             const { result } = renderHook(() => usePagination(sampleData, -5));
 
-            expect(result.current.totalPages).toBe(0);
+            expect(result.current.totalPages).toBe(1); // fallback to 1 when itemsPerPage <= 0
             expect(result.current.paginatedData).toHaveLength(0);
         });
 

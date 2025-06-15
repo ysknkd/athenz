@@ -52,13 +52,15 @@ describe('useMemberFilter', () => {
         });
 
         it('should initialize with provided initial filter', () => {
-            const { result } = renderHook(() => 
+            const { result } = renderHook(() =>
                 useMemberFilter(mockMembers, 'user.john')
             );
 
             expect(result.current.filterText).toBe('user.john');
             expect(result.current.filteredMembers).toHaveLength(1);
-            expect(result.current.filteredMembers[0].memberName).toBe('user.john');
+            expect(result.current.filteredMembers[0].memberName).toBe(
+                'user.john'
+            );
             expect(result.current.hasFilter).toBe(true);
         });
     });
@@ -72,7 +74,9 @@ describe('useMemberFilter', () => {
             });
 
             expect(result.current.filteredMembers).toHaveLength(1);
-            expect(result.current.filteredMembers[0].memberName).toBe('user.john');
+            expect(result.current.filteredMembers[0].memberName).toBe(
+                'user.john'
+            );
             expect(result.current.filteredCount).toBe(1);
         });
 
@@ -84,11 +88,9 @@ describe('useMemberFilter', () => {
             });
 
             expect(result.current.filteredMembers).toHaveLength(3);
-            expect(result.current.filteredMembers.map(m => m.memberName)).toEqual([
-                'user.john',
-                'user.jane', 
-                'user.alice'
-            ]);
+            expect(
+                result.current.filteredMembers.map((m) => m.memberName)
+            ).toEqual(['user.john', 'user.jane', 'user.alice']);
         });
 
         it('should handle case insensitive filtering', () => {
@@ -99,7 +101,9 @@ describe('useMemberFilter', () => {
             });
 
             expect(result.current.filteredMembers).toHaveLength(1);
-            expect(result.current.filteredMembers[0].memberName).toBe('service.api');
+            expect(result.current.filteredMembers[0].memberName).toBe(
+                'service.api'
+            );
         });
     });
 
@@ -112,7 +116,9 @@ describe('useMemberFilter', () => {
             });
 
             expect(result.current.filteredMembers).toHaveLength(1);
-            expect(result.current.filteredMembers[0].memberName).toBe('user.jane');
+            expect(result.current.filteredMembers[0].memberName).toBe(
+                'user.jane'
+            );
         });
 
         it('should filter by partial full name match', () => {
@@ -123,7 +129,9 @@ describe('useMemberFilter', () => {
             });
 
             expect(result.current.filteredMembers).toHaveLength(1);
-            expect(result.current.filteredMembers[0].memberName).toBe('user.john');
+            expect(result.current.filteredMembers[0].memberName).toBe(
+                'user.john'
+            );
         });
 
         it('should handle members with null memberFullName', () => {
@@ -134,7 +142,9 @@ describe('useMemberFilter', () => {
             });
 
             expect(result.current.filteredMembers).toHaveLength(1);
-            expect(result.current.filteredMembers[0].memberName).toBe('service.api');
+            expect(result.current.filteredMembers[0].memberName).toBe(
+                'service.api'
+            );
         });
     });
 
@@ -206,10 +216,12 @@ describe('useMemberFilter', () => {
         it('should handle members with missing memberName', () => {
             const membersWithMissingName = [
                 { memberFullName: 'Test User', approved: true },
-                { memberName: 'user.test', approved: true }
+                { memberName: 'user.test', approved: true },
             ];
 
-            const { result } = renderHook(() => useMemberFilter(membersWithMissingName));
+            const { result } = renderHook(() =>
+                useMemberFilter(membersWithMissingName)
+            );
 
             act(() => {
                 result.current.setFilterText('test');
@@ -221,12 +233,14 @@ describe('useMemberFilter', () => {
 
     describe('performance and memoization', () => {
         it('should maintain reference equality when filter unchanged', () => {
-            const { result, rerender } = renderHook(() => useMemberFilter(mockMembers));
+            const { result, rerender } = renderHook(() =>
+                useMemberFilter(mockMembers)
+            );
 
             const firstResult = result.current.filteredMembers;
-            
+
             rerender();
-            
+
             const secondResult = result.current.filteredMembers;
             expect(firstResult).toBe(secondResult);
         });
@@ -244,7 +258,11 @@ describe('useMemberFilter', () => {
             expect(result.current.filteredMembers).toHaveLength(2);
 
             const newMembers = [
-                { memberName: 'user.bob', memberFullName: 'Bob Johnson', approved: true }
+                {
+                    memberName: 'user.bob',
+                    memberFullName: 'Bob Johnson',
+                    approved: true,
+                },
             ];
 
             rerender({ members: newMembers });

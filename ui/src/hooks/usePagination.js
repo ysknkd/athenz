@@ -15,91 +15,75 @@
  */
 import { useState, useMemo, useEffect } from 'react';
 
-export const usePagination = (
-    data,
-    initialItemsPerPage = 10,
-    enabled = true
-) => {
+/**
+ * Simplified pagination hook for general use cases
+ * For complex member pagination with filtering, use useMemberPagination instead
+ *
+ * @param {Array} data - Array of items to paginate
+ * @param {number} initialItemsPerPage - Initial items per page
+ * @returns {Object} Pagination state and controls
+ */
+export const usePagination = (data = [], initialItemsPerPage = 10) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(initialItemsPerPage);
 
     const totalItems = data.length;
-    const totalPages = enabled && itemsPerPage > 0 ? Math.ceil(totalItems / itemsPerPage) : (enabled ? 0 : 1);
+    const totalPages =
+        itemsPerPage > 0 ? Math.ceil(totalItems / itemsPerPage) : 1;
 
+    // Paginated data with memoization
     const paginatedData = useMemo(() => {
-        // When pagination is disabled, return all data
-        if (!enabled) {
-            return data;
-        }
-        
-        if (itemsPerPage <= 0) {
-            return [];
-        }
+        if (itemsPerPage <= 0) return [];
 
         const startIndex = (currentPage - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
         return data.slice(startIndex, endIndex);
-    }, [data, currentPage, itemsPerPage, enabled]);
+    }, [data, currentPage, itemsPerPage]);
 
-    const hasNextPage = enabled && currentPage < totalPages;
-    const hasPreviousPage = enabled && currentPage > 1;
+    // Navigation state
+    const hasNextPage = currentPage < totalPages;
+    const hasPreviousPage = currentPage > 1;
 
+    // Navigation functions
     const goToPage = (page) => {
-        if (enabled && page >= 1 && page <= totalPages) {
+        if (page >= 1 && page <= totalPages) {
             setCurrentPage(page);
         }
     };
 
     const goToNextPage = () => {
-        if (enabled && hasNextPage) {
+        if (hasNextPage) {
             setCurrentPage(currentPage + 1);
         }
     };
 
     const goToPreviousPage = () => {
-        if (enabled && hasPreviousPage) {
+        if (hasPreviousPage) {
             setCurrentPage(currentPage - 1);
         }
     };
 
-    const resetPage = () => {
-        if (enabled) {
-            setCurrentPage(1);
-        }
+    const setPageSize = (newItemsPerPage) => {
+        setItemsPerPage(newItemsPerPage);
+        setCurrentPage(1); // Reset to first page when page size changes
     };
 
-    const handleSetItemsPerPage = (newItemsPerPage) => {
-        if (enabled) {
-            setItemsPerPage(newItemsPerPage);
-            setCurrentPage(1);
-        }
-    };
-
+    // Reset to first page when data length changes
     useEffect(() => {
-        if (enabled) {
-            setCurrentPage(1);
-        }
-    }, [data.length, enabled]);
-
-    useEffect(() => {
-        if (enabled && currentPage > totalPages && totalPages > 0) {
-            setCurrentPage(1);
-        }
-    }, [totalPages, currentPage, enabled]);
+        setCurrentPage(1);
+    }, [data.length]);
 
     return {
-        currentPage: enabled ? currentPage : 1,
-        totalPages: enabled ? totalPages : 1,
+        currentPage,
+        totalPages,
         totalItems,
-        itemsPerPage: enabled ? itemsPerPage : totalItems,
+        itemsPerPage,
         paginatedData,
-        hasNextPage: enabled ? hasNextPage : false,
-        hasPreviousPage: enabled ? hasPreviousPage : false,
+        hasNextPage,
+        hasPreviousPage,
         goToPage,
         goToNextPage,
         goToPreviousPage,
-        resetPage,
-        setItemsPerPage: handleSetItemsPerPage,
-        enabled,
+        setPageSize,
     };
 };

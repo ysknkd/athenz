@@ -20,7 +20,6 @@ import MemberRow from './MemberRow';
 import Icon from '../denali/icons/Icon';
 import Pagination from './Pagination';
 import PageSizeSelector from './PageSizeSelector';
-import { PAGINATION_SHOW_THRESHOLD } from '../constants/constants';
 
 const StyleTable = styled.table`
     width: 100%;
