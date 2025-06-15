@@ -40,56 +40,8 @@ const PaginationControls = styled.div`
     gap: 8px;
 `;
 
-const PaginationButton = styled.button`
-    background: ${(props) => {
-        if (props.$isActive) return colors.brand600;
-        return 'transparent';
-    }};
-    color: ${(props) => {
-        if (props.$isActive) return colors.white;
-        return colors.brand600;
-    }};
-    border: 1px solid ${colors.brand600};
-    border-radius: 4px;
-    padding: 8px 12px;
-    min-width: 32px;
-    height: auto;
-    font-size: 14px;
-    font-weight: normal;
-    cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
-    opacity: ${(props) => (props.disabled ? 0.5 : 1)};
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    &:hover:not(:disabled) {
-        background: ${(props) => {
-            if (props.$isActive) return colors.brand700;
-            return colors.brand200;
-        }};
-        border-color: ${colors.brand600};
-        color: ${(props) => {
-            if (props.$isActive) return colors.white;
-            return colors.brand600;
-        }};
-    }
-
-    &:focus {
-        outline: 2px solid ${colors.brand600};
-        outline-offset: 2px;
-    }
-
-    &:disabled {
-        background: transparent;
-        border-color: ${colors.grey400};
-        color: ${colors.grey400};
-        cursor: not-allowed;
-        opacity: 0.5;
-    }
-`;
-
-const NavigationButton = styled(PaginationButton)`
-    min-width: 80px;
+const NavigationButtonStyle = styled.button`
+    min-width: 80px !important;
     gap: 8px;
 `;
 
@@ -97,6 +49,9 @@ const Ellipsis = styled.span`
     color: ${colors.grey600};
     padding: 8px 4px;
     font-size: 14px;
+    display: flex;
+    align-items: center;
+    align-self: center;
 `;
 
 const Pagination = ({
@@ -120,21 +75,33 @@ const Pagination = ({
     const hasPrevious = currentPage > 1;
     const hasNext = currentPage < totalPages;
 
-    const handlePageClick = (page) => {
+    const handlePageClick = (page, event) => {
         if (page !== currentPage && onPageChange) {
             onPageChange(page);
+            // Remove focus to reset hover state after click (Denali best practice)
+            if (event && event.target) {
+                event.target.blur();
+            }
         }
     };
 
-    const handlePreviousClick = () => {
+    const handlePreviousClick = (event) => {
         if (hasPrevious && onPreviousPage) {
             onPreviousPage();
+            // Remove focus to reset hover state after click (Denali best practice)
+            if (event && event.target && event.target.blur) {
+                event.target.blur();
+            }
         }
     };
 
-    const handleNextClick = () => {
+    const handleNextClick = (event) => {
         if (hasNext && onNextPage) {
             onNextPage();
+            // Remove focus to reset hover state after click (Denali best practice)
+            if (event && event.target && event.target.blur) {
+                event.target.blur();
+            }
         }
     };
 
@@ -142,6 +109,10 @@ const Pagination = ({
         if (event.key === 'Enter' || event.key === ' ') {
             event.preventDefault();
             action();
+            // Remove focus to reset hover state after keyboard activation (Denali best practice)
+            if (event && event.target && event.target.blur) {
+                event.target.blur();
+            }
         }
     };
 
@@ -192,7 +163,8 @@ const Pagination = ({
             )}
 
             <PaginationControls>
-                <NavigationButton
+                <NavigationButtonStyle
+                    className="button is-outline is-small"
                     disabled={!hasPrevious}
                     onClick={handlePreviousClick}
                     onKeyDown={(e) => handleKeyDown(e, handlePreviousClick)}
@@ -200,34 +172,41 @@ const Pagination = ({
                 >
                     <Icon icon='arrow-left' size='1em' color='currentColor' />
                     Previous
-                </NavigationButton>
+                </NavigationButtonStyle>
 
-                {!compact &&
-                    visiblePages.map((page, index) =>
-                        page === '...' ? (
-                            <Ellipsis key={`ellipsis-${index}`}>...</Ellipsis>
-                        ) : (
-                            <PaginationButton
-                                key={page}
-                                $isActive={page === currentPage}
-                                inTable={inTable}
-                                onClick={() => handlePageClick(page)}
-                                onKeyDown={(e) =>
-                                    handleKeyDown(e, () =>
-                                        handlePageClick(page)
-                                    )
-                                }
-                                aria-label={`Page ${page}`}
-                                aria-current={
-                                    page === currentPage ? 'page' : undefined
-                                }
-                            >
-                                {page}
-                            </PaginationButton>
-                        )
-                    )}
+                {!compact && visiblePages.length > 0 && (
+                    <div className="toggle is-small">
+                        <ul>
+                            {visiblePages.map((page, index) =>
+                                page === '...' ? (
+                                    <Ellipsis key={`ellipsis-${index}`}>...</Ellipsis>
+                                ) : (
+                                    <li
+                                        key={page}
+                                        className={page === currentPage ? 'is-active' : ''}
+                                        onClick={(event) => handlePageClick(page, event)}
+                                        onKeyDown={(e) =>
+                                            handleKeyDown(e, () =>
+                                                handlePageClick(page, e)
+                                            )
+                                        }
+                                        aria-label={`Page ${page}`}
+                                        aria-current={
+                                            page === currentPage ? 'page' : undefined
+                                        }
+                                        role="button"
+                                        tabIndex={0}
+                                    >
+                                        <a>{page}</a>
+                                    </li>
+                                )
+                            )}
+                        </ul>
+                    </div>
+                )}
 
-                <NavigationButton
+                <NavigationButtonStyle
+                    className="button is-outline is-small"
                     disabled={!hasNext}
                     onClick={handleNextClick}
                     onKeyDown={(e) => handleKeyDown(e, handleNextClick)}
@@ -235,7 +214,7 @@ const Pagination = ({
                 >
                     Next
                     <Icon icon='arrow-right' size='1em' color='currentColor' />
-                </NavigationButton>
+                </NavigationButtonStyle>
             </PaginationControls>
         </PaginationContainer>
     );

@@ -26,37 +26,9 @@ const SelectorContainer = styled.div`
 `;
 
 const Label = styled.span`
-    color: ${(props) => (props.compact ? colors.grey600 : colors.grey600)};
+    color: ${colors.grey600};
     font-weight: 500;
     font-size: 14px;
-`;
-
-const Select = styled.select`
-    background: ${(props) => (props.compact ? colors.grey100 : colors.grey100)};
-    border: 1px solid
-        ${(props) => (props.compact ? colors.grey500 : colors.grey400)};
-    border-radius: 3px;
-    padding: ${(props) => (props.compact ? '4px 8px' : '6px 8px')};
-    font-size: 14px;
-    color: ${(props) => (props.compact ? colors.grey800 : colors.grey800)};
-    cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
-    opacity: ${(props) => (props.disabled ? 0.5 : 1)};
-    min-width: ${(props) => (props.compact ? '50px' : '60px')};
-
-    &:hover:not(:disabled) {
-        border-color: ${colors.grey500};
-    }
-
-    &:focus {
-        outline: 2px solid ${colors.brand600};
-        outline-offset: 2px;
-        border-color: ${colors.brand600};
-    }
-
-    option {
-        background: ${colors.grey100};
-        color: ${colors.grey800};
-    }
 `;
 
 const PageSizeSelector = ({
@@ -82,26 +54,28 @@ const PageSizeSelector = ({
 
     return (
         <SelectorContainer className={className} compact={compact}>
-            {label && <Label compact={compact}>{label}</Label>}
-            <Select
-                id={selectId}
-                value={value}
-                onChange={handleChange}
-                disabled={disabled}
-                compact={compact}
-                aria-label='Select page size'
-            >
-                {options.map((option) => (
-                    <option key={option} value={option}>
-                        {option}
-                    </option>
-                ))}
-                {!options.includes(value) && (
-                    <option key={value} value={value}>
-                        {value}
-                    </option>
-                )}
-            </Select>
+            {label && <Label>{label}</Label>}
+            <div className={`input has-arrow w-auto ${compact ? 'is-small' : ''}`}>
+                <select
+                    id={selectId}
+                    value={value}
+                    onChange={handleChange}
+                    disabled={disabled}
+                    aria-label='Select page size'
+                    style={{ minWidth: compact ? '50px' : '60px' }}
+                >
+                    {options.map((option) => (
+                        <option key={option} value={option}>
+                            {option}
+                        </option>
+                    ))}
+                    {!options.includes(value) && (
+                        <option key={value} value={value}>
+                            {value}
+                        </option>
+                    )}
+                </select>
+            </div>
         </SelectorContainer>
     );
 };

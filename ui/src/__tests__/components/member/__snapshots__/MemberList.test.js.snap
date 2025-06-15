@@ -292,33 +292,6 @@ exports[`MemberList should render 1`] = `
 }
 
 .emotion-26 {
-  background: #fff;
-  border: 1px solid #d5d5d5;
-  border-radius: 3px;
-  padding: 4px 8px;
-  font-size: 14px;
-  color: #303030;
-  cursor: pointer;
-  opacity: 1;
-  min-width: 50px;
-}
-
-.emotion-26:hover:not(:disabled) {
-  border-color: #d5d5d5;
-}
-
-.emotion-26:focus {
-  outline: 2px solid #3697f2;
-  outline-offset: 2px;
-  border-color: #3697f2;
-}
-
-.emotion-26 option {
-  background: #fff;
-  color: #303030;
-}
-
-.emotion-28 {
   text-align: center;
   width: 1%;
   border-bottom: 2px solid #d5d5d5;
@@ -331,7 +304,7 @@ exports[`MemberList should render 1`] = `
   word-break: break-all;
 }
 
-.emotion-30 {
+.emotion-28 {
   text-align: left;
   width: 25%;
   border-bottom: 2px solid #d5d5d5;
@@ -344,7 +317,7 @@ exports[`MemberList should render 1`] = `
   word-break: break-all;
 }
 
-.emotion-32 {
+.emotion-30 {
   text-align: left;
   width: 25%;
   border-bottom: 2px solid #d5d5d5;
@@ -357,7 +330,7 @@ exports[`MemberList should render 1`] = `
   word-break: break-all;
 }
 
-.emotion-36 {
+.emotion-34 {
   text-align: left;
   width: 39%;
   border-bottom: 2px solid #d5d5d5;
@@ -370,7 +343,7 @@ exports[`MemberList should render 1`] = `
   word-break: break-all;
 }
 
-.emotion-38 {
+.emotion-36 {
   text-align: center;
   width: 8%;
   border-bottom: 2px solid #d5d5d5;
@@ -383,7 +356,7 @@ exports[`MemberList should render 1`] = `
   word-break: break-all;
 }
 
-.emotion-42 {
+.emotion-40 {
   background-color: #3570f40D;
   text-align: left;
   padding: 5px 0 5px 15px;
@@ -391,13 +364,13 @@ exports[`MemberList should render 1`] = `
   word-break: break-all;
 }
 
-.emotion-50 {
+.emotion-48 {
   display: flex;
   -webkit-column-gap: 10px;
   column-gap: 10px;
 }
 
-.emotion-58 {
+.emotion-56 {
   background-color: #3570f40D;
   text-align: center;
   padding: 5px 0 5px 15px;
@@ -405,25 +378,25 @@ exports[`MemberList should render 1`] = `
   word-break: break-all;
 }
 
-.emotion-63 {
+.emotion-61 {
   text-align: left;
   padding: 5px 0 5px 15px;
   vertical-align: middle;
   word-break: break-all;
 }
 
-.emotion-79 {
+.emotion-77 {
   text-align: center;
   padding: 5px 0 5px 15px;
   vertical-align: middle;
   word-break: break-all;
 }
 
-.emotion-82 {
+.emotion-80 {
   border-top: none;
 }
 
-.emotion-84 {
+.emotion-82 {
   padding: 8px 15px 12px 15px;
   text-align: center;
   background-color: #ffffff;
@@ -434,7 +407,7 @@ exports[`MemberList should render 1`] = `
   vertical-align: middle;
 }
 
-.emotion-86 {
+.emotion-84 {
   display: flex;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
@@ -448,114 +421,34 @@ exports[`MemberList should render 1`] = `
   color: inherit;
 }
 
-.emotion-88 {
+.emotion-86 {
   color: #9a9a9a;
   font-size: 14px;
   font-weight: normal;
   text-align: center;
 }
 
-.emotion-90 {
+.emotion-88 {
   display: flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  gap: 8px;
+}
+
+.emotion-90 {
+  min-width: 80px!important;
   gap: 8px;
 }
 
 .emotion-92 {
-  background: transparent;
-  color: #3697f2;
-  border: 1px solid #3697f2;
-  border-radius: 4px;
-  padding: 8px 12px;
-  min-width: 80px;
-  height: auto;
-  font-size: 14px;
-  font-weight: normal;
-  cursor: not-allowed;
-  opacity: 0.5;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.emotion-92:hover:not(:disabled) {
-  background: #d7e2fd;
-  border-color: #3697f2;
-  color: #3697f2;
-}
-
-.emotion-92:focus {
-  outline: 2px solid #3697f2;
-  outline-offset: 2px;
-}
-
-.emotion-92:disabled {
-  background: transparent;
-  border-color: #e8e8e8;
-  color: #e8e8e8;
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-
-.emotion-94 {
   fill: currentColor;
   cursor: inherit;
   vertical-align: text-bottom;
 }
 
-.emotion-95 {
-  background: #3697f2;
-  color: #fff;
-  border: 1px solid #3697f2;
-  border-radius: 4px;
-  padding: 8px 12px;
-  min-width: 32px;
-  height: auto;
-  font-size: 14px;
-  font-weight: normal;
-  cursor: pointer;
-  opacity: 1;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-}
-
-.emotion-95:hover:not(:disabled) {
-  background: #3570f4;
-  border-color: #3697f2;
-  color: #fff;
-}
-
-.emotion-95:focus {
-  outline: 2px solid #3697f2;
-  outline-offset: 2px;
-}
-
-.emotion-95:disabled {
-  background: transparent;
-  border-color: #e8e8e8;
-  color: #e8e8e8;
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-
-.emotion-129 {
+.emotion-123 {
   text-align: left;
   width: 14%;
   border-bottom: 2px solid #d5d5d5;
@@ -674,27 +567,31 @@ exports[`MemberList should render 1`] = `
                   >
                     Show
                   </span>
-                  <select
-                    aria-label="Select page size"
-                    class="emotion-26 emotion-27"
-                    id="approved-page-size-selector-test"
+                  <div
+                    class="input has-arrow w-auto is-small"
                   >
-                    <option
-                      value="30"
+                    <select
+                      aria-label="Select page size"
+                      id="approved-page-size-selector-test"
+                      style="min-width: 50px;"
                     >
-                      30
-                    </option>
-                    <option
-                      value="50"
-                    >
-                      50
-                    </option>
-                    <option
-                      value="100"
-                    >
-                      100
-                    </option>
-                  </select>
+                      <option
+                        value="30"
+                      >
+                        30
+                      </option>
+                      <option
+                        value="50"
+                      >
+                        50
+                      </option>
+                      <option
+                        value="100"
+                      >
+                        100
+                      </option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
@@ -702,35 +599,35 @@ exports[`MemberList should render 1`] = `
         </tr>
         <tr>
           <th
-            class="emotion-28 emotion-29"
+            class="emotion-26 emotion-27"
             width="1"
           />
           <th
-            class="emotion-30 emotion-31"
+            class="emotion-28 emotion-29"
             width="25"
           >
             User Name
           </th>
           <th
-            class="emotion-32 emotion-29"
+            class="emotion-30 emotion-27"
             width="25"
           >
             Name of User
           </th>
           <th
-            class="emotion-32 emotion-29"
+            class="emotion-30 emotion-27"
             width="25"
           >
             Expiration Date
           </th>
           <th
-            class="emotion-36 emotion-29"
+            class="emotion-34 emotion-27"
             width="39"
           >
             Review Reminder Date
           </th>
           <th
-            class="emotion-38 emotion-29"
+            class="emotion-36 emotion-27"
             width="8"
           >
             Delete
@@ -739,30 +636,30 @@ exports[`MemberList should render 1`] = `
       </thead>
       <tbody>
         <tr
-          class="emotion-40 emotion-41"
+          class="emotion-38 emotion-39"
           data-testid="member-row"
           data-wdio="user1-member-row"
         >
           <td
-            class="emotion-42 emotion-43"
+            class="emotion-40 emotion-41"
             color="#3570f40D"
           />
           <td
-            class="emotion-42 emotion-43"
+            class="emotion-40 emotion-41"
             color="#3570f40D"
           >
             user1
           </td>
           <td
-            class="emotion-42 emotion-43"
+            class="emotion-40 emotion-41"
             color="#3570f40D"
           />
           <td
-            class="emotion-42 emotion-43"
+            class="emotion-40 emotion-41"
             color="#3570f40D"
           >
             <div
-              class="emotion-50 emotion-51"
+              class="emotion-48 emotion-49"
             >
               N/A
               <span>
@@ -786,11 +683,11 @@ exports[`MemberList should render 1`] = `
             </div>
           </td>
           <td
-            class="emotion-42 emotion-43"
+            class="emotion-40 emotion-41"
             color="#3570f40D"
           >
             <div
-              class="emotion-50 emotion-51"
+              class="emotion-48 emotion-49"
             >
               N/A
               <span>
@@ -814,7 +711,7 @@ exports[`MemberList should render 1`] = `
             </div>
           </td>
           <td
-            class="emotion-58 emotion-43"
+            class="emotion-56 emotion-41"
             color="#3570f40D"
           >
             <span>
@@ -841,30 +738,30 @@ exports[`MemberList should render 1`] = `
           </td>
         </tr>
         <tr
-          class="emotion-40 emotion-41"
+          class="emotion-38 emotion-39"
           data-testid="member-row"
           data-wdio="user4-member-row"
         >
           <td
-            class="emotion-63 emotion-43"
+            class="emotion-61 emotion-41"
             color=""
           />
           <td
-            class="emotion-63 emotion-43"
+            class="emotion-61 emotion-41"
             color=""
           >
             user4
           </td>
           <td
-            class="emotion-63 emotion-43"
+            class="emotion-61 emotion-41"
             color=""
           />
           <td
-            class="emotion-63 emotion-43"
+            class="emotion-61 emotion-41"
             color=""
           >
             <div
-              class="emotion-50 emotion-51"
+              class="emotion-48 emotion-49"
             >
               N/A
               <span>
@@ -888,11 +785,11 @@ exports[`MemberList should render 1`] = `
             </div>
           </td>
           <td
-            class="emotion-63 emotion-43"
+            class="emotion-61 emotion-41"
             color=""
           >
             <div
-              class="emotion-50 emotion-51"
+              class="emotion-48 emotion-49"
             >
               N/A
               <span>
@@ -916,7 +813,7 @@ exports[`MemberList should render 1`] = `
             </div>
           </td>
           <td
-            class="emotion-79 emotion-43"
+            class="emotion-77 emotion-41"
             color=""
           >
             <span>
@@ -944,18 +841,18 @@ exports[`MemberList should render 1`] = `
         </tr>
       </tbody>
       <tfoot
-        class="emotion-82 emotion-83"
+        class="emotion-80 emotion-81"
       >
         <tr>
           <td
-            class="emotion-84 emotion-85"
+            class="emotion-82 emotion-83"
             colspan="6"
           >
             <div
-              class="emotion-86 emotion-87"
+              class="emotion-84 emotion-85"
             >
               <div
-                class="emotion-88 emotion-89"
+                class="emotion-86 emotion-87"
               >
                 Showing 
                 1
@@ -967,15 +864,15 @@ exports[`MemberList should render 1`] = `
                 members
               </div>
               <div
-                class="emotion-90 emotion-91"
+                class="emotion-88 emotion-89"
               >
                 <button
                   aria-label="Go to previous page"
-                  class="emotion-92 emotion-93"
+                  class="button is-outline is-small emotion-90 emotion-91"
                   disabled=""
                 >
                   <svg
-                    class="emotion-94"
+                    class="emotion-92"
                     data-testid="icon"
                     data-wdio=""
                     height="1em"
@@ -992,21 +889,31 @@ exports[`MemberList should render 1`] = `
                   </svg>
                   Previous
                 </button>
-                <button
-                  aria-current="page"
-                  aria-label="Page 1"
-                  class="emotion-95 emotion-96"
+                <div
+                  class="toggle is-small"
                 >
-                  1
-                </button>
+                  <ul>
+                    <li
+                      aria-current="page"
+                      aria-label="Page 1"
+                      class="is-active"
+                      role="button"
+                      tabindex="0"
+                    >
+                      <a>
+                        1
+                      </a>
+                    </li>
+                  </ul>
+                </div>
                 <button
                   aria-label="Go to next page"
-                  class="emotion-92 emotion-93"
+                  class="button is-outline is-small emotion-90 emotion-91"
                   disabled=""
                 >
                   Next
                   <svg
-                    class="emotion-94"
+                    class="emotion-92"
                     data-testid="icon"
                     data-wdio=""
                     height="1em"
@@ -1080,27 +987,31 @@ exports[`MemberList should render 1`] = `
                   >
                     Show
                   </span>
-                  <select
-                    aria-label="Select page size"
-                    class="emotion-26 emotion-27"
-                    id="pending-page-size-selector-test"
+                  <div
+                    class="input has-arrow w-auto is-small"
                   >
-                    <option
-                      value="30"
+                    <select
+                      aria-label="Select page size"
+                      id="pending-page-size-selector-test"
+                      style="min-width: 50px;"
                     >
-                      30
-                    </option>
-                    <option
-                      value="50"
-                    >
-                      50
-                    </option>
-                    <option
-                      value="100"
-                    >
-                      100
-                    </option>
-                  </select>
+                      <option
+                        value="30"
+                      >
+                        30
+                      </option>
+                      <option
+                        value="50"
+                      >
+                        50
+                      </option>
+                      <option
+                        value="100"
+                      >
+                        100
+                      </option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1108,41 +1019,41 @@ exports[`MemberList should render 1`] = `
         </tr>
         <tr>
           <th
-            class="emotion-28 emotion-29"
+            class="emotion-26 emotion-27"
             width="1"
           />
           <th
-            class="emotion-30 emotion-31"
+            class="emotion-28 emotion-29"
             width="25"
           >
             User Name
           </th>
           <th
-            class="emotion-32 emotion-29"
+            class="emotion-30 emotion-27"
             width="25"
           >
             Name of User
           </th>
           <th
-            class="emotion-32 emotion-29"
+            class="emotion-30 emotion-27"
             width="25"
           >
             Expiration Date
           </th>
           <th
-            class="emotion-32 emotion-29"
+            class="emotion-30 emotion-27"
             width="25"
           >
             Review Reminder Date
           </th>
           <th
-            class="emotion-129 emotion-29"
+            class="emotion-123 emotion-27"
             width="14"
           >
             Pending State
           </th>
           <th
-            class="emotion-38 emotion-29"
+            class="emotion-36 emotion-27"
             width="8"
           >
             Delete
@@ -1151,30 +1062,30 @@ exports[`MemberList should render 1`] = `
       </thead>
       <tbody>
         <tr
-          class="emotion-40 emotion-41"
+          class="emotion-38 emotion-39"
           data-testid="member-row"
           data-wdio="user2-member-row"
         >
           <td
-            class="emotion-42 emotion-43"
+            class="emotion-40 emotion-41"
             color="#3570f40D"
           />
           <td
-            class="emotion-42 emotion-43"
+            class="emotion-40 emotion-41"
             color="#3570f40D"
           >
             user2
           </td>
           <td
-            class="emotion-42 emotion-43"
+            class="emotion-40 emotion-41"
             color="#3570f40D"
           />
           <td
-            class="emotion-42 emotion-43"
+            class="emotion-40 emotion-41"
             color="#3570f40D"
           >
             <div
-              class="emotion-50 emotion-51"
+              class="emotion-48 emotion-49"
             >
               N/A
               <span>
@@ -1198,11 +1109,11 @@ exports[`MemberList should render 1`] = `
             </div>
           </td>
           <td
-            class="emotion-42 emotion-43"
+            class="emotion-40 emotion-41"
             color="#3570f40D"
           >
             <div
-              class="emotion-50 emotion-51"
+              class="emotion-48 emotion-49"
             >
               N/A
               <span>
@@ -1226,11 +1137,11 @@ exports[`MemberList should render 1`] = `
             </div>
           </td>
           <td
-            class="emotion-42 emotion-43"
+            class="emotion-40 emotion-41"
             color="#3570f40D"
           />
           <td
-            class="emotion-58 emotion-43"
+            class="emotion-56 emotion-41"
             color="#3570f40D"
           >
             <span>
@@ -1257,30 +1168,30 @@ exports[`MemberList should render 1`] = `
           </td>
         </tr>
         <tr
-          class="emotion-40 emotion-41"
+          class="emotion-38 emotion-39"
           data-testid="member-row"
           data-wdio="user3-member-row"
         >
           <td
-            class="emotion-63 emotion-43"
+            class="emotion-61 emotion-41"
             color=""
           />
           <td
-            class="emotion-63 emotion-43"
+            class="emotion-61 emotion-41"
             color=""
           >
             user3
           </td>
           <td
-            class="emotion-63 emotion-43"
+            class="emotion-61 emotion-41"
             color=""
           />
           <td
-            class="emotion-63 emotion-43"
+            class="emotion-61 emotion-41"
             color=""
           >
             <div
-              class="emotion-50 emotion-51"
+              class="emotion-48 emotion-49"
             >
               N/A
               <span>
@@ -1304,11 +1215,11 @@ exports[`MemberList should render 1`] = `
             </div>
           </td>
           <td
-            class="emotion-63 emotion-43"
+            class="emotion-61 emotion-41"
             color=""
           >
             <div
-              class="emotion-50 emotion-51"
+              class="emotion-48 emotion-49"
             >
               N/A
               <span>
@@ -1332,11 +1243,11 @@ exports[`MemberList should render 1`] = `
             </div>
           </td>
           <td
-            class="emotion-63 emotion-43"
+            class="emotion-61 emotion-41"
             color=""
           />
           <td
-            class="emotion-79 emotion-43"
+            class="emotion-77 emotion-41"
             color=""
           >
             <span>
@@ -1364,18 +1275,18 @@ exports[`MemberList should render 1`] = `
         </tr>
       </tbody>
       <tfoot
-        class="emotion-82 emotion-83"
+        class="emotion-80 emotion-81"
       >
         <tr>
           <td
-            class="emotion-84 emotion-85"
+            class="emotion-82 emotion-83"
             colspan="7"
           >
             <div
-              class="emotion-86 emotion-87"
+              class="emotion-84 emotion-85"
             >
               <div
-                class="emotion-88 emotion-89"
+                class="emotion-86 emotion-87"
               >
                 Showing 
                 1
@@ -1387,15 +1298,15 @@ exports[`MemberList should render 1`] = `
                 members
               </div>
               <div
-                class="emotion-90 emotion-91"
+                class="emotion-88 emotion-89"
               >
                 <button
                   aria-label="Go to previous page"
-                  class="emotion-92 emotion-93"
+                  class="button is-outline is-small emotion-90 emotion-91"
                   disabled=""
                 >
                   <svg
-                    class="emotion-94"
+                    class="emotion-92"
                     data-testid="icon"
                     data-wdio=""
                     height="1em"
@@ -1412,21 +1323,31 @@ exports[`MemberList should render 1`] = `
                   </svg>
                   Previous
                 </button>
-                <button
-                  aria-current="page"
-                  aria-label="Page 1"
-                  class="emotion-95 emotion-96"
+                <div
+                  class="toggle is-small"
                 >
-                  1
-                </button>
+                  <ul>
+                    <li
+                      aria-current="page"
+                      aria-label="Page 1"
+                      class="is-active"
+                      role="button"
+                      tabindex="0"
+                    >
+                      <a>
+                        1
+                      </a>
+                    </li>
+                  </ul>
+                </div>
                 <button
                   aria-label="Go to next page"
-                  class="emotion-92 emotion-93"
+                  class="button is-outline is-small emotion-90 emotion-91"
                   disabled=""
                 >
                   Next
                   <svg
-                    class="emotion-94"
+                    class="emotion-92"
                     data-testid="icon"
                     data-wdio=""
                     height="1em"
@@ -1744,33 +1665,6 @@ exports[`MemberList should render delegated role 1`] = `
 }
 
 .emotion-26 {
-  background: #fff;
-  border: 1px solid #d5d5d5;
-  border-radius: 3px;
-  padding: 4px 8px;
-  font-size: 14px;
-  color: #303030;
-  cursor: pointer;
-  opacity: 1;
-  min-width: 50px;
-}
-
-.emotion-26:hover:not(:disabled) {
-  border-color: #d5d5d5;
-}
-
-.emotion-26:focus {
-  outline: 2px solid #3697f2;
-  outline-offset: 2px;
-  border-color: #3697f2;
-}
-
-.emotion-26 option {
-  background: #fff;
-  color: #303030;
-}
-
-.emotion-28 {
   text-align: center;
   width: 1%;
   border-bottom: 2px solid #d5d5d5;
@@ -1783,7 +1677,7 @@ exports[`MemberList should render delegated role 1`] = `
   word-break: break-all;
 }
 
-.emotion-30 {
+.emotion-28 {
   text-align: left;
   width: 25%;
   border-bottom: 2px solid #d5d5d5;
@@ -1796,7 +1690,7 @@ exports[`MemberList should render delegated role 1`] = `
   word-break: break-all;
 }
 
-.emotion-32 {
+.emotion-30 {
   text-align: left;
   width: 25%;
   border-bottom: 2px solid #d5d5d5;
@@ -1809,7 +1703,7 @@ exports[`MemberList should render delegated role 1`] = `
   word-break: break-all;
 }
 
-.emotion-36 {
+.emotion-34 {
   text-align: left;
   width: 39%;
   border-bottom: 2px solid #d5d5d5;
@@ -1822,7 +1716,7 @@ exports[`MemberList should render delegated role 1`] = `
   word-break: break-all;
 }
 
-.emotion-38 {
+.emotion-36 {
   text-align: center;
   width: 8%;
   border-bottom: 2px solid #d5d5d5;
@@ -1835,7 +1729,7 @@ exports[`MemberList should render delegated role 1`] = `
   word-break: break-all;
 }
 
-.emotion-42 {
+.emotion-40 {
   background-color: #3570f40D;
   text-align: left;
   padding: 5px 0 5px 15px;
@@ -1843,13 +1737,13 @@ exports[`MemberList should render delegated role 1`] = `
   word-break: break-all;
 }
 
-.emotion-50 {
+.emotion-48 {
   display: flex;
   -webkit-column-gap: 10px;
   column-gap: 10px;
 }
 
-.emotion-58 {
+.emotion-56 {
   background-color: #3570f40D;
   text-align: center;
   padding: 5px 0 5px 15px;
@@ -1857,25 +1751,25 @@ exports[`MemberList should render delegated role 1`] = `
   word-break: break-all;
 }
 
-.emotion-63 {
+.emotion-61 {
   text-align: left;
   padding: 5px 0 5px 15px;
   vertical-align: middle;
   word-break: break-all;
 }
 
-.emotion-79 {
+.emotion-77 {
   text-align: center;
   padding: 5px 0 5px 15px;
   vertical-align: middle;
   word-break: break-all;
 }
 
-.emotion-124 {
+.emotion-122 {
   border-top: none;
 }
 
-.emotion-126 {
+.emotion-124 {
   padding: 8px 15px 12px 15px;
   text-align: center;
   background-color: #ffffff;
@@ -1886,7 +1780,7 @@ exports[`MemberList should render delegated role 1`] = `
   vertical-align: middle;
 }
 
-.emotion-128 {
+.emotion-126 {
   display: flex;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
@@ -1900,111 +1794,31 @@ exports[`MemberList should render delegated role 1`] = `
   color: inherit;
 }
 
-.emotion-130 {
+.emotion-128 {
   color: #9a9a9a;
   font-size: 14px;
   font-weight: normal;
   text-align: center;
 }
 
-.emotion-132 {
+.emotion-130 {
   display: flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  gap: 8px;
+}
+
+.emotion-132 {
+  min-width: 80px!important;
   gap: 8px;
 }
 
 .emotion-134 {
-  background: transparent;
-  color: #3697f2;
-  border: 1px solid #3697f2;
-  border-radius: 4px;
-  padding: 8px 12px;
-  min-width: 80px;
-  height: auto;
-  font-size: 14px;
-  font-weight: normal;
-  cursor: not-allowed;
-  opacity: 0.5;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.emotion-134:hover:not(:disabled) {
-  background: #d7e2fd;
-  border-color: #3697f2;
-  color: #3697f2;
-}
-
-.emotion-134:focus {
-  outline: 2px solid #3697f2;
-  outline-offset: 2px;
-}
-
-.emotion-134:disabled {
-  background: transparent;
-  border-color: #e8e8e8;
-  color: #e8e8e8;
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-
-.emotion-136 {
   fill: currentColor;
   cursor: inherit;
   vertical-align: text-bottom;
-}
-
-.emotion-137 {
-  background: #3697f2;
-  color: #fff;
-  border: 1px solid #3697f2;
-  border-radius: 4px;
-  padding: 8px 12px;
-  min-width: 32px;
-  height: auto;
-  font-size: 14px;
-  font-weight: normal;
-  cursor: pointer;
-  opacity: 1;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-}
-
-.emotion-137:hover:not(:disabled) {
-  background: #3570f4;
-  border-color: #3697f2;
-  color: #fff;
-}
-
-.emotion-137:focus {
-  outline: 2px solid #3697f2;
-  outline-offset: 2px;
-}
-
-.emotion-137:disabled {
-  background: transparent;
-  border-color: #e8e8e8;
-  color: #e8e8e8;
-  cursor: not-allowed;
-  opacity: 0.5;
 }
 
 <div
@@ -2113,27 +1927,31 @@ exports[`MemberList should render delegated role 1`] = `
                   >
                     Show
                   </span>
-                  <select
-                    aria-label="Select page size"
-                    class="emotion-26 emotion-27"
-                    id="approved-page-size-selector-test"
+                  <div
+                    class="input has-arrow w-auto is-small"
                   >
-                    <option
-                      value="30"
+                    <select
+                      aria-label="Select page size"
+                      id="approved-page-size-selector-test"
+                      style="min-width: 50px;"
                     >
-                      30
-                    </option>
-                    <option
-                      value="50"
-                    >
-                      50
-                    </option>
-                    <option
-                      value="100"
-                    >
-                      100
-                    </option>
-                  </select>
+                      <option
+                        value="30"
+                      >
+                        30
+                      </option>
+                      <option
+                        value="50"
+                      >
+                        50
+                      </option>
+                      <option
+                        value="100"
+                      >
+                        100
+                      </option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2141,35 +1959,35 @@ exports[`MemberList should render delegated role 1`] = `
         </tr>
         <tr>
           <th
-            class="emotion-28 emotion-29"
+            class="emotion-26 emotion-27"
             width="1"
           />
           <th
-            class="emotion-30 emotion-31"
+            class="emotion-28 emotion-29"
             width="25"
           >
             User Name
           </th>
           <th
-            class="emotion-32 emotion-29"
+            class="emotion-30 emotion-27"
             width="25"
           >
             Name of User
           </th>
           <th
-            class="emotion-32 emotion-29"
+            class="emotion-30 emotion-27"
             width="25"
           >
             Expiration Date
           </th>
           <th
-            class="emotion-36 emotion-29"
+            class="emotion-34 emotion-27"
             width="39"
           >
             Review Reminder Date
           </th>
           <th
-            class="emotion-38 emotion-29"
+            class="emotion-36 emotion-27"
             width="8"
           >
             Delete
@@ -2178,30 +1996,30 @@ exports[`MemberList should render delegated role 1`] = `
       </thead>
       <tbody>
         <tr
-          class="emotion-40 emotion-41"
+          class="emotion-38 emotion-39"
           data-testid="member-row"
           data-wdio="user1-member-row"
         >
           <td
-            class="emotion-42 emotion-43"
+            class="emotion-40 emotion-41"
             color="#3570f40D"
           />
           <td
-            class="emotion-42 emotion-43"
+            class="emotion-40 emotion-41"
             color="#3570f40D"
           >
             user1
           </td>
           <td
-            class="emotion-42 emotion-43"
+            class="emotion-40 emotion-41"
             color="#3570f40D"
           />
           <td
-            class="emotion-42 emotion-43"
+            class="emotion-40 emotion-41"
             color="#3570f40D"
           >
             <div
-              class="emotion-50 emotion-51"
+              class="emotion-48 emotion-49"
             >
               N/A
               <span>
@@ -2225,11 +2043,11 @@ exports[`MemberList should render delegated role 1`] = `
             </div>
           </td>
           <td
-            class="emotion-42 emotion-43"
+            class="emotion-40 emotion-41"
             color="#3570f40D"
           >
             <div
-              class="emotion-50 emotion-51"
+              class="emotion-48 emotion-49"
             >
               N/A
               <span>
@@ -2253,7 +2071,7 @@ exports[`MemberList should render delegated role 1`] = `
             </div>
           </td>
           <td
-            class="emotion-58 emotion-43"
+            class="emotion-56 emotion-41"
             color="#3570f40D"
           >
             <span>
@@ -2280,30 +2098,30 @@ exports[`MemberList should render delegated role 1`] = `
           </td>
         </tr>
         <tr
-          class="emotion-40 emotion-41"
+          class="emotion-38 emotion-39"
           data-testid="member-row"
           data-wdio="user2-member-row"
         >
           <td
-            class="emotion-63 emotion-43"
+            class="emotion-61 emotion-41"
             color=""
           />
           <td
-            class="emotion-63 emotion-43"
+            class="emotion-61 emotion-41"
             color=""
           >
             user2
           </td>
           <td
-            class="emotion-63 emotion-43"
+            class="emotion-61 emotion-41"
             color=""
           />
           <td
-            class="emotion-63 emotion-43"
+            class="emotion-61 emotion-41"
             color=""
           >
             <div
-              class="emotion-50 emotion-51"
+              class="emotion-48 emotion-49"
             >
               N/A
               <span>
@@ -2327,11 +2145,11 @@ exports[`MemberList should render delegated role 1`] = `
             </div>
           </td>
           <td
-            class="emotion-63 emotion-43"
+            class="emotion-61 emotion-41"
             color=""
           >
             <div
-              class="emotion-50 emotion-51"
+              class="emotion-48 emotion-49"
             >
               N/A
               <span>
@@ -2355,7 +2173,7 @@ exports[`MemberList should render delegated role 1`] = `
             </div>
           </td>
           <td
-            class="emotion-79 emotion-43"
+            class="emotion-77 emotion-41"
             color=""
           >
             <span>
@@ -2382,30 +2200,30 @@ exports[`MemberList should render delegated role 1`] = `
           </td>
         </tr>
         <tr
-          class="emotion-40 emotion-41"
+          class="emotion-38 emotion-39"
           data-testid="member-row"
           data-wdio="user3-member-row"
         >
           <td
-            class="emotion-42 emotion-43"
+            class="emotion-40 emotion-41"
             color="#3570f40D"
           />
           <td
-            class="emotion-42 emotion-43"
+            class="emotion-40 emotion-41"
             color="#3570f40D"
           >
             user3
           </td>
           <td
-            class="emotion-42 emotion-43"
+            class="emotion-40 emotion-41"
             color="#3570f40D"
           />
           <td
-            class="emotion-42 emotion-43"
+            class="emotion-40 emotion-41"
             color="#3570f40D"
           >
             <div
-              class="emotion-50 emotion-51"
+              class="emotion-48 emotion-49"
             >
               N/A
               <span>
@@ -2429,11 +2247,11 @@ exports[`MemberList should render delegated role 1`] = `
             </div>
           </td>
           <td
-            class="emotion-42 emotion-43"
+            class="emotion-40 emotion-41"
             color="#3570f40D"
           >
             <div
-              class="emotion-50 emotion-51"
+              class="emotion-48 emotion-49"
             >
               N/A
               <span>
@@ -2457,7 +2275,7 @@ exports[`MemberList should render delegated role 1`] = `
             </div>
           </td>
           <td
-            class="emotion-58 emotion-43"
+            class="emotion-56 emotion-41"
             color="#3570f40D"
           >
             <span>
@@ -2484,30 +2302,30 @@ exports[`MemberList should render delegated role 1`] = `
           </td>
         </tr>
         <tr
-          class="emotion-40 emotion-41"
+          class="emotion-38 emotion-39"
           data-testid="member-row"
           data-wdio="user4-member-row"
         >
           <td
-            class="emotion-63 emotion-43"
+            class="emotion-61 emotion-41"
             color=""
           />
           <td
-            class="emotion-63 emotion-43"
+            class="emotion-61 emotion-41"
             color=""
           >
             user4
           </td>
           <td
-            class="emotion-63 emotion-43"
+            class="emotion-61 emotion-41"
             color=""
           />
           <td
-            class="emotion-63 emotion-43"
+            class="emotion-61 emotion-41"
             color=""
           >
             <div
-              class="emotion-50 emotion-51"
+              class="emotion-48 emotion-49"
             >
               N/A
               <span>
@@ -2531,11 +2349,11 @@ exports[`MemberList should render delegated role 1`] = `
             </div>
           </td>
           <td
-            class="emotion-63 emotion-43"
+            class="emotion-61 emotion-41"
             color=""
           >
             <div
-              class="emotion-50 emotion-51"
+              class="emotion-48 emotion-49"
             >
               N/A
               <span>
@@ -2559,7 +2377,7 @@ exports[`MemberList should render delegated role 1`] = `
             </div>
           </td>
           <td
-            class="emotion-79 emotion-43"
+            class="emotion-77 emotion-41"
             color=""
           >
             <span>
@@ -2587,18 +2405,18 @@ exports[`MemberList should render delegated role 1`] = `
         </tr>
       </tbody>
       <tfoot
-        class="emotion-124 emotion-125"
+        class="emotion-122 emotion-123"
       >
         <tr>
           <td
-            class="emotion-126 emotion-127"
+            class="emotion-124 emotion-125"
             colspan="6"
           >
             <div
-              class="emotion-128 emotion-129"
+              class="emotion-126 emotion-127"
             >
               <div
-                class="emotion-130 emotion-131"
+                class="emotion-128 emotion-129"
               >
                 Showing 
                 1
@@ -2610,15 +2428,15 @@ exports[`MemberList should render delegated role 1`] = `
                 members
               </div>
               <div
-                class="emotion-132 emotion-133"
+                class="emotion-130 emotion-131"
               >
                 <button
                   aria-label="Go to previous page"
-                  class="emotion-134 emotion-135"
+                  class="button is-outline is-small emotion-132 emotion-133"
                   disabled=""
                 >
                   <svg
-                    class="emotion-136"
+                    class="emotion-134"
                     data-testid="icon"
                     data-wdio=""
                     height="1em"
@@ -2635,21 +2453,31 @@ exports[`MemberList should render delegated role 1`] = `
                   </svg>
                   Previous
                 </button>
-                <button
-                  aria-current="page"
-                  aria-label="Page 1"
-                  class="emotion-137 emotion-138"
+                <div
+                  class="toggle is-small"
                 >
-                  1
-                </button>
+                  <ul>
+                    <li
+                      aria-current="page"
+                      aria-label="Page 1"
+                      class="is-active"
+                      role="button"
+                      tabindex="0"
+                    >
+                      <a>
+                        1
+                      </a>
+                    </li>
+                  </ul>
+                </div>
                 <button
                   aria-label="Go to next page"
-                  class="emotion-134 emotion-135"
+                  class="button is-outline is-small emotion-132 emotion-133"
                   disabled=""
                 >
                   Next
                   <svg
-                    class="emotion-136"
+                    class="emotion-134"
                     data-testid="icon"
                     data-wdio=""
                     height="1em"
