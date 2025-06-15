@@ -284,3 +284,10 @@ export const PERCENTAGE_OF_DAYS_TILL_NEXT_REVIEW = 0.2;
 
 export const SEARCH_MAX_100_RESULTS_CAN_BE_DISPLAYED =
     'Maximum 100 results can be searched for at a time. Specify more characters in the search criteria to get better results.';
+
+export const PAGINATION_DEFAULT_ITEMS_PER_PAGE = 30;
+export const PAGINATION_ITEMS_PER_PAGE_OPTIONS = [30, 50, 100];
+export const PAGINATION_MAX_PAGE_NUMBERS = 9;
+export const PAGINATION_DEBOUNCE_DELAY = 200;
+export const PAGINATION_NO_MEMBERS_FOUND_MESSAGE = 'No members found matching your search criteria.';
+export const PAGINATION_SEARCH_PLACEHOLDER = 'Search members...';
