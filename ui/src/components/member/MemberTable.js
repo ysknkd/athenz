@@ -20,25 +20,12 @@ import MemberRow from './MemberRow';
 import Icon from '../denali/icons/Icon';
 import Pagination from './Pagination';
 import PageSizeSelector from './PageSizeSelector';
+import {
+    PAGINATION_ITEMS_PER_PAGE_LABEL,
+    PAGINATION_MEMBERS_TEXT,
+} from '../constants/constants';
 
 const StyleTable = styled.table`
-    width: 100%;
-    border-spacing: 0;
-    display: table;
-    border-collapse: separate;
-    border-color: grey;
-    box-sizing: border-box;
-    margin-top: 5px;
-    box-shadow: 0 1px 4px #d9d9d9;
-    border: 1px solid #fff;
-    -webkit-border-image: none;
-    border-image: none;
-    -webkit-border-image: initial;
-    border-image: initial;
-    height: 50px;
-`;
-
-const StyleDiv = styled.table`
     width: 100%;
     border-spacing: 0;
     display: table;
@@ -289,7 +276,9 @@ export default class MemberTable extends React.Component {
                                                         this.props
                                                             .onPageSizeChange
                                                     }
-                                                    label='Show'
+                                                    label={
+                                                        PAGINATION_ITEMS_PER_PAGE_LABEL
+                                                    }
                                                     compact={true}
                                                     testId={
                                                         this.props
@@ -376,7 +365,7 @@ export default class MemberTable extends React.Component {
                                             this.props.onPreviousPage
                                         }
                                         itemsPerPage={this.props.itemsPerPage}
-                                        memberType='members'
+                                        memberType={PAGINATION_MEMBERS_TEXT}
                                         inTable={true}
                                     />
                                 </PaginationCell>

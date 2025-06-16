@@ -16,6 +16,10 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { colors } from '../denali/styles';
+import {
+    PAGINATION_ITEMS_PER_PAGE_LABEL,
+    PAGINATION_ARIA_SELECT_PAGE_SIZE_LABEL,
+} from '../constants/constants';
 
 const SelectorContainer = styled.div`
     display: flex;
@@ -35,7 +39,7 @@ const PageSizeSelector = ({
     value,
     options = [30, 50, 100],
     onChange,
-    label = 'Show',
+    label = PAGINATION_ITEMS_PER_PAGE_LABEL,
     disabled = false,
     compact = false,
     className,
@@ -65,7 +69,7 @@ const PageSizeSelector = ({
                     value={value}
                     onChange={handleChange}
                     disabled={disabled}
-                    aria-label='Select page size'
+                    aria-label={PAGINATION_ARIA_SELECT_PAGE_SIZE_LABEL}
                     style={{ minWidth: compact ? '50px' : '60px' }}
                 >
                     {options.map((option) => (

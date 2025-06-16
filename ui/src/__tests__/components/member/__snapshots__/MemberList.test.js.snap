@@ -854,11 +854,14 @@ exports[`MemberList should render 1`] = `
               <div
                 class="emotion-86 emotion-87"
               >
-                Showing 
+                Showing
+                 
                 1
                 -
                 2
-                 of 
+                 
+                of
+                 
                 2
                  
                 members
@@ -1288,11 +1291,14 @@ exports[`MemberList should render 1`] = `
               <div
                 class="emotion-86 emotion-87"
               >
-                Showing 
+                Showing
+                 
                 1
                 -
                 2
-                 of 
+                 
+                of
+                 
                 2
                  
                 members
@@ -2418,11 +2424,14 @@ exports[`MemberList should render delegated role 1`] = `
               <div
                 class="emotion-128 emotion-129"
               >
-                Showing 
+                Showing
+                 
                 1
                 -
                 4
-                 of 
+                 
+                of
+                 
                 4
                  
                 members

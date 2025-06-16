@@ -18,12 +18,32 @@ import { useMemberPagination } from '../../hooks/useMemberPagination';
 
 describe('useMemberPagination', () => {
     const sampleMembers = [
-        { memberName: 'user.alice', memberFullName: 'Alice Smith', approved: true },
+        {
+            memberName: 'user.alice',
+            memberFullName: 'Alice Smith',
+            approved: true,
+        },
         { memberName: 'user.bob', memberFullName: 'Bob Jones', approved: true },
-        { memberName: 'user.carol', memberFullName: 'Carol Brown', approved: false },
-        { memberName: 'user.dave', memberFullName: 'Dave Wilson', approved: true },
-        { memberName: 'user.eve', memberFullName: 'Eve Davis', approved: false },
-        { memberName: 'user.frank', memberFullName: 'Frank Miller', approved: true },
+        {
+            memberName: 'user.carol',
+            memberFullName: 'Carol Brown',
+            approved: false,
+        },
+        {
+            memberName: 'user.dave',
+            memberFullName: 'Dave Wilson',
+            approved: true,
+        },
+        {
+            memberName: 'user.eve',
+            memberFullName: 'Eve Davis',
+            approved: false,
+        },
+        {
+            memberName: 'user.frank',
+            memberFullName: 'Frank Miller',
+            approved: true,
+        },
     ];
 
     const collectionDetails = { trust: false };
@@ -31,7 +51,7 @@ describe('useMemberPagination', () => {
 
     describe('initial state', () => {
         it('should initialize with default values', () => {
-            const { result } = renderHook(() => 
+            const { result } = renderHook(() =>
                 useMemberPagination(sampleMembers, collectionDetails, true)
             );
 
@@ -43,7 +63,7 @@ describe('useMemberPagination', () => {
         });
 
         it('should handle trust collections correctly', () => {
-            const { result } = renderHook(() => 
+            const { result } = renderHook(() =>
                 useMemberPagination(sampleMembers, trustCollectionDetails, true)
             );
 
@@ -52,7 +72,7 @@ describe('useMemberPagination', () => {
         });
 
         it('should handle disabled pagination', () => {
-            const { result } = renderHook(() => 
+            const { result } = renderHook(() =>
                 useMemberPagination(sampleMembers, collectionDetails, false)
             );
 
@@ -65,7 +85,7 @@ describe('useMemberPagination', () => {
 
     describe('filtering', () => {
         it('should filter members by name', () => {
-            const { result } = renderHook(() => 
+            const { result } = renderHook(() =>
                 useMemberPagination(sampleMembers, collectionDetails, true)
             );
 
@@ -79,7 +99,7 @@ describe('useMemberPagination', () => {
         });
 
         it('should filter members by full name', () => {
-            const { result } = renderHook(() => 
+            const { result } = renderHook(() =>
                 useMemberPagination(sampleMembers, collectionDetails, true)
             );
 
@@ -92,7 +112,7 @@ describe('useMemberPagination', () => {
         });
 
         it('should clear filter', () => {
-            const { result } = renderHook(() => 
+            const { result } = renderHook(() =>
                 useMemberPagination(sampleMembers, collectionDetails, true)
             );
 
@@ -111,7 +131,7 @@ describe('useMemberPagination', () => {
 
     describe('pagination navigation', () => {
         it('should navigate approved members pages', () => {
-            const { result } = renderHook(() => 
+            const { result } = renderHook(() =>
                 useMemberPagination(sampleMembers, collectionDetails, true)
             );
 
@@ -133,7 +153,7 @@ describe('useMemberPagination', () => {
         });
 
         it('should navigate pending members pages independently', () => {
-            const { result } = renderHook(() => 
+            const { result } = renderHook(() =>
                 useMemberPagination(sampleMembers, collectionDetails, true)
             );
 
@@ -156,7 +176,7 @@ describe('useMemberPagination', () => {
 
     describe('page size changes', () => {
         it('should update page size for both member types', () => {
-            const { result } = renderHook(() => 
+            const { result } = renderHook(() =>
                 useMemberPagination(sampleMembers, collectionDetails, true)
             );
 
@@ -177,7 +197,8 @@ describe('useMemberPagination', () => {
     describe('data changes', () => {
         it('should reset pages when members change', () => {
             const { result, rerender } = renderHook(
-                ({ members }) => useMemberPagination(members, collectionDetails, true),
+                ({ members }) =>
+                    useMemberPagination(members, collectionDetails, true),
                 { initialProps: { members: sampleMembers } }
             );
 
@@ -185,7 +206,7 @@ describe('useMemberPagination', () => {
             act(() => {
                 result.current.onPageSizeChange(2);
             });
-            
+
             act(() => {
                 result.current.approvedMembers.goToPage(2);
             });
@@ -200,14 +221,23 @@ describe('useMemberPagination', () => {
 
     describe('sorting', () => {
         it('should sort members by name', () => {
-            const { result } = renderHook(() => 
+            const { result } = renderHook(() =>
                 useMemberPagination(sampleMembers, collectionDetails, true)
             );
 
-            const approvedNames = result.current.approvedMembers.data.map(m => m.memberName);
-            expect(approvedNames).toEqual(['user.alice', 'user.bob', 'user.dave', 'user.frank']);
+            const approvedNames = result.current.approvedMembers.data.map(
+                (m) => m.memberName
+            );
+            expect(approvedNames).toEqual([
+                'user.alice',
+                'user.bob',
+                'user.dave',
+                'user.frank',
+            ]);
 
-            const pendingNames = result.current.pendingMembers.data.map(m => m.memberName);
+            const pendingNames = result.current.pendingMembers.data.map(
+                (m) => m.memberName
+            );
             expect(pendingNames).toEqual(['user.carol', 'user.eve']);
         });
     });

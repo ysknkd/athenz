@@ -115,18 +115,32 @@ export const DELETE_AUDIT_REFERENCE = 'deleted using Athenz UI';
 
 #### Pagination Constants
 ```javascript
-export const PAGINATION_DEFAULT_ITEMS_PER_PAGE = 10;
-export const PAGINATION_ITEMS_PER_PAGE_OPTIONS = [10, 25, 30, 50, 100];
-export const PAGINATION_MAX_VISIBLE_PAGES = 7;
+// Basic Pagination Configuration
+export const PAGINATION_DEFAULT_ITEMS_PER_PAGE = 30;
+export const PAGINATION_ITEMS_PER_PAGE_OPTIONS = [30, 50, 100];
 
 // Pagination UI Labels
 export const PAGINATION_ITEMS_PER_PAGE_LABEL = 'Show';
-export const PAGINATION_PER_PAGE_SUFFIX = 'per page';
 export const PAGINATION_SHOWING_TEXT = 'Showing';
 export const PAGINATION_OF_TEXT = 'of';
 export const PAGINATION_MEMBERS_TEXT = 'members';
 export const PAGINATION_PREVIOUS_TEXT = 'Previous';
 export const PAGINATION_NEXT_TEXT = 'Next';
+
+// Pagination Accessibility Labels (ARIA support)
+export const PAGINATION_ARIA_PREVIOUS_LABEL = 'Go to previous page';
+export const PAGINATION_ARIA_NEXT_LABEL = 'Go to next page';
+export const PAGINATION_ARIA_PAGE_LABEL = 'Page';
+export const PAGINATION_ARIA_CURRENT_PAGE = 'page';
+export const PAGINATION_ARIA_ROLE_BUTTON = 'button';
+export const PAGINATION_ARIA_SELECT_PAGE_SIZE_LABEL = 'Select page size';
+
+// Generic Item Types for Pagination (supports multiple data types)
+export const PAGINATION_ITEMS_TEXT = 'items';        // Generic fallback
+export const PAGINATION_ROLES_TEXT = 'roles';        // For role lists
+export const PAGINATION_POLICIES_TEXT = 'policies';  // For policy lists
+export const PAGINATION_SERVICES_TEXT = 'services';  // For service lists
+export const PAGINATION_GROUPS_TEXT = 'groups';      // For group lists
 ```
 
 #### Service Types
@@ -411,6 +425,76 @@ const CustomButton = styled.button`
 - Test hooks separately from UI components when debugging
 - Use React DevTools to inspect hook states and re-render causes
 
+#### Component Generalization Patterns
+
+**Purpose**: Convert specific components into reusable, generic components while maintaining backward compatibility.
+
+**Key Principles**:
+- **Backward Compatibility**: Existing usage must continue to work without changes
+- **Gradual Migration**: Allow both old and new prop interfaces
+- **Clear Deprecation**: Mark old props as deprecated with clear alternatives
+
+**Generalization Strategy Example - Pagination Component**:
+
+```javascript
+// ✅ BEFORE: Member-specific pagination
+<Pagination memberType="members" />
+
+// ✅ AFTER: Generic pagination with backward compatibility
+<Pagination 
+    itemType="roles"      // New generic prop (preferred)
+    memberType="members"  // Deprecated but still works
+/>
+
+// Implementation pattern for backward compatibility:
+const Pagination = ({ itemType, memberType = 'members' }) => {
+    // Prioritize new prop, fall back to old prop
+    const displayItemType = itemType || memberType;
+    
+    return (
+        <div>
+            Showing 1-10 of 50 {displayItemType}
+        </div>
+    );
+};
+```
+
+**Generic Prop Design Patterns**:
+
+```javascript
+// ✅ Generic constants for different item types
+export const PAGINATION_ROLES_TEXT = 'roles';
+export const PAGINATION_POLICIES_TEXT = 'policies';
+export const PAGINATION_SERVICES_TEXT = 'services';
+
+// ✅ Component usage with different types
+<Pagination itemType="roles" />     // For role lists
+<Pagination itemType="policies" />  // For policy lists
+<Pagination itemType="services" />  // For service lists
+```
+
+**Migration Documentation Pattern**:
+
+```javascript
+/**
+ * @param {string} itemType - Type of items being paginated (preferred)
+ * @param {string} memberType - Deprecated: use itemType instead
+ */
+const GenericComponent = ({ itemType, memberType }) => {
+    // Implementation with deprecation warning in development
+    if (memberType && !itemType && process.env.NODE_ENV === 'development') {
+        console.warn('memberType is deprecated, use itemType instead');
+    }
+};
+```
+
+**Validation Checklist for Component Generalization**:
+- ✅ Existing tests continue to pass without modification
+- ✅ No breaking changes in public API
+- ✅ Clear documentation of new vs deprecated props
+- ✅ Generic constants available for different use cases
+- ✅ JSDoc comments explain migration path
+
 #### State Management Best Practices
 
 **useEffect Dependencies**:
@@ -579,10 +663,246 @@ const sortedData = useMemo(() =>
 - Handle network failures gracefully
 - Always provide fallback values for configuration flags
 
+#### String Literal Management Best Practices
+
+**Purpose**: Centralize and standardize all user-facing text for maintainability, consistency, and internationalization readiness.
+
+**Core Principles**:
+- **No Hardcoded Strings**: All user-visible text must be defined as constants
+- **Accessibility First**: ARIA labels and accessibility text must be centralized
+- **Internationalization Ready**: Structure constants for future translation support
+- **Consistent Naming**: Follow established patterns for constant naming
+
+**Constant Categories and Patterns**:
+
+```javascript
+// ✅ UI Labels - User-visible text
+export const PAGINATION_SHOWING_TEXT = 'Showing';
+export const PAGINATION_OF_TEXT = 'of';
+export const BUTTON_SAVE_TEXT = 'Save';
+export const BUTTON_CANCEL_TEXT = 'Cancel';
+
+// ✅ Accessibility Labels - ARIA and screen reader text
+export const PAGINATION_ARIA_PREVIOUS_LABEL = 'Go to previous page';
+export const PAGINATION_ARIA_NEXT_LABEL = 'Go to next page';
+export const BUTTON_ARIA_CLOSE_DIALOG = 'Close dialog';
+
+// ✅ Item Type Descriptors - Context-specific labels
+export const PAGINATION_MEMBERS_TEXT = 'members';
+export const PAGINATION_ROLES_TEXT = 'roles';
+export const PAGINATION_POLICIES_TEXT = 'policies';
+
+// ✅ Form Placeholders and Descriptions
+export const GROUP_MEMBER_PLACEHOLDER = 'user.example or domain.service';
+export const ROLE_JUSTIFICATION_PLACEHOLDER = 'Enter justification here';
+```
+
+**Naming Convention Patterns**:
+
+```javascript
+// Pattern: [COMPONENT]_[CATEGORY]_[DESCRIPTION]_[TYPE]
+export const PAGINATION_ARIA_PREVIOUS_LABEL = '...';  // Component_Category_Description_Type
+export const MEMBER_TABLE_HEADER_USER_NAME = '...';   // Component_Category_Description
+export const WORKFLOW_PENDING_APPROVAL_TITLE = '...'; // Feature_Context_Description
+```
+
+**String Literal Audit Process**:
+
+1. **Identification**: Search for hardcoded strings in quotes
+```bash
+# Find potential hardcoded UI text
+grep -r "aria-label=['\"]" src/components/
+grep -r "placeholder=['\"]" src/components/
+grep -r "'[A-Z]" src/components/ | grep -v "className"
+```
+
+2. **Classification**: Determine constant category
+   - UI Labels (user-visible)
+   - Accessibility Labels (ARIA)
+   - Form Text (placeholders, descriptions)
+   - Error Messages
+   - Configuration Values
+
+3. **Centralization**: Move to appropriate constants section
+```javascript
+// ❌ BEFORE: Hardcoded strings
+<button aria-label="Go to next page">Next</button>
+<input placeholder="Enter role name" />
+
+// ✅ AFTER: Centralized constants
+<button aria-label={PAGINATION_ARIA_NEXT_LABEL}>{PAGINATION_NEXT_TEXT}</button>
+<input placeholder={ROLE_NAME_PLACEHOLDER} />
+```
+
+**Internationalization Preparation**:
+
+```javascript
+// ✅ Group related constants for future i18n
+export const PAGINATION_LABELS = {
+    SHOWING: 'Showing',
+    OF: 'of',
+    PREVIOUS: 'Previous',
+    NEXT: 'Next',
+    ITEMS: 'items'
+};
+
+// ✅ Accessibility labels grouped for translation
+export const PAGINATION_ARIA = {
+    PREVIOUS: 'Go to previous page',
+    NEXT: 'Go to next page',
+    PAGE: 'Page',
+    SELECT_SIZE: 'Select page size'
+};
+```
+
+**Quality Assurance Checklist**:
+- ✅ No hardcoded user-visible strings in JSX
+- ✅ All ARIA labels use constants
+- ✅ Form placeholders and descriptions centralized
+- ✅ Constants follow naming conventions
+- ✅ Related constants grouped logically
+- ✅ JSDoc comments explain usage context
+
 ### Code Quality
+
+#### Development Workflow
 - Follow ESLint rules and Prettier formatting
 - Use meaningful variable and function names
 - Write self-documenting code
+
+#### Code Quality Improvement Workflow
+
+**Purpose**: Systematic approach to identifying and resolving code quality issues discovered during development.
+
+**1. Unused Variable Detection**
+
+```bash
+# Regular audit process
+npm run ci-lint              # Check formatting issues
+npm run build                # Verify no unused imports/variables cause build failures
+
+# Manual inspection for unused variables
+# Look for variables/imports that are declared but never referenced
+```
+
+**Common Patterns to Check**:
+```javascript
+// ❌ Unused imports
+import { UnusedConstant } from './constants';  // Remove if not used
+
+// ❌ Unused variables
+const unusedVariable = computeValue();         // Remove if not referenced
+
+// ❌ Duplicate constants/functions
+export const DUPLICATE_CONSTANT = 'value';    // Consolidate duplicates
+
+// ❌ Unused styled components
+const UnusedStyledDiv = styled.div`...`;       // Remove if not used
+```
+
+**2. String Literal Audit Process**
+
+```bash
+# Find hardcoded strings that should be constants
+grep -r "aria-label=['\"]" src/components/
+grep -r "placeholder=['\"]" src/components/
+grep -r "'[A-Z][a-zA-Z ]*'" src/components/ | grep -v className
+
+# Focus on pagination-related hardcoded strings
+grep -r "'Previous'" src/components/
+grep -r "'Next'" src/components/
+grep -r "'Showing'" src/components/
+```
+
+**String Literal Priority Matrix**:
+```
+High Priority (Immediate Action Required):
+├─ User-visible text (buttons, labels, messages)
+├─ Accessibility text (ARIA labels, screen reader)
+└─ Form text (placeholders, validation messages)
+
+Medium Priority (Plan for Future):
+├─ Error messages
+├─ Configuration values
+└─ Debug/development text
+
+Low Priority (As Needed):
+├─ Technical constants (CSS class names)
+├─ API endpoint paths
+└─ Environment-specific values
+```
+
+**3. Component Generalization Assessment**
+
+```javascript
+// Evaluation criteria for component generalization
+const shouldGeneralize = {
+    // ✅ Good candidates
+    usedInMultipleContexts: true,     // Component used for different data types
+    hasSpecificProps: true,           // Props tied to specific use case
+    easyToGeneralize: true,           // Simple prop changes can make it generic
+    
+    // ❌ Poor candidates  
+    highlySpecialized: false,         // Complex domain-specific logic
+    rarelyUsed: false,               // Used in only one place
+    complexDependencies: false        // Tightly coupled to specific data structures
+};
+```
+
+**4. Quality Gates Checklist**
+
+**Before Committing**:
+```bash
+# Automated checks
+npm run fix-lint              # Fix formatting issues
+npm run ci-lint               # Verify no formatting issues remain
+npm run build                 # Ensure production build succeeds
+npm test                      # Verify tests pass
+
+# Manual verification
+□ No unused variables or imports
+□ No hardcoded user-visible strings
+□ No duplicate constants or functions
+□ Consistent naming conventions
+□ JSDoc comments for complex functions
+```
+
+**After Implementation**:
+```bash
+# Regression testing
+□ Existing functionality unchanged
+□ New features work as expected
+□ Accessibility compliance maintained
+□ Performance impact acceptable
+□ Documentation updated
+```
+
+**5. Refactoring Safety Protocol**
+
+```javascript
+// ✅ Safe refactoring patterns
+// 1. Additive changes (new props with defaults)
+const Component = ({ newProp = 'default', ...existingProps }) => {
+    // Implementation maintains backward compatibility
+};
+
+// 2. Deprecation with warnings
+const Component = ({ oldProp, newProp }) => {
+    if (oldProp && process.env.NODE_ENV === 'development') {
+        console.warn('oldProp is deprecated, use newProp instead');
+    }
+    const value = newProp || oldProp;
+};
+
+// 3. Gradual migration support
+const displayValue = newConstant || oldConstant || defaultValue;
+```
+
+**Emergency Rollback Plan**:
+- Keep deprecated props functional during transition period
+- Maintain comprehensive test coverage
+- Document all breaking changes clearly
+- Provide migration guides for complex changes
 
 ## Key Architectural Patterns
 
@@ -715,8 +1035,8 @@ Validation Checklist:
 Example Confirmation:
 "Based on the requirement to 'make pagination configurable', I propose:
 - Changing constants in /src/components/constants/constants.js
-- Updating default from 30 to 10 items per page
-- Expanding options to [10, 25, 30, 50, 100]
+- Current default is 30 items per page with options [30, 50, 100]
+- Constants can be easily modified for different defaults
 - No runtime configuration needed
 - Maintains existing performance
 - One-line change for developers to customize further
@@ -743,8 +1063,8 @@ If you find yourself implementing these, step back and reconsider.
 #### ✅ Simple, Effective Alternatives
 ```javascript
 // Instead of complex configuration systems:
-export const PAGINATION_DEFAULT_ITEMS_PER_PAGE = 10;
-export const PAGINATION_ITEMS_PER_PAGE_OPTIONS = [10, 25, 30, 50, 100];
+export const PAGINATION_DEFAULT_ITEMS_PER_PAGE = 30;
+export const PAGINATION_ITEMS_PER_PAGE_OPTIONS = [30, 50, 100];
 
 // Direct usage without ceremony:
 const pagination = usePagination(data, PAGINATION_DEFAULT_ITEMS_PER_PAGE);

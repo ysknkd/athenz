@@ -17,6 +17,17 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { colors } from '../denali/styles';
 import Icon from '../denali/icons/Icon';
+import {
+    PAGINATION_SHOWING_TEXT,
+    PAGINATION_OF_TEXT,
+    PAGINATION_PREVIOUS_TEXT,
+    PAGINATION_NEXT_TEXT,
+    PAGINATION_ARIA_PREVIOUS_LABEL,
+    PAGINATION_ARIA_NEXT_LABEL,
+    PAGINATION_ARIA_PAGE_LABEL,
+    PAGINATION_ARIA_CURRENT_PAGE,
+    PAGINATION_ARIA_ROLE_BUTTON,
+} from '../constants/constants';
 
 const PaginationContainer = styled.div`
     display: flex;
@@ -54,6 +65,23 @@ const Ellipsis = styled.span`
     align-self: center;
 `;
 
+/**
+ * Generic Pagination component with Denali Design System compliance
+ *
+ * @param {number} currentPage - Current active page (1-indexed)
+ * @param {number} totalPages - Total number of pages
+ * @param {number} totalItems - Total number of items across all pages
+ * @param {function} onPageChange - Callback when page number is clicked
+ * @param {function} onNextPage - Callback for next button
+ * @param {function} onPreviousPage - Callback for previous button
+ * @param {boolean} showInfo - Whether to show "Showing X-Y of Z items" text
+ * @param {boolean} compact - Whether to use compact mode (no page numbers)
+ * @param {number} itemsPerPage - Number of items per page for display calculation
+ * @param {string} itemType - Type of items being paginated (e.g., 'members', 'roles', 'policies')
+ * @param {string} memberType - Deprecated: use itemType instead
+ * @param {string} className - Additional CSS classes
+ * @param {boolean} inTable - Whether pagination is inside a table (affects styling)
+ */
 const Pagination = ({
     currentPage,
     totalPages,
@@ -64,10 +92,14 @@ const Pagination = ({
     showInfo = true,
     compact = false,
     itemsPerPage = 10,
-    memberType = 'members',
+    itemType,
+    memberType = 'members', // Deprecated: use itemType instead
     className,
     inTable = false,
 }) => {
+    // Backward compatibility: use itemType if provided, otherwise fall back to memberType
+    const displayItemType = itemType || memberType;
+
     const startItem =
         totalItems === 0 ? 0 : (currentPage - 1) * itemsPerPage + 1;
     const endItem = Math.min(currentPage * itemsPerPage, totalItems);
@@ -158,7 +190,8 @@ const Pagination = ({
         <PaginationContainer className={className} inTable={inTable}>
             {showInfo && (
                 <InfoText inTable={inTable}>
-                    Showing {startItem}-{endItem} of {totalItems} {memberType}
+                    {PAGINATION_SHOWING_TEXT} {startItem}-{endItem}{' '}
+                    {PAGINATION_OF_TEXT} {totalItems} {displayItemType}
                 </InfoText>
             )}
 
@@ -168,10 +201,10 @@ const Pagination = ({
                     disabled={!hasPrevious}
                     onClick={handlePreviousClick}
                     onKeyDown={(e) => handleKeyDown(e, handlePreviousClick)}
-                    aria-label='Go to previous page'
+                    aria-label={PAGINATION_ARIA_PREVIOUS_LABEL}
                 >
                     <Icon icon='arrow-left' size='1em' color='currentColor' />
-                    Previous
+                    {PAGINATION_PREVIOUS_TEXT}
                 </NavigationButtonStyle>
 
                 {!compact && visiblePages.length > 0 && (
@@ -198,13 +231,13 @@ const Pagination = ({
                                                 handlePageClick(page, e)
                                             )
                                         }
-                                        aria-label={`Page ${page}`}
+                                        aria-label={`${PAGINATION_ARIA_PAGE_LABEL} ${page}`}
                                         aria-current={
                                             page === currentPage
-                                                ? 'page'
+                                                ? PAGINATION_ARIA_CURRENT_PAGE
                                                 : undefined
                                         }
-                                        role='button'
+                                        role={PAGINATION_ARIA_ROLE_BUTTON}
                                         tabIndex={0}
                                     >
                                         <a>{page}</a>
@@ -220,9 +253,9 @@ const Pagination = ({
                     disabled={!hasNext}
                     onClick={handleNextClick}
                     onKeyDown={(e) => handleKeyDown(e, handleNextClick)}
-                    aria-label='Go to next page'
+                    aria-label={PAGINATION_ARIA_NEXT_LABEL}
                 >
-                    Next
+                    {PAGINATION_NEXT_TEXT}
                     <Icon icon='arrow-right' size='1em' color='currentColor' />
                 </NavigationButtonStyle>
             </PaginationControls>

@@ -319,7 +319,6 @@ describe('usePagination', () => {
         });
     });
 
-
     describe('edge cases', () => {
         it('should handle zero items per page gracefully', () => {
             const { result } = renderHook(() => usePagination(sampleData, 0));
